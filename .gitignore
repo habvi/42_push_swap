@@ -1,5 +1,6 @@
 obj/
 *.a
-a.out
+*out
 test*
-checker_*
+checker*
+push_swap
