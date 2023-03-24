@@ -20,6 +20,9 @@ bool	deque_is_empty(t_deque *deque);
 // dq_add_back.c
 void	deque_add_back(t_deque *deque, int num, t_error *error);
 
+// dq_add_front.c
+void	deque_add_front(t_deque *deque, int num, t_error *error);
+
 // dq_clear.c
 void	deque_clear(t_deque *deque);
 
