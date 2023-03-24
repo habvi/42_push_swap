@@ -1,25 +1,39 @@
 NAME		:=	push_swap
 
+#--------------------------------------------
+# src
+#--------------------------------------------
 SRC_DIR		:=	src
 SRCS		:=	main.c \
 				parse.c \
 				push_swap.c
 
+#--------------------------------------------
+# obj
+#--------------------------------------------
 OBJ_DIR		:=	obj
 OBJS		:=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
 
-DEPS		:=	$(OBJS:.o=.d)
-
+#--------------------------------------------
+# libft
+#--------------------------------------------
 LIBFT_DIR	:=	libft
 LIBFT		:=	$(LIBFT_DIR)/libft.a
 
+#--------------------------------------------
+# include
+#--------------------------------------------
 INCLUDE_DIR	:=	include
 INCLUDES	:=	-I./$(INCLUDE_DIR)/ -I$(LIBFT_DIR)/$(INCLUDE_DIR)/
+DEPS		:=	$(OBJS:.o=.d)
 
-CC			:=	gcc
+#--------------------------------------------
+# to do -> cc
+CC			:=	clang
 CFLAGS		:=	-Wall -Wextra -Werror -MMD -MP
 MKDIR		:=	mkdir -p
 
+#--------------------------------------------
 all: $(NAME)
 
 -include $(DEPS)
@@ -42,16 +56,21 @@ fclean: clean
 
 re: fclean all
 
+#--------------------------------------------
 FORCE:
 
 norm:
 	norminette $(SRC_DIR) $(INCLUDE_DIR) $(LIBFT_DIR)
 
-debug:
+norm_ex_libft:
+	norminette $(SRC_DIR) $(INCLUDE_DIR)
+
+info:
 	$(info >>> default goal : $(.DEFAULT_GOAL))
 	$(info >>> name : $(NAME))
+	$(info >>> objs : $(OBJS))
 
-.PHONY: all clean fclean re FORCE debug norm
+.PHONY: all clean fclean re FORCE info norm norm_ex_libft
 
 
 # ./push_swap 2 1 3 6 5 8
