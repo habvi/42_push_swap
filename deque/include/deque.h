@@ -14,6 +14,12 @@ typedef struct s_deque {
 	struct s_deque	*prev;
 }	t_deque;
 
+// dq_is_empty.c
+bool	deque_is_empty(t_deque *deque);
+
+// dq_append.c
+void	deque_append(t_deque *deque, int num, t_error *error);
+
 // dq_clear.c
 void	deque_clear(t_deque *deque);
 
@@ -25,8 +31,5 @@ t_deque	*deque_new(int num, t_error *error);
 
 // dq_print.c
 void	deque_print(t_deque *deque);
-
-bool	deque_is_empty(t_deque *deque);
-void	deque_append(t_deque *deque, int num, t_error *error);
 
 #endif
