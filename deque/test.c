@@ -1,7 +1,23 @@
 #include <stdlib.h>
 #include "deque.h"
 #include "error.h"
-#include <assert.h>
+
+static void	init_test(t_deque *deque)
+{
+	deque_init(deque);
+	deque_print(deque);
+}
+
+static void	add_back_test(t_deque *deque, int num, t_error *error)
+{
+	deque_add_back(deque, num, error);
+	if (*error)
+	{
+		printf("Error: malloc\n");
+		return ;
+	}
+	deque_print(deque);
+}
 
 int	main(void)
 {
@@ -9,23 +25,18 @@ int	main(void)
 	t_error	error;
 
 	error = 0;
-	deque_init(&deque);
-	deque_print(&deque);
+	init_test(&deque);
 
-	deque_append(&deque, 5, &error);
-	if (error)
-		return (EXIT_FAILURE); // to do: free
-	deque_print(&deque);
+	// add_front_test();
 
-	deque_append(&deque, 3, &error);
-	if (error)
-		return (EXIT_FAILURE); // to do: free
-	deque_print(&deque);
+	// to do: if error: free & exit
+	add_back_test(&deque, 5, &error);
+	add_back_test(&deque, 2, &error);
+	add_back_test(&deque, -17, &error);
+	add_back_test(&deque, 0, &error);
 
-	deque_append(&deque, 9, &error);
-	if (error)
-		return (EXIT_FAILURE); // to do: free
-	deque_print(&deque);
+	// pop_front_test();
+	// pop_back_test();
 
 	deque_clear(&deque);
 	return (EXIT_SUCCESS);
