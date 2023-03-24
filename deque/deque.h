@@ -24,9 +24,9 @@ void	deque_init(t_deque *deque);
 t_deque	*deque_new(int num, t_error *error);
 
 // dq_print.c
-void	deque_print(t_deque deque);
+void	deque_print(t_deque *deque);
 
-bool	deque_is_empty(t_deque deque);
+bool	deque_is_empty(t_deque *deque);
 void	deque_append(t_deque *deque, int num, t_error *error);
 
 #endif

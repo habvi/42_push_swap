@@ -2,34 +2,32 @@
 #include "deque.h"
 #include "error.h"
 
-bool	deque_is_empty(t_deque deque)
+bool	deque_is_empty(t_deque *deque)
 {
-	if (deque.next == NULL)
-	{
+	if (deque == deque->next)
 		return (true);
-	}
 	return (false);
 }
 
 void	deque_append(t_deque *deque, int num, t_error *error)
 {
-	t_deque	*node;
+	t_deque	*new_node;
 	t_deque	*tail;
 
-	node = deque_new(num, error);
+	new_node = deque_new(num, error);
 	if (*error)
 		return ;
-	if (deque_is_empty(*deque))
+	if (deque_is_empty(deque))
 	{
-		node->prev = deque;
-		deque->next = node;
-		deque->prev = node;
+		new_node->prev = deque;
+		deque->next = new_node;
+		deque->prev = new_node;
 	}
 	else
 	{
 		tail = deque->prev;
-		tail->next = node;
-		node->prev = tail;
-		deque->prev = node;
+		tail->next = new_node;
+		deque->prev = new_node;
+		new_node->prev = tail;
 	}
 }
