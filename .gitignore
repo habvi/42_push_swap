@@ -4,3 +4,6 @@
 !*.h
 !Makefile
 !.gitignore
+!checker/*
+
+test/
