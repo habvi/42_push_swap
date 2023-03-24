@@ -1,7 +1,7 @@
 NAME		:=	libft.a
 
 SRC_DIR		:=	src
-SRCS		:=	ft_atoi_with_bool.c \
+SRCS		:=	ft_atoi_for_pushswap.c \
 				ft_isdigit.c \
 				ft_min.c \
 				ft_putstr_fd.c \

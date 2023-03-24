@@ -4,7 +4,7 @@
 # include <stddef.h>
 # include <stdbool.h>
 
-bool	ft_atoi_with_bool(const char *str, int *num);
+bool	ft_atoi_for_pushswap(const char *str, int *num);
 bool	ft_isdigit(int c);
 size_t	ft_min(const size_t x, const size_t y);
 void	ft_putstr_fd(const char *s, int fd);
