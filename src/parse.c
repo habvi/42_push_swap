@@ -1,7 +1,6 @@
+#include <stdlib.h> // free
 #include "push_swap.h"
 #include "libft.h"
-#include <stdlib.h>
-#include <stdio.h> // todo
 
 // erase
 static void	print_and_free_split_str(char **str)
@@ -14,7 +13,7 @@ static void	print_and_free_split_str(char **str)
 	i = 0;
 	while (str[i])
 	{
-		res = ft_atoi_with_bool(str[i], &num);
+		res = ft_atoi_for_pushswap(str[i], &num);
 		printf("[%s] : %d [%d]\n", str[i], res, num);
 		free(str[i]);
 		i++;
@@ -32,25 +31,30 @@ static size_t	count_strs_length(char **str)
 	return (i);
 }
 
-bool	parse_nums_from_argv(char *const *argv, t_nums *nums)
+t_nums	parse_nums_from_argv(char *const *argv, bool *error)
 {
+	t_nums	nums;
 	size_t	i;
 	char	**strs;
 
-	nums->size = 0;
+	nums.size = 0;
 	i = 1;
 	while (argv[i])
 	{
 		strs = ft_split(argv[i], ' ');
 		if (strs == NULL)
-			return (false);
-		nums->size += count_strs_length(strs);
+		{
+			*error = false;
+			return (nums);
+		}
+		nums.size += count_strs_length(strs);
 		print_and_free_split_str(strs);
 		i++;
 	}
-	printf("nums size : %zu\n", nums->size);
 	// set_argv_to_list();
+	printf("nums size : %zu\n", nums.size);
 	// nums->list = convert_to_nums();
+	// sort, check double
 	// compress
-	return (true);
+	return (nums);
 }

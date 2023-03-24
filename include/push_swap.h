@@ -4,22 +4,17 @@
 # include <stdbool.h>
 # include <unistd.h>
 
-# define ERROR_MSG	"Error\n"
-
-typedef enum e_status {
-	SUCCESS = 0,
-	ERROR = 1
-}	t_status;
+# include <stdio.h> // to do: erase
 
 typedef struct s_nums {
 	int		*list;
 	size_t	size;
 }	t_nums;
 
-// args.c
-bool	parse_nums_from_argv(char *const *argv, t_nums *nums);
+// parse.c
+t_nums	parse_nums_from_argv(char *const *argv, bool *error);
 
 // push_swap.c
-bool	push_swap(const t_nums nums);
+void	push_swap(t_nums nums, bool *error);
 
 #endif

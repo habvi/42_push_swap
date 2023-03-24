@@ -1,7 +1,7 @@
 #include "push_swap.h"
 
-bool	push_swap(const t_nums nums)
+void	push_swap(t_nums nums, bool *error)
 {
 	(void)nums;
-	return (true);
+	(void)error;
 }
