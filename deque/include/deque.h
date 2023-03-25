@@ -18,10 +18,10 @@ typedef struct s_deque {
 bool	deque_is_empty(t_deque *deque);
 
 // dq_add_back.c
-void	deque_add_back(t_deque *deque, int num, t_error *error);
+void	deque_add_back(t_deque *deque, t_deque *new_node);
 
 // dq_add_front.c
-void	deque_add_front(t_deque *deque, int num, t_error *error);
+void	deque_add_front(t_deque *deque, t_deque *new_node);
 
 // dq_clear.c
 void	deque_clear(t_deque *deque);
@@ -39,6 +39,7 @@ t_deque	*deque_pop_back(t_deque *deque);
 t_deque	*deque_pop_front(t_deque *deque);
 
 // dq_print.c
+
 void	deque_print(t_deque *deque);
 
 // dq_set_value.c

@@ -15,6 +15,6 @@ void	deque_clear(t_deque *deque)
 		node = node->next;
 		free(tmp);
 	}
-	deque->next = NULL;
-	deque->prev = NULL;
+	// deque->next = NULL;
+	// deque->prev = NULL;
 }
