@@ -27,7 +27,7 @@ void	deque_add_front(t_deque *deque, int num, t_error *error);
 void	deque_clear(t_deque *deque);
 
 // dq_init.c
-void	deque_init(t_deque *deque, int num);
+void	deque_init(t_deque *deque, int init_num, t_deque *init_node);
 
 // dq_new.c
 t_deque	*deque_new(int num, t_error *error);

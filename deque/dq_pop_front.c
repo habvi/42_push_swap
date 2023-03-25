@@ -11,15 +11,12 @@ t_deque	*deque_pop_front(t_deque *deque)
 	pop_node = deque->next;
 	new_front = pop_node->next;
 	if (new_front == NULL)
-	{
-		deque_set_next(deque, deque);
-		deque_set_prev(deque, deque);
-	}
+		deque_init(deque, 0, deque);
 	else
 	{
 		deque_set_next(deque, new_front);
 		deque_set_prev(new_front, deque);
 	}
-	deque_init(pop_node, pop_node->num);
+	deque_init(pop_node, pop_node->num, NULL);
 	return (pop_node);
 }

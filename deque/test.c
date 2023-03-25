@@ -4,7 +4,7 @@
 
 static void	init_test(t_deque *deque)
 {
-	deque_init(deque, 0);
+	deque_init(deque, 0, deque);
 	deque_print(deque);
 }
 

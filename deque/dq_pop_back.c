@@ -15,6 +15,6 @@ t_deque	*deque_pop_back(t_deque *deque)
 	else
 		deque_set_next(new_tail, NULL);
 	deque_set_prev(deque, new_tail);
-	deque_init(pop_node, pop_node->num);
+	deque_init(pop_node, pop_node->num, NULL);
 	return (pop_node);
 }
