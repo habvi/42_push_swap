@@ -27,10 +27,13 @@ void	deque_add_front(t_deque *deque, int num, t_error *error);
 void	deque_clear(t_deque *deque);
 
 // dq_init.c
-void	deque_init(t_deque *deque);
+void	deque_init(t_deque *deque, int num);
 
 // dq_new.c
 t_deque	*deque_new(int num, t_error *error);
+
+// dq_pop_back.c
+t_deque	*deque_pop_back(t_deque *deque);
 
 // dq_print.c
 void	deque_print(t_deque *deque);
