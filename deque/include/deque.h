@@ -35,6 +35,9 @@ t_deque	*deque_new(int num, t_error *error);
 // dq_pop_back.c
 t_deque	*deque_pop_back(t_deque *deque);
 
+// dq_pop_front.c
+t_deque	*deque_pop_front(t_deque *deque);
+
 // dq_print.c
 void	deque_print(t_deque *deque);
 

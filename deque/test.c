@@ -16,6 +16,7 @@ static void	add_front_test(t_deque *deque, int num, t_error *error)
 		printf("Error: malloc\n");
 		return ;
 	}
+	printf("add_front success: %d\n", num);
 	deque_print(deque);
 }
 
@@ -27,6 +28,7 @@ static void	add_back_test(t_deque *deque, int num, t_error *error)
 		printf("Error: malloc\n");
 		return ;
 	}
+	printf("add_back success: %d\n", num);
 	deque_print(deque);
 }
 
@@ -42,6 +44,22 @@ static void	pop_back_test(t_deque *deque)
 		return ;
 	}
 	printf("pop_back success: %d\n", pop_node->num);
+	free(pop_node);
+	deque_print(deque);
+}
+
+static void	pop_front_test(t_deque *deque)
+{
+	t_deque	*pop_node;
+
+	pop_node = deque_pop_front(deque);
+	if (pop_node == NULL)
+	{
+		printf("pop_front failed\n");
+		deque_print(deque);
+		return ;
+	}
+	printf("pop_front success: %d\n", pop_node->num);
 	free(pop_node);
 	deque_print(deque);
 }
@@ -83,7 +101,19 @@ int	main(void)
 	add_back_test(&deque, 7, &error);
 	add_front_test(&deque, -1, &error);
 
-	// pop_back_test(&deque);
+	pop_front_test(&deque);
+	pop_back_test(&deque);
+	pop_front_test(&deque);
+	pop_front_test(&deque);
+	pop_front_test(&deque);
+
+	add_back_test(&deque, 3, &error);
+	add_back_test(&deque, 7, &error);
+	add_front_test(&deque, 0, &error);
+	add_back_test(&deque, 8, &error);
+	pop_back_test(&deque);
+	add_front_test(&deque, -1, &error);
+	pop_front_test(&deque);
 
 	deque_clear(&deque);
 	return (EXIT_SUCCESS);
