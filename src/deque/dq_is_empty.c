@@ -1,4 +1,5 @@
 #include "deque.h"
+#include <stdio.h>
 
 bool	deque_is_empty(t_deque *deque)
 {

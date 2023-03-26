@@ -44,6 +44,6 @@ void	deque_set_next(t_deque *deque, t_deque *next);
 void	deque_set_prev(t_deque *deque, t_deque *prev);
 
 // dq_size.c
-size_t	dq_size(t_deque deque);
+size_t	dq_size(t_deque *deque);
 
 #endif
