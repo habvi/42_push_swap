@@ -1,5 +1,4 @@
 #include "deque.h"
-#include "error.h"
 
 void	deque_add_front(t_deque *deque, t_deque *new_node)
 {

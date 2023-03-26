@@ -1,5 +1,4 @@
 #include "deque.h"
-#include "error.h"
 
 void	deque_set_next(t_deque *deque, t_deque *next)
 {
