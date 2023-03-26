@@ -1,9 +1,9 @@
-#include <stdlib.h> // malloc, free
+#include <stdlib.h> // free
 #include "push_swap.h"
 #include "error.h"
 #include "libft.h"
 
-void	strs_to_deque(char **strs, t_deque *deque, t_error *error)
+void	add_strs_to_deque(char **strs, t_deque *deque, t_error *error)
 {
 	size_t	i;
 	t_deque	*new_node;
@@ -40,13 +40,15 @@ void	free_all(char **strs)
 	free(strs);
 }
 
-t_deque	set_argv_to_deque(char *const *argv, t_error *error)
+t_deque	*set_argv_to_deque(char *const *argv, t_error *error)
 {
-	t_deque	deque;
+	t_deque	*deque;
 	size_t	i;
 	char	**strs;
 
-	deque_init(&deque, 0, &deque);
+	deque = deque_init_head(0, error);
+	if (deque == NULL)
+		return (NULL);
 	i = 0;
 	while (argv[i])
 	{
@@ -56,7 +58,7 @@ t_deque	set_argv_to_deque(char *const *argv, t_error *error)
 			*error = ERROR_MALLOC;
 			return (deque);
 		}
-		strs_to_deque(strs, &deque, error);
+		add_strs_to_deque(strs, deque, error);
 		free_all(strs);
 		if (*error)
 			return (deque);
@@ -66,53 +68,17 @@ t_deque	set_argv_to_deque(char *const *argv, t_error *error)
 	return (deque);
 }
 
-size_t	count_deque_len(t_deque deque)
-{
-	t_deque	*head;
-	size_t	len;
-
-	if (deque_is_empty(&deque))
-		return (0);
-	head = deque.next;
-	len = 0;
-	while (head)
-	{
-		head = head->next;
-		len++;
-	}
-	return (len);
-}
-
-bool	is_valid_nums(t_nums *nums)
-{
-	(void)nums;
-	return (true);
-}
-
 t_nums	*parse_nums_from_argv(char *const *argv, t_error *error)
 {
 	t_nums	*nums;
 
-	nums = (t_nums *)malloc(sizeof(t_nums));
+	nums = nums_new(error);
 	if (nums == NULL)
-	{
-		*error = ERROR_MALLOC;
 		return (NULL);
-	}
 	nums->deque = set_argv_to_deque(argv, error);
 	if (*error)
-	{
-		free_nums(nums);
 		return (NULL);
-	}
-	nums->size = count_deque_len(nums->deque);
-	printf("deque size : %zu\n", nums->size);
-	if (!is_valid_nums(nums))
-	{
-		*error = ERROR_ARGS;
-		free_nums(nums);
-		return (NULL);
-	}
-	deque_print(&nums->deque);
+	nums->size = dq_size(nums->deque);
+	deque_print(nums->deque);
 	return (nums);
 }

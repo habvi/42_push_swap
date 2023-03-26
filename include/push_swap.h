@@ -12,13 +12,18 @@ typedef enum e_error	t_error;
 
 typedef struct s_nums
 {
-	struct s_deque	deque;
+	struct s_deque	*deque;
 	size_t			size;
 }	t_nums;
 
 // exit.c
-void	free_nums(t_nums *nums);
+int		put_error(void);
+void	*free_nums(t_nums *nums);
 int		error_exit(t_nums *nums);
+
+// nums.c
+t_nums	*nums_new(t_error *error);
+bool	is_valid_nums(t_nums *nums, t_error *error);
 
 // parse.c
 t_nums	*parse_nums_from_argv(char *const *argv, t_error *error);
