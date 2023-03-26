@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "deque.h"
 #include "error.h"
+#include <stdio.h>
 
 static void	init_test(t_deque *deque)
 {

@@ -5,7 +5,7 @@ OBJ_DIR		:=	obj
 OBJS		:=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
 
 INCLUDE_DIR	:=	include
-INCLUDES	:=	-I./$(INCLUDE_DIR)/
+INCLUDES	:=	-I../../$(INCLUDE_DIR)/
 DEPS		:=	$(OBJS:.o=.d)
 
 CC			:=	clang
