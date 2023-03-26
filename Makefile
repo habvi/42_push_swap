@@ -9,10 +9,25 @@ SRCS		:=	main.c \
 				push_swap.c
 
 #--------------------------------------------
+# deque
+#--------------------------------------------
+DEQUE_DIR	:=	deque
+DEQUE_SRCS	:=	$(DEQUE_DIR)/dq_add_back.c \
+				$(DEQUE_DIR)/dq_add_front.c \
+				$(DEQUE_DIR)/dq_clear.c \
+				$(DEQUE_DIR)/dq_init.c \
+				$(DEQUE_DIR)/dq_is_empty.c \
+				$(DEQUE_DIR)/dq_new.c \
+				$(DEQUE_DIR)/dq_pop_back.c \
+				$(DEQUE_DIR)/dq_pop_front.c \
+				$(DEQUE_DIR)/dq_print.c \
+				$(DEQUE_DIR)/dq_set_value.c
+
+#--------------------------------------------
 # obj
 #--------------------------------------------
 OBJ_DIR		:=	obj
-OBJS		:=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
+OBJS		:=	$(SRCS:%.c=$(OBJ_DIR)/%.o) $(DEQUE_SRCS:%.c=$(OBJ_DIR)/%.o)
 
 #--------------------------------------------
 # libft
