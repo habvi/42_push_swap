@@ -6,6 +6,7 @@ NAME		:=	push_swap
 SRC_DIR		:=	src
 SRCS		:=	exit.c \
 				main.c \
+				nums.c \
 				parse.c \
 				push_swap.c
 
@@ -22,7 +23,8 @@ DEQUE_SRCS	:=	$(DEQUE_DIR)/dq_add_back.c \
 				$(DEQUE_DIR)/dq_pop_back.c \
 				$(DEQUE_DIR)/dq_pop_front.c \
 				$(DEQUE_DIR)/dq_print.c \
-				$(DEQUE_DIR)/dq_set_value.c
+				$(DEQUE_DIR)/dq_set_value.c \
+				$(DEQUE_DIR)/dq_size.c
 
 #--------------------------------------------
 # obj
