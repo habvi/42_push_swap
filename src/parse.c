@@ -102,20 +102,17 @@ t_nums	*parse_nums_from_argv(char *const *argv, t_error *error)
 	nums->deque = set_argv_to_deque(argv, error);
 	if (*error)
 	{
-		deque_clear(&nums->deque);
-		free(nums);
+		free_nums(nums);
 		return (NULL);
 	}
 	nums->size = count_deque_len(nums->deque);
+	printf("deque size : %zu\n", nums->size);
 	if (!is_valid_nums(nums))
 	{
 		*error = ERROR_ARGS;
-		deque_clear(&nums->deque);
-		free(nums);
+		free_nums(nums);
 		return (NULL);
 	}
-	// deque_print(&nums->deque);
-	deque_clear(&nums->deque);
-	free(nums);
+	deque_print(&nums->deque);
 	return (nums);
 }

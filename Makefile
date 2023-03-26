@@ -4,7 +4,8 @@ NAME		:=	push_swap
 # src
 #--------------------------------------------
 SRC_DIR		:=	src
-SRCS		:=	main.c \
+SRCS		:=	exit.c \
+				main.c \
 				parse.c \
 				push_swap.c
 

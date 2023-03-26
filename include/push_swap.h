@@ -16,6 +16,10 @@ typedef struct s_nums
 	size_t			size;
 }	t_nums;
 
+// exit.c
+void	free_nums(t_nums *nums);
+int		error_exit(t_nums *nums);
+
 // parse.c
 t_nums	*parse_nums_from_argv(char *const *argv, t_error *error);
 
