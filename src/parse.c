@@ -1,5 +1,6 @@
 #include <stdlib.h> // free
 #include "push_swap.h"
+#include "deque.h"
 #include "error.h"
 #include "libft.h"
 
@@ -79,6 +80,6 @@ t_nums	*parse_nums_from_argv(char *const *argv, t_error *error)
 	if (*error)
 		return (NULL);
 	nums->size = dq_size(nums->deque);
-	deque_print(nums->deque);
+	deque_print(nums->deque); // to do: erase
 	return (nums);
 }

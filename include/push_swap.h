@@ -5,9 +5,8 @@
 # include <unistd.h>
 
 # include <stdio.h> // to do: erase
-# include "deque.h"
 
-// typedef struct s_deque	t_deque;
+typedef struct s_deque	t_deque;
 typedef enum e_error	t_error;
 
 typedef struct s_nums

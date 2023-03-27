@@ -1,5 +1,6 @@
 #include <stdlib.h> // EXIT_
 #include "push_swap.h"
+#include "deque.h"
 #include "error.h"
 #include "ft_dprintf.h"
 
