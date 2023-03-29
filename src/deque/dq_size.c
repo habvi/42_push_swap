@@ -1,7 +1,7 @@
 #include "deque.h"
 #include <stdio.h>
 
-size_t	dq_size(t_deque *deque)
+size_t	deque_size(t_deque *deque)
 {
 	t_deque	*head;
 	size_t	size;
