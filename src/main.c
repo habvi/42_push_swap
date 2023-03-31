@@ -12,19 +12,18 @@ static bool	is_valid_argc(int argc)
 int	main(int argc, char *argv[])
 {
 	t_nums	*nums;
-	t_error	error;
+	t_error	error_code;
 
-	error = 0;
+	error_code = 0;
 	if (!is_valid_argc(argc))
 		return (put_error());
-	nums = parse_nums_from_argv(&argv[1], &error);
-	if (error)
+	nums = parse_nums_from_argv(&argv[1], &error_code);
+	if (error_code)
 		return (error_exit(nums));
-	if (!is_valid_nums(nums, &error))
+	if (!is_valid_nums(nums, &error_code))
 		return (error_exit(nums));
-	push_swap(nums, &error);
-	if (error)
+	push_swap(nums, &error_code);
+	if (error_code)
 		return (error_exit(nums));
-	free_nums(nums);
 	return (EXIT_SUCCESS);
 }

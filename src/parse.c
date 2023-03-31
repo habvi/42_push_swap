@@ -4,7 +4,7 @@
 #include "error.h"
 #include "libft.h"
 
-void	add_strs_to_deque(char **strs, t_deque *deque, t_error *error)
+void	add_strs_to_deque(char **strs, t_deque *deque, t_error *error_code)
 {
 	size_t	i;
 	t_deque	*new_node;
@@ -17,10 +17,10 @@ void	add_strs_to_deque(char **strs, t_deque *deque, t_error *error)
 		result = ft_atoi_for_pushswap(strs[i], &num);
 		if (!result)
 		{
-			*error = ERROR_ARGS;
+			*error_code = ERROR_ARGS;
 			return ;
 		}
-		new_node = deque_new(num, error);
+		new_node = deque_new(num, error_code);
 		if (new_node == NULL)
 			return ;
 		deque_add_back(deque, new_node);
@@ -41,13 +41,13 @@ void	free_all(char **strs)
 	free(strs);
 }
 
-t_deque	*set_argv_to_deque(char *const *argv, t_error *error)
+t_deque	*set_argv_to_deque(char *const *argv, t_error *error_code)
 {
 	t_deque	*deque;
 	size_t	i;
 	char	**strs;
 
-	deque = deque_init_head(0, error);
+	deque = deque_init_head(0, error_code);
 	if (deque == NULL)
 		return (NULL);
 	i = 0;
@@ -56,12 +56,12 @@ t_deque	*set_argv_to_deque(char *const *argv, t_error *error)
 		strs = ft_split(argv[i], ' ');
 		if (strs == NULL)
 		{
-			*error = ERROR_MALLOC;
+			*error_code = ERROR_MALLOC;
 			return (deque);
 		}
-		add_strs_to_deque(strs, deque, error);
+		add_strs_to_deque(strs, deque, error_code);
 		free_all(strs);
-		if (*error)
+		if (*error_code)
 			return (deque);
 		i++;
 	}
@@ -69,15 +69,15 @@ t_deque	*set_argv_to_deque(char *const *argv, t_error *error)
 	return (deque);
 }
 
-t_nums	*parse_nums_from_argv(char *const *argv, t_error *error)
+t_nums	*parse_nums_from_argv(char *const *argv, t_error *error_code)
 {
 	t_nums	*nums;
 
-	nums = nums_new(error);
-	if (*error)
+	nums = nums_new(error_code);
+	if (*error_code)
 		return (nums);
-	nums->deque = set_argv_to_deque(argv, error);
-	if (*error)
+	nums->deque = set_argv_to_deque(argv, error_code);
+	if (*error_code)
 		return (nums);
 	nums->size = deque_size(nums->deque);
 	deque_print(nums->deque); // to do: erase
