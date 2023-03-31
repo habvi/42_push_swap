@@ -4,28 +4,45 @@
 #include "free.h"
 #include "push_swap.h"
 
+static int	convert_str_to_integer(char *str, t_error *error_code)
+{
+	int		num;
+	bool	result;
+
+	result = ft_atoi_for_pushswap(str, &num);
+	if (!result)
+		*error_code = ERROR_ARGS;
+	return (num);
+}
+
 static void	add_strs_to_deque(char **strs, t_deque *deque, t_error *error_code)
 {
 	size_t	i;
 	t_deque	*new_node;
-	bool	result;
 	int		num;
 
 	i = 0;
 	while (strs[i])
 	{
-		result = ft_atoi_for_pushswap(strs[i], &num);
-		if (!result)
-		{
-			*error_code = ERROR_ARGS;
+		num = convert_str_to_integer(strs[i], error_code);
+		if (*error_code)
 			return ;
-		}
 		new_node = deque_new_node(num, error_code);
-		if (new_node == NULL)
+		if (*error_code)
 			return ;
 		deque_add_back(deque, new_node);
 		i++;
 	}
+}
+
+static char	**split_strs(char *strs, t_error *error_code)
+{
+	char	**split_strs;
+
+	split_strs = ft_split(strs, ' ');
+	if (split_strs == NULL)
+		*error_code = ERROR_MALLOC;
+	return (split_strs);
 }
 
 static t_deque	*set_argv_to_deque(char *const *argv, t_error *error_code)
@@ -40,12 +57,9 @@ static t_deque	*set_argv_to_deque(char *const *argv, t_error *error_code)
 	i = 0;
 	while (argv[i])
 	{
-		strs = ft_split(argv[i], ' ');
-		if (strs == NULL)
-		{
-			*error_code = ERROR_MALLOC;
+		strs = split_strs(argv[i], error_code);
+		if (*error_code)
 			return (deque);
-		}
 		add_strs_to_deque(strs, deque, error_code);
 		free_strs(strs);
 		if (*error_code)

@@ -21,6 +21,7 @@ int	main(int argc, char *argv[])
 	nums = parse_nums_from_argv(&argv[1], &error_code);
 	if (error_code)
 		return (error_exit(nums));
+	// ↓↓ need free_nums()
 	if (!is_valid_nums(nums, &error_code)) // in parse??
 		return (error_exit(nums));
 	push_swap(nums, &error_code);
