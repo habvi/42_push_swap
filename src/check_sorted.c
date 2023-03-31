@@ -2,6 +2,7 @@
 #include "deque.h"
 #include "error.h"
 #include "push_swap.h"
+#include <stdio.h> // to do: erase
 
 static void	swap(int **array, size_t i, size_t min_index)
 {
@@ -39,17 +40,32 @@ static void	sort_array(int *array, size_t size)
 	}
 }
 
+static bool	is_sorted(t_nums *nums, int *array)
+{
+	t_deque	*node;
+	size_t	i;
+
+	node = nums->deque->next;
+	i = 0;
+	while (i < nums->size)
+	{
+		if (node->num != array[i])
+			return (false);
+		node = node->next;
+		i++;
+	}
+	return (true);
+}
+
 bool	is_stack_a_sorted(t_nums *nums, int **array, t_error *error_code)
 {
-	if (deque_is_empty(nums->deque))
-		return (true);
 	*array = copy_to_array(nums, error_code);
 	if (*error_code)
 		return (false);
 	print_array(*array, nums->size, "array before"); // to do: erase
 	sort_array(*array, nums->size);
 	print_array(*array, nums->size, "array after "); // to do: erase
-	// if (is_sorted(array, nums))
-	// 	return (true);
+	if (is_sorted(nums, *array))
+		return (true);
 	return (false);
 }
