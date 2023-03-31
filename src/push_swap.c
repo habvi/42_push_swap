@@ -13,7 +13,7 @@ void	push_swap(t_nums *nums, t_error *error_code)
 	array = copy_to_array(nums, error_code);
 	if (*error_code)
 		return ;
-	print_array(array, nums->size); // to do: erase
+	print_array(array, nums->size, "array"); // to do: erase
 	// ↓↓ need free_array()
 	// sort_array(array);
 	// if (is_stack_a_already_sorted(array, nums))
