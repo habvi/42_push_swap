@@ -1,7 +1,7 @@
-#include <stdlib.h> // free
 #include "libft.h"
 #include "deque.h"
 #include "error.h"
+#include "free.h"
 #include "push_swap.h"
 
 static void	add_strs_to_deque(char **strs, t_deque *deque, t_error *error_code)
@@ -26,19 +26,6 @@ static void	add_strs_to_deque(char **strs, t_deque *deque, t_error *error_code)
 		deque_add_back(deque, new_node);
 		i++;
 	}
-}
-
-static void	free_strs(char **strs)
-{
-	size_t	i;
-
-	i = 0;
-	while (strs[i])
-	{
-		free(strs[i]);
-		i++;
-	}
-	free(strs);
 }
 
 static t_deque	*set_argv_to_deque(char *const *argv, t_error *error_code)
