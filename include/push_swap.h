@@ -13,7 +13,7 @@ typedef struct s_nums
 	size_t			size;
 }	t_nums;
 
-// nums_sub.c
+// nums_new.c
 t_nums	*nums_new(t_error *error_code);
 
 // nums.c
