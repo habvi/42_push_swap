@@ -1,6 +1,6 @@
-#include "push_swap.h"
-#include "deque.h"
 #include "error.h"
+#include "deque.h"
+#include "push_swap.h"
 
 static bool	is_same_number_in_stack_a(t_deque *node, t_deque *stack_a)
 {

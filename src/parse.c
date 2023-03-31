@@ -1,8 +1,8 @@
 #include <stdlib.h> // free
-#include "push_swap.h"
+#include "libft.h"
 #include "deque.h"
 #include "error.h"
-#include "libft.h"
+#include "push_swap.h"
 
 static void	add_strs_to_deque(char **strs, t_deque *deque, t_error *error_code)
 {

@@ -1,7 +1,8 @@
 #include <stdlib.h> // EXIT_
-#include "push_swap.h"
-#include "error.h"
 #include "ft_dprintf.h"
+#include "error.h"
+#include "free.h"
+#include "push_swap.h"
 
 int	put_error(void)
 {

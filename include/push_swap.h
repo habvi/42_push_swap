@@ -4,8 +4,6 @@
 # include <stdbool.h>
 # include <unistd.h>
 
-# include <stdio.h> // to do: erase
-
 typedef struct s_deque	t_deque;
 typedef enum e_error	t_error;
 
@@ -17,7 +15,6 @@ typedef struct s_nums
 
 // nums_sub.c
 t_nums	*nums_new(t_error *error_code);
-void	*free_nums(t_nums *nums);
 
 // nums.c
 bool	is_valid_nums(t_nums *nums, t_error *error);
@@ -26,6 +23,6 @@ bool	is_valid_nums(t_nums *nums, t_error *error);
 t_nums	*parse_nums_from_argv(char *const *argv, t_error *error);
 
 // push_swap.c
-bool	push_swap(t_nums *nums, t_error *error_code);
+void	push_swap(t_nums *nums, t_error *error_code);
 
 #endif

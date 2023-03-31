@@ -1,6 +1,7 @@
 #include <stdlib.h> // EXIT_
-#include "push_swap.h"
 #include "error.h"
+#include "free.h"
+#include "push_swap.h"
 
 static bool	is_valid_argc(int argc)
 {
@@ -25,5 +26,6 @@ int	main(int argc, char *argv[])
 	push_swap(nums, &error_code);
 	if (error_code)
 		return (error_exit(nums));
+	free_nums(nums);
 	return (EXIT_SUCCESS);
 }

@@ -1,7 +1,7 @@
 #include <stdlib.h> // malloc
-#include "push_swap.h"
 #include "deque.h"
 #include "error.h"
+#include "push_swap.h"
 
 static int	*allocate_array(size_t size, t_error *error_code)
 {

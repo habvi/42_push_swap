@@ -7,6 +7,7 @@ SRC_DIR		:=	src
 SRCS		:=	array_copy.c \
 				array_sub.c \
 				error.c \
+				free.c \
 				main.c \
 				nums_sub.c \
 				nums.c \
