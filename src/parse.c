@@ -4,7 +4,7 @@
 #include "error.h"
 #include "libft.h"
 
-void	add_strs_to_deque(char **strs, t_deque *deque, t_error *error_code)
+static void	add_strs_to_deque(char **strs, t_deque *deque, t_error *error_code)
 {
 	size_t	i;
 	t_deque	*new_node;
@@ -28,7 +28,7 @@ void	add_strs_to_deque(char **strs, t_deque *deque, t_error *error_code)
 	}
 }
 
-void	free_all(char **strs)
+static void	free_strs(char **strs)
 {
 	size_t	i;
 
@@ -41,7 +41,7 @@ void	free_all(char **strs)
 	free(strs);
 }
 
-t_deque	*set_argv_to_deque(char *const *argv, t_error *error_code)
+static t_deque	*set_argv_to_deque(char *const *argv, t_error *error_code)
 {
 	t_deque	*deque;
 	size_t	i;
@@ -60,12 +60,11 @@ t_deque	*set_argv_to_deque(char *const *argv, t_error *error_code)
 			return (deque);
 		}
 		add_strs_to_deque(strs, deque, error_code);
-		free_all(strs);
+		free_strs(strs);
 		if (*error_code)
 			return (deque);
 		i++;
 	}
-	// convert_to_integer();
 	return (deque);
 }
 

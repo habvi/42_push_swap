@@ -4,8 +4,11 @@ NAME		:=	push_swap
 # src
 #--------------------------------------------
 SRC_DIR		:=	src
-SRCS		:=	error.c \
+SRCS		:=	array_copy.c \
+				array_sub.c \
+				error.c \
 				main.c \
+				nums_sub.c \
 				nums.c \
 				parse.c \
 				push_swap.c

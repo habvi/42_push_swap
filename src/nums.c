@@ -1,22 +1,6 @@
-#include <stdlib.h> // malloc
-#include "deque.h"
 #include "push_swap.h"
+#include "deque.h"
 #include "error.h"
-
-t_nums	*nums_new(t_error *error_code)
-{
-	t_nums	*nums;
-
-	nums = (t_nums *)malloc(sizeof(t_nums));
-	if (nums == NULL)
-	{
-		*error_code = ERROR_MALLOC;
-		return (NULL);
-	}
-	nums->deque = NULL;
-	nums->size = 0;
-	return (nums);
-}
 
 static bool	is_same_number_in_stack_a(t_deque *node, t_deque *stack_a)
 {
