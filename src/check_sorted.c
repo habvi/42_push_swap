@@ -3,15 +3,52 @@
 #include "error.h"
 #include "push_swap.h"
 
-bool	is_stack_a_already_sorted(t_nums *nums, int **array, t_error *error_code)
+static void	swap(int **array, size_t i, size_t min_index)
+{
+	int	tmp;
+
+	tmp = (*array)[i];
+	(*array)[i] = (*array)[min_index];
+	(*array)[min_index] = tmp;
+}
+
+static void	sort_array(int *array, size_t size)
+{
+	size_t	i;
+	size_t	j;
+	int		min_num;
+	size_t	min_index;
+
+	i = 0;
+	while (i < size)
+	{
+		min_num = array[i];
+		min_index = i;
+		j = i + 1;
+		while (j < size)
+		{
+			if (array[j] < min_num)
+			{
+				min_num = array[j];
+				min_index = j;
+			}
+			j++;
+		}
+		swap(&array, i, min_index);
+		i++;
+	}
+}
+
+bool	is_stack_a_sorted(t_nums *nums, int **array, t_error *error_code)
 {
 	if (deque_is_empty(nums->deque))
 		return (true);
 	*array = copy_to_array(nums, error_code);
 	if (*error_code)
 		return (false);
-	print_array(*array, nums->size, "array"); // to do: erase
-	// sort_array(array);
+	print_array(*array, nums->size, "array before"); // to do: erase
+	sort_array(*array, nums->size);
+	print_array(*array, nums->size, "array after "); // to do: erase
 	// if (is_sorted(array, nums))
 	// 	return (true);
 	return (false);
