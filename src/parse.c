@@ -74,11 +74,11 @@ t_nums	*parse_nums_from_argv(char *const *argv, t_error *error)
 	t_nums	*nums;
 
 	nums = nums_new(error);
-	if (nums == NULL)
-		return (NULL);
+	if (*error)
+		return (nums);
 	nums->deque = set_argv_to_deque(argv, error);
 	if (*error)
-		return (NULL);
+		return (nums);
 	nums->size = deque_size(nums->deque);
 	deque_print(nums->deque); // to do: erase
 	return (nums);
