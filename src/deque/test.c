@@ -13,7 +13,7 @@ static void	add_front_test(t_deque *deque, int num, t_error *error)
 {
 	t_deque	*new_node;
 
-	new_node = deque_new(num, error);
+	new_node = deque_new_node(num, error);
 	if (new_node == NULL)
 	{
 		printf("Error: malloc\n");
@@ -28,7 +28,7 @@ static void	add_back_test(t_deque *deque, int num, t_error *error)
 {
 	t_deque	*new_node;
 
-	new_node = deque_new(num, error);
+	new_node = deque_new_node(num, error);
 	if (new_node == NULL)
 	{
 		printf("Error: malloc\n");

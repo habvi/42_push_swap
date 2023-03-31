@@ -23,13 +23,13 @@ void	deque_clear(t_deque *deque);
 
 // dq_init.c
 void	deque_init(t_deque *deque, int init_num, t_deque *init_node);
-t_deque	*deque_init_head(int init_num, t_error *error);
 
 // dq_is_empty.c
 bool	deque_is_empty(t_deque *deque);
 
 // dq_new.c
-t_deque	*deque_new(int num, t_error *error);
+t_deque	*deque_new_head(int init_num, t_error *error);
+t_deque	*deque_new_node(int num, t_error *error);
 
 // dq_pop_back.c
 t_deque	*deque_pop_back(t_deque *deque);

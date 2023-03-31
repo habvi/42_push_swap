@@ -20,7 +20,7 @@ static void	add_strs_to_deque(char **strs, t_deque *deque, t_error *error_code)
 			*error_code = ERROR_ARGS;
 			return ;
 		}
-		new_node = deque_new(num, error_code);
+		new_node = deque_new_node(num, error_code);
 		if (new_node == NULL)
 			return ;
 		deque_add_back(deque, new_node);
@@ -34,7 +34,7 @@ static t_deque	*set_argv_to_deque(char *const *argv, t_error *error_code)
 	size_t	i;
 	char	**strs;
 
-	deque = deque_init_head(0, error_code);
+	deque = deque_new_head(0, error_code);
 	if (deque == NULL)
 		return (NULL);
 	i = 0;
