@@ -4,6 +4,8 @@
 # include <stdbool.h>
 # include <unistd.h>
 
+# include <stdio.h> // to do: erase
+
 typedef struct s_deque	t_deque;
 typedef enum e_error	t_error;
 

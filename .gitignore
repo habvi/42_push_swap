@@ -6,4 +6,7 @@
 !.gitignore
 !checker/*
 
+# test
 test/
+!check_leaks.py
+!test.sh
