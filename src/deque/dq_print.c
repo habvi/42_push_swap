@@ -8,7 +8,8 @@ void	deque_print(t_deque *deque, char *deque_name)
 	if (deque_is_empty(deque))
 	{
 		printf("%s is empty!\n", deque_name);
-		printf("---------------------\n");
+		printf("\n");
+		// printf("---------------------\n");
 		return ;
 	}
 	node = deque->next;
@@ -18,5 +19,6 @@ void	deque_print(t_deque *deque, char *deque_name)
 		printf(" %d", node->num);
 		node = node->next;
 	}
-	printf("]\n---------------------\n");
+	printf("]\n");
+	// printf("]\n---------------------\n");
 }

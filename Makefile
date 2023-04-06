@@ -7,6 +7,7 @@ SRC_DIR		:=	src
 SRCS		:=	array_print.c \
 				array.c \
 				check_sorted.c \
+				compress.c \
 				error.c \
 				free.c \
 				main.c \

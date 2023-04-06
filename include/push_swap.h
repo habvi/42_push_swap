@@ -15,6 +15,9 @@ typedef struct s_nums
 	size_t			size;
 }	t_nums;
 
+// compress.c
+t_nums	*compress_number(t_nums *nums, int *array);
+
 // nums_new.c
 t_nums	*nums_new(t_error *error_code);
 

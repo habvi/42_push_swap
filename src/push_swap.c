@@ -15,7 +15,8 @@ void	push_swap(t_nums *nums, t_error *error_code)
 		free_array(array);
 		return ;
 	}
-	// compress();
+	nums = compress_number(nums, array);
+	deque_print(nums->deque, "stackA"); // to do: erase
 	// solve();
 	free_array(array);
 }
