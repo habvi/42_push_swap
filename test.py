@@ -46,6 +46,9 @@ def run_cmd(cmd):
 
 
 # ----------------------------------------------------------
+cmd = "touch " + filepath
+subprocess.run(cmd, shell=True)
+
 run_cmd("make")
 print("================================")
 
