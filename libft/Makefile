@@ -1,5 +1,6 @@
 LIBFT_DIR	:=	libft
 SRC_LIBFT	:=	$(LIBFT_DIR)/ft_atoi_for_pushswap.c \
+				$(LIBFT_DIR)/ft_abs.c \
 				$(LIBFT_DIR)/ft_isdigit.c \
 				$(LIBFT_DIR)/ft_max.c \
 				$(LIBFT_DIR)/ft_min.c \
