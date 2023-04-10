@@ -4,15 +4,17 @@ NAME		:=	push_swap
 # src
 #--------------------------------------------
 SRC_DIR		:=	src
-SRCS		:=	array_print.c \
-				array.c \
-				check_sorted.c \
-				compress.c \
+SOLVE_DIR	:=	solve
+SRCS		:=	$(SOLVE_DIR)/compress.c \
+				$(SOLVE_DIR)/solve.c \
+				array_copy.c \
+				array_print.c \
+				array_sort.c \
+				check_nums.c \
 				error.c \
 				free.c \
 				main.c \
 				nums_new.c \
-				nums.c \
 				parse.c \
 				push_swap.c
 
