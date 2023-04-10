@@ -1,5 +1,5 @@
 #include "deque.h"
-#include <stdio.h> // to do: erase
+#include "ft_dprintf.h"
 
 void	deque_print(t_deque *deque, char *deque_name)
 {
@@ -7,18 +7,16 @@ void	deque_print(t_deque *deque, char *deque_name)
 
 	if (deque_is_empty(deque))
 	{
-		printf("%s is empty!\n", deque_name);
-		printf("\n");
-		// printf("---------------------\n");
+		ft_dprintf(STDERR_FILENO, "%s is empty!\n", deque_name);
+		ft_dprintf(STDERR_FILENO, "\n");
 		return ;
 	}
 	node = deque->next;
-	printf("[%s:", deque_name);
+	ft_dprintf(STDERR_FILENO, "[%s:", deque_name);
 	while (node)
 	{
-		printf(" %d", node->num);
+		ft_dprintf(STDERR_FILENO, " %d", node->num);
 		node = node->next;
 	}
-	printf("]\n");
-	// printf("]\n---------------------\n");
+	ft_dprintf(STDERR_FILENO, "]\n");
 }
