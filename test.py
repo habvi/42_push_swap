@@ -34,8 +34,11 @@ def check_leaks():
 # ----------------------------------------------------------
 # run
 def run_cmd(cmd):
+    subprocess.run(cmd, shell=True)
+
+def run_cmd_leaks(cmd):
     if LEAKS:
-        cmd = 'valgrind --log-file="valgrind.log" ./push_swap ' + cmd
+        cmd = 'valgrind --log-file=valgrind.log ./push_swap ' + cmd
     else:
         cmd = './push_swap ' + cmd
     print(cmd)
@@ -47,52 +50,53 @@ def run_cmd(cmd):
 
 # ----------------------------------------------------------
 cmd = "touch " + filepath
-subprocess.run(cmd, shell=True)
+run_cmd(cmd)
 
-run_cmd("make")
+cmd = "make"
+run_cmd(cmd)
 print("================================")
 
 # ----------------------------------------------------------
 # error
-run_cmd("")
-run_cmd("a")
-run_cmd("a 5")
-run_cmd("4a")
-run_cmd("-")
-run_cmd("+")
-run_cmd("+ 5")
-run_cmd("2147483648")
-run_cmd("-2147483649")
-run_cmd("-2147483649 5")
-run_cmd("0 0")
-run_cmd("-0 0")
-run_cmd("-0 +0")
-run_cmd("0 +0")
-run_cmd("02 2")
-run_cmd("2 2")
-run_cmd("2 2 5")
-run_cmd("2 2 5 2")
+run_cmd_leaks("")
+run_cmd_leaks("a")
+run_cmd_leaks("a 5")
+run_cmd_leaks("4a")
+run_cmd_leaks("-")
+run_cmd_leaks("+")
+run_cmd_leaks("+ 5")
+run_cmd_leaks("2147483648")
+run_cmd_leaks("-2147483649")
+run_cmd_leaks("-2147483649 5")
+run_cmd_leaks("0 0")
+run_cmd_leaks("-0 0")
+run_cmd_leaks("-0 +0")
+run_cmd_leaks("0 +0")
+run_cmd_leaks("02 2")
+run_cmd_leaks("2 2")
+run_cmd_leaks("2 2 5")
+run_cmd_leaks("2 2 5 2")
 
 # ----------------------------------------------------------
 # nothing happend
-run_cmd("02")
-run_cmd("4")
-run_cmd("-5 8")
-run_cmd("-2147483648 0 2147483647")
-run_cmd('""')
-run_cmd('"" ""')
-run_cmd('" "')
-run_cmd('"" "  "')
-run_cmd('"" "  " 5')
-run_cmd('"    7"')
-run_cmd('"7      "')
-run_cmd('"  7      "')
+run_cmd_leaks("02")
+run_cmd_leaks("4")
+run_cmd_leaks("-5 8")
+run_cmd_leaks("-2147483648 0 2147483647")
+run_cmd_leaks('""')
+run_cmd_leaks('"" ""')
+run_cmd_leaks('" "')
+run_cmd_leaks('"" "  "')
+run_cmd_leaks('"" "  " 5')
+run_cmd_leaks('"    7"')
+run_cmd_leaks('"7      "')
+run_cmd_leaks('"  7      "')
 
 # ----------------------------------------------------------
 # ok
-run_cmd("6 5")
-run_cmd('"   7   3"')
-run_cmd('5 "  7   3 "')
-run_cmd('"" "  " " 7 " "  -6  2 "  2147483647')
+run_cmd_leaks("6 5")
+run_cmd_leaks('"   7   3"')
+run_cmd_leaks('5 "  7   3 "')
+run_cmd_leaks('"" "  " " 7 " "  -6  2 "  2147483647')
 
 # ----------------------------------------------------------
