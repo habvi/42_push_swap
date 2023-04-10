@@ -6,17 +6,17 @@
 
 void	push_swap(t_nums *nums, t_error *error_code)
 {
-	int	*array;
+	int	*sorted_array;
 
 	if (deque_is_empty(nums->deque))
 		return ;
-	if (is_stack_a_sorted(nums, &array, error_code)) // ↓↓ need free_array()
+	if (is_stack_a_sorted(nums, &sorted_array, error_code)) // ↓↓ need free_array()
 	{
-		free_array(array);
+		free_array(sorted_array);
 		return ;
 	}
-	nums = compress_number(nums, array);
+	nums = compress_number(nums, sorted_array);
 	deque_print(nums->deque, "stackA"); // to do: erase
 	// solve();
-	free_array(array);
+	free_array(sorted_array);
 }

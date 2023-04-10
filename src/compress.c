@@ -1,22 +1,27 @@
+#include "libft.h"
 #include "deque.h"
 #include "push_swap.h"
 
-// to do: bisect?
-static size_t	get_sorted_index(int num, int *array, size_t array_size)
+static size_t	get_sorted_index(int num, int *sorted_array, size_t array_size)
 {
-	size_t	i;
+	ssize_t	ng_idx;
+	ssize_t	ok_idx;
+	ssize_t	middle_idx;
 
-	i = 0;
-	while (i < array_size)
+	ng_idx = -1;
+	ok_idx = array_size;
+	while (ft_abs(ok_idx - ng_idx) > 1)
 	{
-		if (array[i] == num)
-			return (i + 1);
-		i++;
+		middle_idx = (ok_idx + ng_idx) / 2;
+		if (sorted_array[middle_idx] >= num)
+			ok_idx = middle_idx;
+		else
+			ng_idx = middle_idx;
 	}
-	return (0);
+	return (ok_idx);
 }
 
-t_nums	*compress_number(t_nums *nums, int *array)
+t_nums	*compress_number(t_nums *nums, int *sorted_array)
 {
 	t_deque	*node;
 	size_t	sorted_index;
@@ -24,8 +29,8 @@ t_nums	*compress_number(t_nums *nums, int *array)
 	node = nums->deque->next;
 	while (node)
 	{
-		sorted_index = get_sorted_index(node->num, array, nums->size);
-		node->num = sorted_index;
+		sorted_index = get_sorted_index(node->num, sorted_array, nums->size);
+		node->num = sorted_index + 1;
 		node = node->next;
 	}
 	return (nums);
