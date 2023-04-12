@@ -6,6 +6,7 @@ NAME		:=	push_swap
 SRC_DIR		:=	src
 SOLVE_DIR	:=	solve
 SRCS		:=	$(SOLVE_DIR)/compress.c \
+				$(SOLVE_DIR)/operations_swap.c \
 				$(SOLVE_DIR)/solve.c \
 				array_copy.c \
 				array_print.c \

@@ -13,6 +13,6 @@ void	push_swap(t_nums *nums, t_error *error_code)
 		free_array(array);
 		return ;
 	}
-	solve(nums, array);
+	solve(nums, array, error_code);
 	free_array(array);
 }
