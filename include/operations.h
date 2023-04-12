@@ -3,6 +3,10 @@
 
 typedef struct s_nums	t_nums;
 
+// operations_push.c
+void	pa(t_nums *nums1, t_nums *nums2);
+void	pb(t_nums *nums1, t_nums *nums2);
+
 // operations_swap.c
 void	sa(t_nums *nums);
 void	sb(t_nums *nums);

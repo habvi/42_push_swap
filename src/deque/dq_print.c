@@ -25,4 +25,5 @@ void	deque_print2(\
 {
 	deque_print(deque1, deque1_name);
 	deque_print(deque2, deque2_name);
+	ft_dprintf(STDERR_FILENO, "----------\n");
 }
