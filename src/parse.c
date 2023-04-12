@@ -45,15 +45,12 @@ static char	**split_strs(char *strs, t_error *error_code)
 	return (split_strs);
 }
 
-static t_deque	*set_argv_to_deque(char *const *argv, t_error *error_code)
+static t_deque	*set_argv_to_deque(\
+				char *const *argv, t_deque *deque, t_error *error_code)
 {
-	t_deque	*deque;
 	size_t	i;
 	char	**strs;
 
-	deque = deque_new_head(0, error_code);
-	if (deque == NULL)
-		return (NULL);
 	i = 0;
 	while (argv[i])
 	{
@@ -73,10 +70,10 @@ t_nums	*parse_nums_from_argv(char *const *argv, t_error *error_code)
 {
 	t_nums	*nums;
 
-	nums = nums_new(error_code);
+	nums = init_nums(error_code);
 	if (*error_code)
 		return (nums);
-	nums->deque = set_argv_to_deque(argv, error_code);
+	set_argv_to_deque(argv, nums->deque, error_code);
 	if (*error_code)
 		return (nums);
 	nums->size = deque_size(nums->deque);

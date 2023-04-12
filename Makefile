@@ -16,7 +16,7 @@ SRCS		:=	$(SOLVE_DIR)/compress.c \
 				error.c \
 				free.c \
 				main.c \
-				nums_new.c \
+				nums.c \
 				parse.c \
 				push_swap.c
 
