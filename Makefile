@@ -4,12 +4,17 @@ NAME		:=	push_swap
 # src
 #--------------------------------------------
 SRC_DIR		:=	src
+
+#--------------------------------------------
+# solve
+#--------------------------------------------
 SOLVE_DIR	:=	solve
 SRCS		:=	$(SOLVE_DIR)/compress.c \
 				$(SOLVE_DIR)/operations_push.c \
 				$(SOLVE_DIR)/operations_rotate1.c \
 				$(SOLVE_DIR)/operations_rotate2.c \
 				$(SOLVE_DIR)/operations_swap.c \
+				$(SOLVE_DIR)/operations_test.c \
 				$(SOLVE_DIR)/solve.c \
 				array_copy.c \
 				array_print.c \

@@ -22,4 +22,7 @@ void	sa(t_nums *nums);
 void	sb(t_nums *nums);
 void	ss(t_nums *nums1, t_nums *nums2);
 
+// operations_test.c
+void	test(t_nums *stack_a, t_nums *stack_b);
+
 #endif
