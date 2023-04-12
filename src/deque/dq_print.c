@@ -8,7 +8,6 @@ void	deque_print(t_deque *deque, char *deque_name)
 	if (deque_is_empty(deque))
 	{
 		ft_dprintf(STDERR_FILENO, "%s is empty!\n", deque_name);
-		ft_dprintf(STDERR_FILENO, "\n");
 		return ;
 	}
 	node = deque->next;

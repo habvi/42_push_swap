@@ -80,6 +80,5 @@ t_nums	*parse_nums_from_argv(char *const *argv, t_error *error_code)
 	if (*error_code)
 		return (nums);
 	nums->size = deque_size(nums->deque);
-	deque_print(nums->deque, "stackA"); // to do: erase
 	return (nums);
 }

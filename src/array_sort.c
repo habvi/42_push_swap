@@ -1,12 +1,12 @@
 #include "push_swap.h"
 
-static void	swap(int **array, size_t i, size_t min_index)
+static void	swap(int *array, size_t i, size_t min_index)
 {
 	int	tmp;
 
-	tmp = (*array)[i];
-	(*array)[i] = (*array)[min_index];
-	(*array)[min_index] = tmp;
+	tmp = array[i];
+	array[i] = array[min_index];
+	array[min_index] = tmp;
 }
 
 void	sort_array(int *array, size_t size)
@@ -31,7 +31,7 @@ void	sort_array(int *array, size_t size)
 			}
 			j++;
 		}
-		swap(&array, i, min_index);
+		swap(array, i, min_index);
 		i++;
 	}
 }

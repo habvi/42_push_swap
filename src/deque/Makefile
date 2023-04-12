@@ -42,3 +42,5 @@ valgrind: all
 	@valgrind ./a.out
 
 .PHONY:	test valgrind
+
+# to do: erase this Makefile
