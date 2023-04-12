@@ -10,7 +10,8 @@ static bool	is_stack_a_empty(size_t	size)
 	return (true);
 }
 
-static bool	is_duplicate_numbers(int *sorted_array, size_t array_size, t_error *error_code)
+static bool	is_duplicate_numbers(\
+			int *sorted_array, size_t array_size, t_error *error_code)
 {
 	size_t	i;
 

@@ -1,6 +1,5 @@
 #include "error.h"
 #include "free.h"
-#include "operations.h"
 #include "push_swap.h"
 
 void	solve(t_nums *stack_a, int *sorted_array, t_error *error_code)
@@ -11,6 +10,5 @@ void	solve(t_nums *stack_a, int *sorted_array, t_error *error_code)
 	if (*error_code)
 		return ;
 	stack_a = compress_number(stack_a, sorted_array);
-	test(stack_a, stack_b);
 	free_nums(stack_b);
 }
