@@ -10,3 +10,4 @@
 test/
 !test.py
 tmp.c
+!main.py
