@@ -1,18 +1,31 @@
-import sys
 from collections import deque
+from itertools import permutations
+import sys
 sys.setrecursionlimit(10 ** 7)
 
+OPS = ["sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr"]
+SA = 0
+SB = 1
+SS = 2
+PA = 3
+PB = 4
+RA = 5
+RB = 6
+RR = 7
+RRA = 8
+RRB = 9
+RRR = 10
+
 # ----------------------------------
-def debug_a():
-    print("stack A", A)
+def debug_a(A):
+    print("stack A", A, file=sys.stderr)
 
-def debug_b():
-    print("stack B", B)
+def debug_b(B):
+    print("stack B", B, file=sys.stderr)
 
-def debug():
-    debug_a()
-    debug_b()
-    print()
+def debug(A, B):
+    debug_a(A)
+    debug_b(B)
 
 # ----------------------------------
 def sa(A):
@@ -60,94 +73,121 @@ def rrr(A, B):
     rrb(B)
 
 # ----------------------------------
-args = list(map(int, sys.argv[1:]))
-A = deque(args)
-B = deque([])
-debug()
-
-# ----------------------------------
 def is_stack_empty(A):
     return not len(A)
 
-def is_stack_a_size_more_than_2(A):
+def is_executable_stack_size(A):
     return len(A) >= 2
 
-def is_stack_b_size_more_than_2(B):
-    return len(B) >= 2
-
-def is_move_ok(A, B, i):
-    if i == 0:
-        return is_stack_a_size_more_than_2(A)
-    elif i == 1:
-        return is_stack_b_size_more_than_2(B)
-    elif i == 2:
-        return is_stack_a_size_more_than_2(A) or is_stack_b_size_more_than_2(B)
-    elif i == 3:
+# to do: optimize
+def is_executable_op(A, B, i):
+    if i == SA:
+        return is_executable_stack_size(A)
+    elif i == SB:
+        return is_executable_stack_size(B)
+    elif i == SS:
+        return is_executable_stack_size(A) or is_executable_stack_size(B)
+    elif i == PA:
         return not is_stack_empty(B)
-    elif i == 4:
+    elif i == PB:
         return not is_stack_empty(A)
-    elif i == 5:
-        return is_stack_a_size_more_than_2(A)
-    elif i == 6:
-        return is_stack_b_size_more_than_2(B)
-    elif i == 7:
-        return is_stack_a_size_more_than_2(A) or is_stack_b_size_more_than_2(B)
-    elif i == 8:
-        return is_stack_a_size_more_than_2(A)
-    elif i == 9:
-        return is_stack_b_size_more_than_2(B)
-    elif i == 10:
-        return is_stack_a_size_more_than_2(A) or is_stack_b_size_more_than_2(B)
+    elif i == RA:
+        return is_executable_stack_size(A)
+    elif i == RB:
+        return is_executable_stack_size(B)
+    elif i == RR:
+        return is_executable_stack_size(A) or is_executable_stack_size(B)
+    elif i == RRA:
+        return is_executable_stack_size(A)
+    elif i == RRB:
+        return is_executable_stack_size(B)
+    elif i == RRR:
+        return is_executable_stack_size(A) or is_executable_stack_size(B)
 
 def do_op(A, B, i):
-    if i == 0: sa(A)
-    elif i == 1: sb(B)
-    elif i == 2: ss(A, B)
-    elif i == 3: pa(A, B)
-    elif i == 4: pb(A, B)
-    elif i == 5: ra(A)
-    elif i == 6: rb(B)
-    elif i == 7: rr(A, B)
-    elif i == 8: rra(A)
-    elif i == 9: rrb(B)
-    elif i == 10: rrr(A, B)
+    if i == SA: sa(A)
+    elif i == SB: sb(B)
+    elif i == SS: ss(A, B)
+    elif i == PA: pa(A, B)
+    elif i == PB: pb(A, B)
+    elif i == RA: ra(A)
+    elif i == RB: rb(B)
+    elif i == RR: rr(A, B)
+    elif i == RRA: rra(A)
+    elif i == RRB: rrb(B)
+    elif i == RRR: rrr(A, B)
 
-def redo_op(A, B, i):
-    if i == 0: sa(A)
-    elif i == 1: sb(B)
-    elif i == 2: ss(A, B)
-    elif i == 3: pb(A, B)
-    elif i == 4: pa(A, B)
-    elif i == 5: rra(A)
-    elif i == 6: rrb(B)
-    elif i == 7: rrr(A, B)
-    elif i == 8: ra(A)
-    elif i == 9: rb(B)
-    elif i == 10: rr(A, B)
+def undo_op(A, B, i):
+    if i == SA: sa(A)
+    elif i == SB: sb(B)
+    elif i == SS: ss(A, B)
+    elif i == PA: pb(A, B)
+    elif i == PB: pa(A, B)
+    elif i == RA: rra(A)
+    elif i == RB: rrb(B)
+    elif i == RR: rrr(A, B)
+    elif i == RRA: ra(A)
+    elif i == RRB: rb(B)
+    elif i == RRR: rr(A, B)
 
-def dfs(A, B, op, i):
-    global ans, ans_len
-    if list(A) == sorted_a:
-        if len(op) < ans_len:
-            print("op:", op)
-            debug()
-            ans = op.copy()
-            ans_len = len(op)
-        return
-    if len(op) == 7:
-        return
+def dfs(A, B, op, sorted_a, ans, ans_len):
+    if len(op) >= ans_len:
+        return ans, ans_len
+    if not len(B) and list(A) == sorted_a:
+        # print("op:", op)
+        # debug(A, B)
+        ans = op.copy()
+        ans_len = len(op)
+        return ans, ans_len
+    if len(op) == 8:
+        return ans, ans_len
     for i in range(11):
-        if is_move_ok(A, B, i):
-            op.append(ops[i])
+        if is_executable_op(A, B, i):
+            op.append(OPS[i])
             do_op(A, B, i)
-            dfs(A, B, op, i)
+            ans, ans_len = dfs(A, B, op, sorted_a, ans, ans_len)
             op.pop()
-            redo_op(A, B, i)
+            undo_op(A, B, i)
+    return ans, ans_len
 
-ans = []
-ans_len = 2147483647
-ops = ["sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr"]
-op = []
-sorted_a = sorted(A)
-dfs(A, B, op, -1)
-print("ans:", ans)
+# ----------------------------------
+def command_line(ans, ans_len, op):
+    args = list(map(int, sys.argv[1:]))
+    print(*args)
+    A = deque(args)
+    B = deque([])
+    debug(A, B)
+
+    sorted_a = sorted(A)
+    ans, ans_len = dfs(A, B, op, sorted_a, ans, ans_len)
+    print(*ans)
+    print("================================", file=sys.stderr)
+
+# n: 2-6
+def all_n_pattern(ans, ans_len, op):
+    n = int(sys.argv[1])
+    if n > 6:
+        return
+    for args in permutations(range(1, n)):
+        print(*args)
+        A = deque(args)
+        B = deque([])
+        debug(A, B)
+
+        sorted_a = sorted(A)
+        ans, ans_len = dfs(A, B, op, sorted_a, ans, ans_len)
+        print(*ans)
+        print("================================", file=sys.stderr)
+
+def main():
+    argc = len(sys.argv)
+    ans = []
+    ans_len = 2147483647
+    op = []
+    if argc == 2:
+        all_n_pattern(ans, ans_len, op)
+    else:
+        command_line(ans, ans_len, op)
+
+if __name__=="__main__":
+    main()
