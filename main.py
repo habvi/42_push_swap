@@ -2,6 +2,7 @@ from collections import deque
 from itertools import permutations
 import sys
 sys.setrecursionlimit(10 ** 7)
+import time
 
 OPS = ["sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr"]
 SA = 0
@@ -15,6 +16,15 @@ RR = 7
 RRA = 8
 RRB = 9
 RRR = 10
+
+RED = "red"
+GREEN = "green"
+color_dict = {"red" : "\033[31m",
+              "green" : "\033[32m",
+              "end" : "\033[0m"}
+
+def print_color_str(color, text=""):
+    print(color_dict[color] + text + color_dict["end"])
 
 # ----------------------------------
 def debug_a(A):
@@ -104,6 +114,33 @@ def is_executable_op(A, B, i):
     elif i == RRR:
         return is_executable_stack_size(A) or is_executable_stack_size(B)
 
+def is_unnecessary_op(i, op):
+    if not len(op):
+        return False
+    pre_op = OPS.index(op[-1])
+    if i == SA:
+        return pre_op in (SA, SB, SS)
+    if i == SB:
+        return pre_op in (SA, SB, SS)
+    if i == SS:
+        return pre_op in (SA, SB, SS)
+    if i == PA:
+        return pre_op == PB
+    if i == PB:
+        return pre_op == PA
+    if i == RA:
+        return pre_op in (RB, RRA, RRR)
+    if i == RB:
+        return pre_op in (RA, RRB, RRR)
+    if i == RR:
+        return pre_op in (RRA, RRB, RRR)
+    if i == RRA:
+        return pre_op in (RRB, RA, RR)
+    if i == RRB:
+        return pre_op in (RRA, RB, RR)
+    if i == RRR:
+        return pre_op in (RA, RB, RR)
+
 def do_op(A, B, i):
     if i == SA: sa(A)
     elif i == SB: sb(B)
@@ -142,7 +179,7 @@ def dfs(A, B, op, sorted_a, ans, ans_len):
     if len(op) == 8:
         return ans, ans_len
     for i in range(11):
-        if is_executable_op(A, B, i):
+        if is_executable_op(A, B, i) and not is_unnecessary_op(i, op):
             op.append(OPS[i])
             do_op(A, B, i)
             ans, ans_len = dfs(A, B, op, sorted_a, ans, ans_len)
@@ -156,14 +193,20 @@ def command_line():
     print(*args)
     A = deque(args)
     B = deque([])
-    debug(A, B)
 
+    start_time = time.time()
     ans = []
     ans_len = 2147483647
     op = []
     sorted_a = sorted(A)
     ans, ans_len = dfs(A, B, op, sorted_a, ans, ans_len)
-    print(*ans)
+    if not ans:
+        print_color_str(RED, "[NO ANS..!!]")
+    else:
+        print(*ans, end=" ")
+        print_color_str(GREEN, "[OK]")
+    end_time = time.time()
+    print("time:", end_time - start_time)
     print("================================", file=sys.stderr)
 
 # n: 2-6
@@ -175,14 +218,20 @@ def all_n_pattern():
         print("args:", *args)
         A = deque(args)
         B = deque([])
-        debug(A, B)
 
+        start_time = time.time()
         ans = []
         ans_len = 2147483647
         op = []
         sorted_a = sorted(A)
         ans, ans_len = dfs(A, B, op, sorted_a, ans, ans_len)
-        print(*ans)
+        if not ans:
+            print_color_str(RED, "[NO ANS..!!]")
+        else:
+            print(*ans, end=" ")
+            print_color_str(GREEN, "[OK]")
+        end_time = time.time()
+        print("time:", end_time - start_time)
         print("================================", file=sys.stderr)
 
 def main():
@@ -194,3 +243,11 @@ def main():
 
 if __name__=="__main__":
     main()
+
+
+'''
+n = 5
+3 4 2 1 5 : 3.8s
+4 1 3 2 5 : 3.6s
+4 3 2 1 5 : 6.7s
+'''
