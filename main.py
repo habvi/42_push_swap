@@ -151,29 +151,35 @@ def dfs(A, B, op, sorted_a, ans, ans_len):
     return ans, ans_len
 
 # ----------------------------------
-def command_line(ans, ans_len, op):
+def command_line():
     args = list(map(int, sys.argv[1:]))
     print(*args)
     A = deque(args)
     B = deque([])
     debug(A, B)
 
+    ans = []
+    ans_len = 2147483647
+    op = []
     sorted_a = sorted(A)
     ans, ans_len = dfs(A, B, op, sorted_a, ans, ans_len)
     print(*ans)
     print("================================", file=sys.stderr)
 
 # n: 2-6
-def all_n_pattern(ans, ans_len, op):
+def all_n_pattern():
     n = int(sys.argv[1])
     if n > 6:
         return
     for args in permutations(range(1, n)):
-        print(*args)
+        print("args:", *args)
         A = deque(args)
         B = deque([])
         debug(A, B)
 
+        ans = []
+        ans_len = 2147483647
+        op = []
         sorted_a = sorted(A)
         ans, ans_len = dfs(A, B, op, sorted_a, ans, ans_len)
         print(*ans)
@@ -181,13 +187,10 @@ def all_n_pattern(ans, ans_len, op):
 
 def main():
     argc = len(sys.argv)
-    ans = []
-    ans_len = 2147483647
-    op = []
     if argc == 2:
-        all_n_pattern(ans, ans_len, op)
+        all_n_pattern()
     else:
-        command_line(ans, ans_len, op)
+        command_line()
 
 if __name__=="__main__":
     main()
