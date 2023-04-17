@@ -351,13 +351,14 @@ def move_to_divide_nums(A, B, op, head, tail, stack_place, movable_stack_place, 
                 break
     return A, B, op
 
-def divide_nums_to_other_stacks(stack, A, B, op, head, tail):
-    stack_place = find_the_block_place(A, B, head, tail)
+def set_movable_stack_place(stack_place):
     movable_stack_place = []
     for i in range(1, 5):
         if i != stack_place:
             movable_stack_place.append(i)
+    return movable_stack_place
 
+def set_nums_range_per_block(stack, head, tail):
     total = tail - head + 1
     block_size = total // 3
     new_tail = head - 1
@@ -371,6 +372,12 @@ def divide_nums_to_other_stacks(stack, A, B, op, head, tail):
             continue
         stack.append((new_head, new_tail))
         nums_range_per_block.append((new_head, new_tail))
+    return stack, nums_range_per_block
+
+def divide_nums_to_other_stacks(stack, A, B, op, head, tail):
+    stack_place = find_the_block_place(A, B, head, tail)
+    movable_stack_place = set_movable_stack_place(stack_place)
+    stack, nums_range_per_block = set_nums_range_per_block(stack, head, tail)
     A, B, op = move_to_divide_nums(A, B, op, head, tail, stack_place, movable_stack_place, nums_range_per_block)
     return stack, A, B, op
 
