@@ -171,8 +171,6 @@ def dfs(A, B, op, sorted_a, ans, ans_len):
     if len(op) >= ans_len:
         return ans, ans_len
     if not len(B) and list(A) == sorted_a:
-        # print("op:", op)
-        # debug(A, B)
         ans = op.copy()
         ans_len = len(op)
         return ans, ans_len
@@ -188,33 +186,10 @@ def dfs(A, B, op, sorted_a, ans, ans_len):
     return ans, ans_len
 
 # ----------------------------------
-def command_line():
-    args = list(map(int, sys.argv[1:]))
-    print(*args)
-    A = deque(args)
-    B = deque([])
-
-    start_time = time.time()
-    ans = []
-    ans_len = 2147483647
-    op = []
-    sorted_a = sorted(A)
-    ans, ans_len = dfs(A, B, op, sorted_a, ans, ans_len)
-    if not ans:
-        print_color_str(RED, "[NO ANS..!!]")
-    else:
-        print(*ans, end=" ")
-        print_color_str(GREEN, "[OK]")
-    end_time = time.time()
-    print("time:", end_time - start_time)
-    print("================================", file=sys.stderr)
-
-# n: 2-6
+# 1 <= n <= 5
 def all_n_pattern():
     n = int(sys.argv[1])
-    if n > 6:
-        return
-    for args in permutations(range(1, n)):
+    for args in permutations(range(1, n + 1)):
         print("args:", *args)
         A = deque(args)
         B = deque([])
@@ -234,6 +209,68 @@ def all_n_pattern():
         print("time:", end_time - start_time)
         print("================================", file=sys.stderr)
 
+# ----------------------------------
+# 1 <= n <= 5
+def solve_less_than_6(A, B):
+    start_time = time.time()
+    ans = []
+    ans_len = 2147483647
+    op = []
+    sorted_a = sorted(A)
+    ans, ans_len = dfs(A, B, op, sorted_a, ans, ans_len)
+    if not ans:
+        print_color_str(RED, "[NO ANS..!!]")
+    else:
+        print(*ans, end=" ")
+        print_color_str(GREEN, "[OK]")
+    end_time = time.time()
+    print("time:", end_time - start_time)
+    print("================================", file=sys.stderr)
+
+def stack_dfs(n):
+    stack = [(1, n)]
+    while stack:
+        current_node = stack.pop()
+        head, tail = current_node
+        print(current_node)
+        if head == tail:
+            # --------------------------
+            # post-order
+            print(head)
+            # --------------------------
+            continue
+        # --------------------------
+        # pre-order
+        total = tail - head + 1
+        block_size = total // 3
+        new_tail = head - 1
+        for i in range(3):
+            new_head = new_tail + 1
+            new_tail = new_head + block_size - 1
+            if total % 3 and i < total % 3:
+                new_tail += 1
+            if new_head > new_tail:
+                continue
+            stack.append((new_head, new_tail))
+        # --------------------------
+
+# n >= 6
+def solve_over_6(n, A, B):
+    stack_dfs(n)
+
+# n >= 2
+def command_line():
+    n = len(sys.argv[1:])
+    args = list(map(int, sys.argv[1:]))
+    print(*args)
+    A = deque(args)
+    B = deque([])
+    if n < 6:
+        solve_less_than_6(A, B)
+    else:
+        solve_over_6(n, A, B)
+
+# ----------------------------------
 def main():
     argc = len(sys.argv)
     if argc == 2:
