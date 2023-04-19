@@ -46,10 +46,12 @@ def rr():
     rb()
 
 def rra():
-    A.appendleft(A.pop())
+    if len(A) >= 2:
+        A.appendleft(A.pop())
 
 def rrb():
-    B.appendleft(B.pop())
+    if len(B) >= 2:
+        B.appendleft(B.pop())
 
 def rrr():
     rra()
