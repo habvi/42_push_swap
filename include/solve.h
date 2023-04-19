@@ -13,9 +13,13 @@ typedef struct s_data {
 // solve.c
 void	solve(t_data *data, t_error *error_code);
 
-// solve_less_than_6/solve.c
+// solve_less_than_6
+// put.c
+void	print_operations(t_nums *answer);
+// solve.c
 void	solve_less_than_6(t_data *data, t_error *error_code);
 
-// solve_over_5/solve.c
+// solve_over_5
+// solve.c
 
 #endif

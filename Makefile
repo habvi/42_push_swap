@@ -24,6 +24,7 @@ SRCS			:=	$(ARRAY_DIR)/copy.c \
 					$(OPRATIONS_DIR)/test.c \
 					$(SOLVE_DIR)/compress.c \
 					$(SOLVE_DIR)/solve.c \
+					$(SOLVE_LESS_THAN_DIR)/put.c \
 					$(SOLVE_LESS_THAN_DIR)/solve.c \
 					check_nums.c \
 					error.c \
