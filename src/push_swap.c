@@ -14,7 +14,7 @@ static void	init_pointers(\
 static void	init_stack_b(\
 			t_nums **stack_b, t_deque *allocated_ptrs, t_error *error_code)
 {
-	*stack_b = init_nums(error_code);
+	*stack_b = init_nums(0, error_code);
 	if (*error_code)
 	{
 		free_all_pointers(allocated_ptrs);
@@ -55,7 +55,7 @@ void	*push_swap(t_nums *stack_a, t_error *error_code)
 	if (*error_code)
 		return (NULL);
 	data = init_data(stack_a, stack_b, array, allocated_ptrs);
-	solve(data, error_code);
+	solve(&data, error_code);
 	free_all_pointers(allocated_ptrs);
 	return (NULL);
 }

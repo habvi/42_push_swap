@@ -70,7 +70,7 @@ t_nums	*parse_nums_from_argv(char *const *argv, t_error *error_code)
 {
 	t_nums	*nums;
 
-	nums = init_nums(error_code);
+	nums = init_nums(0, error_code);
 	if (*error_code)
 		return (nums);
 	set_argv_to_deque(argv, nums->deque, error_code);

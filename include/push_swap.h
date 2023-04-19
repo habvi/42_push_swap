@@ -26,8 +26,8 @@ bool	is_valid_stack_nums(\
 t_nums	*compress_number(t_nums *nums, int *array);
 
 // nums_new.c
-t_nums	*nums_new(t_error *error_code);
-t_nums	*init_nums(t_error *error_code);
+t_nums	*nums_new(size_t init_size, t_error *error_code);
+t_nums	*init_nums(size_t init_size, t_error *error_code);
 
 // parse.c
 t_nums	*parse_nums_from_argv(char *const *argv, t_error *error);

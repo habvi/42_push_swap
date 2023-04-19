@@ -11,10 +11,10 @@ typedef struct s_data {
 }	t_data;
 
 // solve.c
-void	solve(t_data data, t_error *error_code);
+void	solve(t_data *data, t_error *error_code);
 
 // solve_less_than_6/solve.c
-void	solve_less_than_6(t_data data, t_error *error_code);
+void	solve_less_than_6(t_data *data, t_error *error_code);
 
 // solve_over_5/solve.c
 

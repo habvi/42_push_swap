@@ -3,7 +3,7 @@
 #include "error.h"
 #include "push_swap.h"
 
-t_nums	*nums_new(t_error *error_code)
+t_nums	*nums_new(size_t init_size, t_error *error_code)
 {
 	t_nums	*nums;
 
@@ -14,22 +14,22 @@ t_nums	*nums_new(t_error *error_code)
 		return (NULL);
 	}
 	nums->deque = NULL;
-	nums->size = 0;
+	nums->size = init_size;
 	return (nums);
 }
 
-t_nums	*init_nums(t_error *error_code)
+t_nums	*init_nums(size_t init_size, t_error *error_code)
 {
-	t_nums	*stack;
+	t_nums	*nums;
 
-	stack = nums_new(error_code);
+	nums = nums_new(init_size, error_code);
 	if (*error_code)
 		return (NULL);
-	stack->deque = deque_new_head(0, NULL, error_code);
+	nums->deque = deque_new_head(0, NULL, error_code);
 	if (*error_code)
 	{
-		free(stack);
+		free(nums);
 		return (NULL);
 	}
-	return (stack);
+	return (nums);
 }
