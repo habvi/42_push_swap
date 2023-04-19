@@ -2,7 +2,7 @@
 #include "deque.h"
 #include "error.h"
 
-t_deque	*deque_new_head(int init_num, t_error *error)
+t_deque	*deque_new_head(int init_num, void *ptr, t_error *error)
 {
 	t_deque	*deque;
 
@@ -13,12 +13,13 @@ t_deque	*deque_new_head(int init_num, t_error *error)
 		return (NULL);
 	}
 	deque->num = init_num;
+	deque->ptr = ptr;
 	deque->next = deque;
 	deque->prev = deque;
 	return (deque);
 }
 
-t_deque	*deque_new_node(int num, t_error *error)
+t_deque	*deque_new_node(int num, void *ptr, t_error *error)
 {
 	t_deque	*node;
 
@@ -29,6 +30,7 @@ t_deque	*deque_new_node(int num, t_error *error)
 		return (NULL);
 	}
 	node->num = num;
+	node->ptr = ptr;
 	node->next = NULL;
 	node->prev = NULL;
 	return (node);

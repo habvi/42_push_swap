@@ -8,6 +8,7 @@ typedef enum e_error	t_error;
 
 typedef struct s_deque {
 	int				num;
+	void			*ptr;
 	struct s_deque	*next;
 	struct s_deque	*prev;
 }	t_deque;
@@ -28,8 +29,8 @@ void	deque_init(t_deque *deque, int init_num, t_deque *init_node);
 bool	deque_is_empty(t_deque *deque);
 
 // dq_new.c
-t_deque	*deque_new_head(int init_num, t_error *error);
-t_deque	*deque_new_node(int num, t_error *error);
+t_deque	*deque_new_head(int init_num, void *ptr, t_error *error);
+t_deque	*deque_new_node(int num, void *ptr, t_error *error);
 
 // dq_pop_back.c
 t_deque	*deque_pop_back(t_deque *deque);
