@@ -13,7 +13,7 @@ typedef struct s_nums {
 }	t_nums;
 
 typedef enum e_type {
-	POINTER	= 1,
+	POINTER_1D	= 1,
 	T_DEQUE	= 2,
 	T_NUMS = 3
 }	t_type;

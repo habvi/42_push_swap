@@ -14,7 +14,7 @@ static int	*allocate_array(\
 		*error_code = ERROR_MALLOC;
 		return (NULL);
 	}
-	set_allocated_pointer(allocated_ptrs, POINTER, array, error_code);
+	set_allocated_pointer(allocated_ptrs, POINTER_1D, array, error_code);
 	return (array);
 }
 

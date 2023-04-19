@@ -30,7 +30,7 @@ void	free_array(int *array)
 
 void	free_by_each_types(t_type type, void *ptr)
 {
-	if (type == POINTER)
+	if (type == POINTER_1D)
 		free(ptr);
 	else if (type == T_DEQUE)
 		deque_clear((t_deque *)ptr);
