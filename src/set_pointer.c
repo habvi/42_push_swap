@@ -3,7 +3,8 @@
 #include "free.h"
 #include "push_swap.h"
 
-void	set_allocated_pointer(t_deque *allocated_ptrs, t_type type, void *ptr, t_error *error_code)
+void	set_allocated_pointer(\
+		t_deque *allocated_ptrs, t_type type, void *ptr, t_error *error_code)
 {
 	t_deque	*new_node;
 

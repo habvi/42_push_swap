@@ -19,7 +19,8 @@ typedef enum e_type {
 }	t_type;
 
 // check_nums.c
-bool	is_valid_stack_nums(t_nums *stack, int **array, t_deque *allocated_ptrs, t_error *error_code);
+bool	is_valid_stack_nums(\
+	t_nums *stack, int **array, t_deque *allocated_ptrs, t_error *error_code);
 
 // compress.c
 t_nums	*compress_number(t_nums *nums, int *array);
@@ -32,7 +33,8 @@ t_nums	*init_nums(t_error *error_code);
 t_nums	*parse_nums_from_argv(char *const *argv, t_error *error);
 
 // push_swap.c
-void	set_allocated_pointer(t_deque *allocated_ptrs, t_type type, void *ptr, t_error *error_code);
+void	set_allocated_pointer(\
+		t_deque *allocated_ptrs, t_type type, void *ptr, t_error *error_code);
 void	*push_swap(t_nums *stack_a, t_error *error_code);
 
 #endif

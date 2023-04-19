@@ -1,9 +1,9 @@
 #ifndef FREE_H
 # define FREE_H
 
-typedef struct s_nums	t_nums;
 typedef struct s_deque	t_deque;
-typedef enum e_type     t_type;
+typedef struct s_nums	t_nums;
+typedef enum e_type		t_type;
 
 // free.c
 void	free_strs(char **strs);

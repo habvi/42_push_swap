@@ -45,7 +45,8 @@ static bool	is_stack_sorted(t_nums *stack, int *array)
 	return (true);
 }
 
-bool	is_valid_stack_nums(t_nums *stack, int **array, t_deque *allocated_ptrs, t_error *error_code)
+bool	is_valid_stack_nums(\
+	t_nums *stack, int **array, t_deque *allocated_ptrs, t_error *error_code)
 {
 	if (is_stack_a_empty(stack->size))
 		return (false);

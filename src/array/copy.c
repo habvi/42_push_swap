@@ -3,7 +3,8 @@
 #include "error.h"
 #include "push_swap.h"
 
-static int	*allocate_array(size_t size, t_deque *allocated_ptrs, t_error *error_code)
+static int	*allocate_array(\
+			size_t size, t_deque *allocated_ptrs, t_error *error_code)
 {
 	int	*array;
 

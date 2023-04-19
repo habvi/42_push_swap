@@ -8,7 +8,8 @@ typedef struct s_nums	t_nums;
 typedef enum e_error	t_error;
 
 // copy.c
-int	    *copy_to_array(t_nums *nums, t_deque *allocated_ptrs, t_error *error_code);
+int		*copy_to_array(\
+		t_nums *nums, t_deque *allocated_ptrs, t_error *error_code);
 
 // print.c
 void	print_array(int *array, size_t size, char *array_name);
