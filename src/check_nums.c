@@ -28,14 +28,14 @@ static bool	is_duplicate_numbers(\
 	return (false);
 }
 
-static bool	is_stack_a_sorted(t_nums *nums, int *array)
+static bool	is_stack_sorted(t_nums *stack, int *array)
 {
 	t_deque	*node;
 	size_t	i;
 
-	node = nums->deque->next;
+	node = stack->deque->next;
 	i = 0;
-	while (i < nums->size)
+	while (i < stack->size)
 	{
 		if (node->num != array[i])
 			return (false);
@@ -45,17 +45,17 @@ static bool	is_stack_a_sorted(t_nums *nums, int *array)
 	return (true);
 }
 
-bool	is_valid_nums(t_nums *nums, int **array, t_error *error_code)
+bool	is_valid_stack_nums(t_nums *stack, int **array, t_deque *allocated_ptrs, t_error *error_code)
 {
-	if (is_stack_a_empty(nums->size))
+	if (is_stack_a_empty(stack->size))
 		return (false);
-	*array = copy_to_array(nums, error_code);
+	*array = copy_to_array(stack, allocated_ptrs, error_code);
 	if (*error_code)
 		return (false);
-	sort_array(*array, nums->size);
-	if (is_duplicate_numbers(*array, nums->size, error_code))
+	sort_array(*array, stack->size);
+	if (is_duplicate_numbers(*array, stack->size, error_code))
 		return (false);
-	if (is_stack_a_sorted(nums, *array))
+	if (is_stack_sorted(stack, *array))
 		return (false);
 	return (true);
 }

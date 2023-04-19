@@ -27,7 +27,7 @@ static void	add_strs_to_deque(char **strs, t_deque *deque, t_error *error_code)
 		num = convert_str_to_integer(strs[i], error_code);
 		if (*error_code)
 			return ;
-		new_node = deque_new_node(num, error_code);
+		new_node = deque_new_node(num, NULL, error_code);
 		if (*error_code)
 			return ;
 		deque_add_back(deque, new_node);

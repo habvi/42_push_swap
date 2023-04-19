@@ -8,25 +8,31 @@ SRC_DIR		:=	src
 #--------------------------------------------
 # solve
 #--------------------------------------------
-OPRATIONS_DIR	:=	operations
-SOLVE_DIR		:=	solve
-SRCS			:=	$(OPRATIONS_DIR)/push.c \
+ARRAY_DIR			:=	array
+OPRATIONS_DIR		:=	operations
+SOLVE_DIR			:=	solve
+SOLVE_LESS_THAN_DIR	:=	solve_less_than_6
+SOLVE_OVER_DIR		:=	solve_over_5
+
+SRCS			:=	$(ARRAY_DIR)/copy.c \
+					$(ARRAY_DIR)/print.c \
+					$(ARRAY_DIR)/sort.c \
+					$(OPRATIONS_DIR)/push.c \
 					$(OPRATIONS_DIR)/reverse_rotate.c \
 					$(OPRATIONS_DIR)/rotate.c \
 					$(OPRATIONS_DIR)/swap.c \
 					$(OPRATIONS_DIR)/test.c \
 					$(SOLVE_DIR)/compress.c \
 					$(SOLVE_DIR)/solve.c \
-					array_copy.c \
-					array_print.c \
-					array_sort.c \
+					$(SOLVE_LESS_THAN_DIR)/solve.c \
 					check_nums.c \
 					error.c \
 					free.c \
 					main.c \
 					nums.c \
 					parse.c \
-					push_swap.c
+					push_swap.c \
+					set_pointer.c
 
 #--------------------------------------------
 # deque

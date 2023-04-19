@@ -25,7 +25,7 @@ t_nums	*init_nums(t_error *error_code)
 	stack = nums_new(error_code);
 	if (*error_code)
 		return (NULL);
-	stack->deque = deque_new_head(0, error_code);
+	stack->deque = deque_new_head(0, NULL, error_code);
 	if (*error_code)
 	{
 		free(stack);
