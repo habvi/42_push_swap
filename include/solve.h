@@ -48,5 +48,6 @@ void	update_answer(t_data *data, t_error *error_code);
 
 // ---------------- solve_over_5 ----------------
 // solve.c
+void	solve_over_5(t_data *data, t_error *error_code);
 
 #endif

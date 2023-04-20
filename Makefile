@@ -44,7 +44,7 @@ SRCS			+=	$(SOLVE_LESS_THAN_DIR)/dfs.c \
 					$(SOLVE_LESS_THAN_DIR)/update.c \
 
 SOLVE_OVER_DIR	:=	solve_over_5
-# SRCS			+=	
+SRCS			+=	$(SOLVE_OVER_DIR)/solve.c \
 
 #--------------------------------------------
 # deque
