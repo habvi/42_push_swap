@@ -5,6 +5,8 @@
 #include "push_swap.h"
 #include "solve.h"
 
+#include <stdio.h>
+
 static int	*copy_stack_a(t_nums *stack_a, t_error *error_code)
 {
 	int		*array_a;
@@ -28,27 +30,66 @@ static int	*copy_stack_a(t_nums *stack_a, t_error *error_code)
 	return (array_a);
 }
 
-static t_deque	*calc_stack_a_lis(t_data *data, t_error *error_code)
+static t_nums	*calc_each_lis(t_data *data, int *array_a, size_t start, t_error *error_code)
+{
+	t_nums	*new_lis_a;
+	size_t	i;
+
+	(void)error_code;
+	new_lis_a = NULL;
+	i = 0;
+	while (i < data->stack_a->size)
+	{
+		printf("%d ", array_a[(start + i) % data->stack_a->size]);
+		i++;
+	}
+	printf("\n");
+	return (new_lis_a);
+}
+
+static t_nums	*calc_all_lis_with_rotate(t_data *data, int *array_a, t_nums *lis_a, t_error *error_code)
+{
+	t_nums *new_lis_a;
+	size_t	i;
+
+	i = 0;
+	while (i < data->stack_a->size)
+	{
+		printf("start index: %zu %d\n", i, array_a[i]);
+		new_lis_a = calc_each_lis(data, array_a, i, error_code);
+		if (*error_code)
+			return (NULL);
+		// update_lis_a(data, lis_a, new_lis_a);
+		i++;
+	}
+	return (lis_a);
+}
+
+// LIS: longest increasing subsequence
+static t_nums	*calc_stack_a_lis(t_data *data, t_error *error_code)
 {
 	int		*array_a;
-	// t_deque	*lis_a;
+	t_nums	*lis_a;
 
 	array_a = copy_stack_a(data->stack_a, error_code);
 	if (*error_code)
 		return (NULL);
 	print_array(array_a, data->stack_a->size, "array_a");
+	lis_a = init_and_set_pointer(data->allocated_ptrs, 0, error_code);
+	if (*error_code)
+	{
+		free(array_a);
+		return (NULL);
+	}
+	lis_a = calc_all_lis_with_rotate(data, array_a, lis_a, error_code);
 	free(array_a);
-	// lis_a = deque_new_head(0, NULL, error_code);
-	// if (*error_code)
-	// 	return (NULL);
-	return (NULL);
+	return (lis_a);
 }
 
 static t_nums	*generate_base_move(t_data *data, t_error *error_code)
 {
-	t_deque	*lis_a;
+	t_nums	*lis_a;
 
-	(void)error_code;
 	deque_print4(data);
 	lis_a = calc_stack_a_lis(data, error_code);
 	if (*error_code)
