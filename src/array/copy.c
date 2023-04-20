@@ -35,7 +35,7 @@ static void	copy_stack_a_to_array(t_nums *stack, int *array)
 	}
 }
 
-int	*copy_to_array(t_nums *stack, t_deque *allocated_ptrs, t_error *error_code)
+int	*copy_to_array_and_set(t_nums *stack, t_deque *allocated_ptrs, t_error *error_code)
 {
 	int	*array;
 

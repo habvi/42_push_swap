@@ -8,7 +8,7 @@ typedef struct s_nums	t_nums;
 typedef enum e_error	t_error;
 
 // copy.c
-int		*copy_to_array(\
+int		*copy_to_array_and_set(\
 		t_nums *nums, t_deque *allocated_ptrs, t_error *error_code);
 
 // print.c

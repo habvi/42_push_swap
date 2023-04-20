@@ -50,7 +50,7 @@ bool	is_valid_stack_nums(\
 {
 	if (is_stack_a_empty(stack->size))
 		return (false);
-	*array = copy_to_array(stack, allocated_ptrs, error_code);
+	*array = copy_to_array_and_set(stack, allocated_ptrs, error_code);
 	if (*error_code)
 		return (false);
 	sort_array(*array, stack->size);
