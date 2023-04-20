@@ -4,10 +4,13 @@
 !*.h
 !Makefile
 !.gitignore
-!checker/*
+!checker_python/*
 
-# test
+# ignore
 test/
-!test.py
+tester/
 tmp.c
+
+# include
+!test.py
 !main.py

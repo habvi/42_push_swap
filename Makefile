@@ -8,31 +8,7 @@ SRC_DIR		:=	src
 #--------------------------------------------
 # solve
 #--------------------------------------------
-ARRAY_DIR			:=	array
-OPRATIONS_DIR		:=	operations
-SOLVE_DIR			:=	solve
-SOLVE_LESS_THAN_DIR	:=	solve_less_than_6
-SOLVE_OVER_DIR		:=	solve_over_5
-
-SRCS			:=	$(ARRAY_DIR)/copy.c \
-					$(ARRAY_DIR)/print.c \
-					$(ARRAY_DIR)/sort.c \
-					$(OPRATIONS_DIR)/append_op.c \
-					$(OPRATIONS_DIR)/pop_op.c \
-					$(OPRATIONS_DIR)/push.c \
-					$(OPRATIONS_DIR)/reverse_rotate.c \
-					$(OPRATIONS_DIR)/rotate.c \
-					$(OPRATIONS_DIR)/swap.c \
-					$(SOLVE_DIR)/compress.c \
-					$(SOLVE_DIR)/solve.c \
-					$(SOLVE_LESS_THAN_DIR)/dfs.c \
-					$(SOLVE_LESS_THAN_DIR)/init.c \
-					$(SOLVE_LESS_THAN_DIR)/operations.c \
-					$(SOLVE_LESS_THAN_DIR)/put.c \
-					$(SOLVE_LESS_THAN_DIR)/run.c \
-					$(SOLVE_LESS_THAN_DIR)/solve.c \
-					$(SOLVE_LESS_THAN_DIR)/update.c \
-					check_nums.c \
+SRCS			:=	check_nums.c \
 					error.c \
 					free.c \
 					main.c \
@@ -40,6 +16,35 @@ SRCS			:=	$(ARRAY_DIR)/copy.c \
 					parse.c \
 					push_swap.c \
 					set_pointer.c
+
+ARRAY_DIR		:=	array
+SRCS			+=	$(ARRAY_DIR)/copy.c \
+					$(ARRAY_DIR)/print.c \
+					$(ARRAY_DIR)/sort.c \
+
+OPRATIONS_DIR	:=	operations
+SRCS			+=	$(OPRATIONS_DIR)/append_op.c \
+					$(OPRATIONS_DIR)/pop_op.c \
+					$(OPRATIONS_DIR)/push.c \
+					$(OPRATIONS_DIR)/reverse_rotate.c \
+					$(OPRATIONS_DIR)/rotate.c \
+					$(OPRATIONS_DIR)/swap.c \
+
+SOLVE_DIR		:=	solve
+SRCS			+=	$(SOLVE_DIR)/init_set.c \
+					$(SOLVE_DIR)/put.c \
+					$(SOLVE_DIR)/run.c \
+					$(SOLVE_DIR)/compress.c \
+					$(SOLVE_DIR)/solve.c \
+
+SOLVE_LESS_THAN_DIR	:=	solve_less_than_6
+SRCS			+=	$(SOLVE_LESS_THAN_DIR)/dfs.c \
+					$(SOLVE_LESS_THAN_DIR)/operations.c \
+					$(SOLVE_LESS_THAN_DIR)/solve.c \
+					$(SOLVE_LESS_THAN_DIR)/update.c \
+
+SOLVE_OVER_DIR	:=	solve_over_5
+# SRCS			+=	
 
 #--------------------------------------------
 # deque
