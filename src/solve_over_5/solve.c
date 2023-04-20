@@ -1,7 +1,8 @@
 #include <stdlib.h> // malloc
-#include "array.h"
+#include "array.h" // print_array
 #include "deque.h"
 #include "error.h"
+#include "free.h" // free_nums
 #include "push_swap.h"
 #include "solve.h"
 
@@ -30,17 +31,56 @@ static int	*copy_stack_a(t_nums *stack_a, t_error *error_code)
 	return (array_a);
 }
 
-static t_nums	*calc_each_lis(t_data *data, int *array_a, size_t start, t_error *error_code)
+static void	update_lis_a_by_num(t_nums *new_lis_a, int num, t_error *error_code)
 {
-	t_nums	*new_lis_a;
-	size_t	i;
+	const int	tail = new_lis_a->deque->prev->num;
+	t_deque		*new_node;
+	t_deque		*node;
 
-	(void)error_code;
-	new_lis_a = NULL;
-	i = 0;
-	while (i < data->stack_a->size)
+	if (tail < num)
 	{
-		printf("%d ", array_a[(start + i) % data->stack_a->size]);
+		new_node = deque_new_node(num, NULL, error_code);
+		if (*error_code)
+			return ;
+		deque_add_back(new_lis_a->deque, new_node);
+		new_lis_a->size++;
+	}
+	node = new_lis_a->deque;
+	while (node)
+	{
+		if (node->num >= num)
+		{
+			node->num = num;
+			return ;
+		}
+		node = node->next;
+	}
+}
+
+// static t_nums	*reconstruct_lis(t_nums *new_lis_a)
+// {
+
+// }
+
+static t_nums	*calc_each_lis(t_data *data, int *array_a, size_t start_i, t_error *error_code)
+{
+	t_nums			*new_lis_a;
+	size_t			i;
+	const size_t	size = data->stack_a->size;
+	int				num;
+
+	new_lis_a = init_nums(0, error_code);
+	if (*error_code)
+		return (NULL);
+	i = 0;
+	while (i < size)
+	{
+		num = array_a[(start_i + i) % size];
+		update_lis_a_by_num(new_lis_a, num, error_code);
+		if (*error_code)
+			return (NULL);
+		// new_lis_a = reconstruct_lis(new_lis_a);
+		deque_print(new_lis_a->deque, "new_lis");
 		i++;
 	}
 	printf("\n");
@@ -55,10 +95,11 @@ static t_nums	*calc_all_lis_with_rotate(t_data *data, int *array_a, t_nums *lis_
 	i = 0;
 	while (i < data->stack_a->size)
 	{
-		printf("start index: %zu %d\n", i, array_a[i]);
+		printf("start_i index[%zu] : %d\n", i, array_a[i]);
 		new_lis_a = calc_each_lis(data, array_a, i, error_code);
 		if (*error_code)
 			return (NULL);
+		free_nums(new_lis_a);
 		// update_lis_a(data, lis_a, new_lis_a);
 		i++;
 	}
