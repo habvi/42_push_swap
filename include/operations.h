@@ -1,7 +1,16 @@
 #ifndef OPERATIONS_H
 # define OPERATIONS_H
 
+# include <stdbool.h>
+
+# define TOTAL_OPERATIONS				11
+# define OPERATION_LIMIT_LESS_THAN_6	11
+# define TWO_OP							1
+# define ONE_OP							0
+
 typedef struct s_nums	t_nums;
+typedef struct s_data	t_data;
+typedef enum e_error	t_error;
 
 typedef enum e_operation {
 	SA = 1,
@@ -17,24 +26,35 @@ typedef enum e_operation {
 	RRR = 11
 }	t_operation;
 
+typedef enum e_run {
+	RUN = 1,
+	UNDO = 2
+}	t_run;
+
+// append_op.c
+void	append_now_op(t_data *data, t_operation op, t_error *error_code);
+
+// pop_op.c
+void	pop_now_op(t_nums *now_op);
+
 // push.c
-void	pa(t_nums *nums1, t_nums *nums2);
-void	pb(t_nums *nums1, t_nums *nums2);
+void	pa(t_data *data, t_run run, t_error *error_code);
+void	pb(t_data *data, t_run run, t_error *error_code);
 
 // reverse_rotate.c
-void	rra(t_nums *nums);
-void	rrb(t_nums *nums);
-void	rrr(t_nums *nums1, t_nums *nums2);
+void	rra(t_data *data, bool is_rrr, t_run run, t_error *error_code);
+void	rrb(t_data *data, bool is_rrr, t_run run, t_error *error_code);
+void	rrr(t_data *data, bool is_rrr, t_run run, t_error *error_code);
 
 // rotate.c
-void	ra(t_nums *nums);
-void	rb(t_nums *nums);
-void	rr(t_nums *nums1, t_nums *nums2);
+void	ra(t_data *data, bool is_rr, t_run run, t_error *error_code);
+void	rb(t_data *data, bool is_rr, t_run run, t_error *error_code);
+void	rr(t_data *data, bool is_rr, t_run run, t_error *error_code);
 
 // swap.c
-void	sa(t_nums *nums);
-void	sb(t_nums *nums);
-void	ss(t_nums *nums1, t_nums *nums2);
+void	sa(t_data *data, bool is_ss, t_run run, t_error *error_code);
+void	sb(t_data *data, bool is_ss, t_run run, t_error *error_code);
+void	ss(t_data *data, bool is_ss, t_run run, t_error *error_code);
 
 // test.c
 void	test(t_nums *stack_a, t_nums *stack_b);

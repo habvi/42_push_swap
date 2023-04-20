@@ -28,7 +28,7 @@ static bool	is_duplicate_numbers(\
 	return (false);
 }
 
-static bool	is_stack_sorted(t_nums *stack, int *array)
+bool	is_stack_sorted(t_nums *stack, int *array)
 {
 	t_deque	*node;
 	size_t	i;

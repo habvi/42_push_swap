@@ -1,6 +1,8 @@
 #include "deque.h"
+#include "error.h"
 #include "operations.h"
 #include "push_swap.h"
+#include "solve.h"
 
 static void	rotate_tail_to_head(t_deque *stack)
 {
@@ -10,30 +12,50 @@ static void	rotate_tail_to_head(t_deque *stack)
 	deque_add_front(stack, move_node);
 }
 
-void	rra(t_nums *nums)
+void	rra(t_data *data, bool is_rrr, t_run run, t_error *error_code)
 {
 	t_deque			*stack_a;
-	const size_t	size = nums->size;
+	const size_t	size = data->stack_a->size;
 
 	if (size < 2)
 		return ;
-	stack_a = nums->deque;
+	stack_a = data->stack_a->deque;
 	rotate_tail_to_head(stack_a);
+	if (is_rrr)
+		return ;
+	if (run == RUN)
+		append_now_op(data, RRA, error_code);
+	else if (run == UNDO)
+		pop_now_op(data->now_op);
 }
 
-void	rrb(t_nums *nums)
+void	rrb(t_data *data, bool is_rrr, t_run run, t_error *error_code)
 {
 	t_deque			*stack_b;
-	const size_t	size = nums->size;
+	const size_t	size = data->stack_b->size;
 
 	if (size < 2)
 		return ;
-	stack_b = nums->deque;
+	stack_b = data->stack_b->deque;
 	rotate_tail_to_head(stack_b);
+	if (is_rrr)
+		return ;
+	if (run == RUN)
+		append_now_op(data, RRB, error_code);
+	else if (run == UNDO)
+		pop_now_op(data->now_op);
 }
 
-void	rrr(t_nums *nums1, t_nums *nums2)
+void	rrr(t_data *data, bool is_rrr, t_run run, t_error *error_code)
 {
-	rra(nums1);
-	rrb(nums2);
+	rra(data, is_rrr, run, error_code);
+	if (*error_code)
+		return ;
+	rrb(data, is_rrr, run, error_code);
+	if (*error_code)
+		return ;
+	if (run == RUN)
+		append_now_op(data, RRR, error_code);
+	else if (run == UNDO)
+		pop_now_op(data->now_op);
 }

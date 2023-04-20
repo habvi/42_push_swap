@@ -19,6 +19,7 @@ typedef enum e_type {
 }	t_type;
 
 // check_nums.c
+bool	is_stack_sorted(t_nums *stack, int *array);
 bool	is_valid_stack_nums(\
 	t_nums *stack, int **array, t_deque *allocated_ptrs, t_error *error_code);
 

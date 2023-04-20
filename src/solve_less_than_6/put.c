@@ -3,10 +3,19 @@
 #include "error.h"
 #include "push_swap.h"
 
-void	print_operations(t_nums *answer)
+void	print_operations(t_nums *answer, t_error *error_code)
 {
-	t_deque	*node;
+	t_deque				*node;
+	static const char	*op_strs[] = {NULL, "sa", "sb", "ss", \
+									"pa", "pb", \
+									"ra", "rb", "rr", \
+									"rra", "rrb", "rrr", NULL};
 
+	if (*error_code)
+	{
+		ft_dprintf(STDERR_FILENO, "Error malloc\n");
+		return ;
+	}
 	if (deque_is_empty(answer->deque))
 	{
 		ft_dprintf(STDERR_FILENO, "is empty!\n");
@@ -15,7 +24,7 @@ void	print_operations(t_nums *answer)
 	node = answer->deque->next;
 	while (node)
 	{
-		ft_dprintf(STDERR_FILENO, " %s", node->ptr);
+		ft_dprintf(STDOUT_FILENO, "%s\n", op_strs[node->num]);
 		node = node->next;
 	}
 	ft_dprintf(STDERR_FILENO, "\ntotal: %zu\n", answer->size);

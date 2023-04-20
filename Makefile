@@ -17,15 +17,21 @@ SOLVE_OVER_DIR		:=	solve_over_5
 SRCS			:=	$(ARRAY_DIR)/copy.c \
 					$(ARRAY_DIR)/print.c \
 					$(ARRAY_DIR)/sort.c \
+					$(OPRATIONS_DIR)/append_op.c \
+					$(OPRATIONS_DIR)/pop_op.c \
 					$(OPRATIONS_DIR)/push.c \
 					$(OPRATIONS_DIR)/reverse_rotate.c \
 					$(OPRATIONS_DIR)/rotate.c \
 					$(OPRATIONS_DIR)/swap.c \
-					$(OPRATIONS_DIR)/test.c \
 					$(SOLVE_DIR)/compress.c \
 					$(SOLVE_DIR)/solve.c \
+					$(SOLVE_LESS_THAN_DIR)/dfs.c \
+					$(SOLVE_LESS_THAN_DIR)/init.c \
+					$(SOLVE_LESS_THAN_DIR)/operations.c \
 					$(SOLVE_LESS_THAN_DIR)/put.c \
+					$(SOLVE_LESS_THAN_DIR)/run.c \
 					$(SOLVE_LESS_THAN_DIR)/solve.c \
+					$(SOLVE_LESS_THAN_DIR)/update.c \
 					check_nums.c \
 					error.c \
 					free.c \
