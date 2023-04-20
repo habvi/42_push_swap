@@ -45,7 +45,10 @@ SRCS			+=	$(SOLVE_LESS_THAN_DIR)/dfs.c \
 					$(SOLVE_LESS_THAN_DIR)/update.c
 
 SOLVE_OVER_DIR	:=	solve_over_5
-SRCS			+=	$(SOLVE_OVER_DIR)/solve.c \
+SRCS			+=	$(SOLVE_OVER_DIR)/copy.c \
+					$(SOLVE_OVER_DIR)/lis_reconstruct.c \
+					$(SOLVE_OVER_DIR)/lis.c \
+					$(SOLVE_OVER_DIR)/solve.c \
 					$(SOLVE_OVER_DIR)/update.c
 
 #--------------------------------------------

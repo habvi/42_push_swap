@@ -17,7 +17,9 @@ typedef struct s_data {
 	t_nums	*lis_a;
 }	t_data;
 
-// ----------------- solve------------------------
+// --------------------------------------------
+//  solve
+// --------------------------------------------
 // compress.c
 t_nums	*compress_number(t_nums *nums, int *array);
 
@@ -38,7 +40,9 @@ void	undo_operation(uint8_t op_i, t_data *data, t_error *error_code);
 // solve.c
 void	solve(t_data *data, t_error *error_code);
 
-// -------------- solve_less_than_6 --------------
+// --------------------------------------------
+//  solve_less_than_6
+// --------------------------------------------
 // dfs.c
 bool	is_operation_exceeded_answer_size(t_data *data);
 bool	is_stack_a_sorted(t_nums *stack_a, t_nums *stack_b, int *sorted_array);
@@ -53,7 +57,18 @@ void	solve_less_than_6(t_data *data, t_error *error_code);
 // update.c
 void	update_answer(t_data *data, t_error *error_code);
 
-// ---------------- solve_over_5 ----------------
+// --------------------------------------------
+//  solve_over_5
+// --------------------------------------------
+// copy.c
+int		*alloc_and_copy_stack_a(t_nums *stack_a, t_error *error_code);
+
+// lis_reconstruct.c
+t_nums	*reconstruct_lis(t_nums *stack_a, t_nums *new_lis_a);
+
+// lis.c
+t_nums	*calc_stack_a_lis(t_data *data, t_error *error_code);
+
 // solve.c
 void	solve_over_5(t_data *data, t_error *error_code);
 
