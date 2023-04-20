@@ -52,7 +52,6 @@ t_nums	*reconstruct_lis(t_nums *stack_a, t_nums *new_lis_a)
 		{
 			new_lis_a_node->num = stack_a_node->num;
 			new_lis_a_node = new_lis_a_node->prev;
-
 		}
 		stack_a_node = stack_a_node->prev;
 		stack_a_node = skip_head_node(stack_a_node);

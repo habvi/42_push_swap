@@ -16,7 +16,7 @@ void	print_operations(t_nums *answer, t_error *error_code)
 		ft_dprintf(STDERR_FILENO, "Error malloc\n");
 		return ;
 	}
-	if (deque_is_empty(answer->deque))
+	if (answer == NULL || deque_is_empty(answer->deque))
 	{
 		ft_dprintf(STDERR_FILENO, "op is empty!\n");
 		return ;

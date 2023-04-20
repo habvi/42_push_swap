@@ -5,8 +5,6 @@
 #include "push_swap.h"
 #include "solve.h"
 
-#include <stdio.h> // to do: erase
-
 static void	update_lis_a_by_num(t_nums *new_lis_a, int num, t_error *error_code)
 {
 	const int	tail = new_lis_a->deque->prev->num;
@@ -53,17 +51,16 @@ static t_nums	*calc_each_lis(\
 			return (NULL);
 		i++;
 	}
-	deque_print(new_lis_a->deque, "before new_lis");
+	// deque_print(new_lis_a->deque, "before new_lis");
 	new_lis_a = reconstruct_lis(data->stack_a, new_lis_a);
-	deque_print(new_lis_a->deque, "after new_lis");
-	printf("\n");
+	// deque_print(new_lis_a->deque, "after new_lis");
 	return (new_lis_a);
 }
 
 static t_nums	*calc_all_lis_with_rotate(\
 					t_data *data, int *array_a, t_error *error_code)
 {
-	t_nums *new_lis_a;
+	t_nums	*new_lis_a;
 	size_t	i;
 
 	i = 0;

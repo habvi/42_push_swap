@@ -32,6 +32,7 @@ void	deque_print2(\
 
 void	deque_print4(t_data *data)
 {
+	ft_dprintf(STDERR_FILENO, "--------------------------------------\n");
 	deque_print(data->stack_a->deque, "stackA");
 	deque_print(data->stack_b->deque, "stackB");
 	deque_print(data->now_op->deque, "now_op");

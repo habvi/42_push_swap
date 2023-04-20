@@ -17,6 +17,11 @@ typedef struct s_data {
 	t_nums	*lis_a;
 }	t_data;
 
+typedef enum e_dir {
+	NEXT = 0,
+	PREV = 1
+}	t_dir;
+
 // --------------------------------------------
 //  solve
 // --------------------------------------------
@@ -68,6 +73,9 @@ t_nums	*reconstruct_lis(t_nums *stack_a, t_nums *new_lis_a);
 
 // lis.c
 t_nums	*calc_stack_a_lis(t_data *data, t_error *error_code);
+
+// pb_optimized.c
+t_nums	*push_to_b_without_lis(t_data *data, t_error *error_code);
 
 // solve.c
 void	solve_over_5(t_data *data, t_error *error_code);
