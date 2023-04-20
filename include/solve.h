@@ -74,6 +74,9 @@ t_nums	*reconstruct_lis(t_nums *stack_a, t_nums *new_lis_a);
 // lis.c
 t_nums	*calc_stack_a_lis(t_data *data, t_error *error_code);
 
+// pa.c
+t_nums	*pushback_to_a_and_sort(t_data *data, t_error *error_code);
+
 // pb_optimized.c
 t_nums	*push_to_b_without_lis(t_data *data, t_error *error_code);
 
