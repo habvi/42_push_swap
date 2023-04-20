@@ -57,10 +57,63 @@ static void	update_lis_a_by_num(t_nums *new_lis_a, int num, t_error *error_code)
 	}
 }
 
-// static t_nums	*reconstruct_lis(t_nums *new_lis_a)
-// {
+static t_deque	*move_to_target_node(t_deque *stack_a_node, const int lis_tail)
+{
+	while (stack_a_node)
+	{
+		if (stack_a_node->num == lis_tail)
+			return (stack_a_node);
+		stack_a_node = stack_a_node->next;
+	}
+	return (stack_a_node);
+}
 
-// }
+static t_deque	*skip_head_node(t_deque *node)
+{
+	if (node->num == 0)
+		return (node->prev);
+	return (node);
+}
+
+static bool	is_update_num(t_deque *stack_a_node, t_deque *new_lis_a_node)
+{
+	if (new_lis_a_node->num <= stack_a_node->num)
+	{
+		if (new_lis_a_node->next)
+		{
+			if (stack_a_node->num <= new_lis_a_node->next->num)
+				return (true);
+		}
+		else
+			return (true);
+	}
+	return (false);
+}
+
+static t_nums	*reconstruct_lis(t_nums *stack_a, t_nums *new_lis_a)
+{
+	const int	lis_tail = new_lis_a->deque->prev->num;
+	t_deque		*stack_a_node;
+	t_deque		*new_lis_a_node;
+	size_t		i;
+
+	stack_a_node = move_to_target_node(stack_a->deque->next, lis_tail);
+	new_lis_a_node = new_lis_a->deque->prev;
+	i = 0;
+	while (i < stack_a->size && new_lis_a_node->num)
+	{
+		if (is_update_num(stack_a_node, new_lis_a_node))
+		{
+			new_lis_a_node->num = stack_a_node->num;
+			new_lis_a_node = new_lis_a_node->prev;
+
+		}
+		stack_a_node = stack_a_node->prev;
+		stack_a_node = skip_head_node(stack_a_node);
+		i++;
+	}
+	return (new_lis_a);
+}
 
 static t_nums	*calc_each_lis(t_data *data, int *array_a, size_t start_i, t_error *error_code)
 {
@@ -79,10 +132,11 @@ static t_nums	*calc_each_lis(t_data *data, int *array_a, size_t start_i, t_error
 		update_lis_a_by_num(new_lis_a, num, error_code);
 		if (*error_code)
 			return (NULL);
-		// new_lis_a = reconstruct_lis(new_lis_a);
-		deque_print(new_lis_a->deque, "new_lis");
 		i++;
 	}
+	deque_print(new_lis_a->deque, "before new_lis");
+	new_lis_a = reconstruct_lis(data->stack_a, new_lis_a);
+	deque_print(new_lis_a->deque, "after new_lis");
 	printf("\n");
 	return (new_lis_a);
 }
