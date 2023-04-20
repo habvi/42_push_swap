@@ -18,7 +18,7 @@ void	print_operations(t_nums *answer, t_error *error_code)
 	}
 	if (deque_is_empty(answer->deque))
 	{
-		ft_dprintf(STDERR_FILENO, "is empty!\n");
+		ft_dprintf(STDERR_FILENO, "op is empty!\n");
 		return ;
 	}
 	node = answer->deque->next;

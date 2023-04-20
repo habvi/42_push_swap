@@ -141,7 +141,7 @@ static t_nums	*calc_each_lis(t_data *data, int *array_a, size_t start_i, t_error
 	return (new_lis_a);
 }
 
-static t_nums	*calc_all_lis_with_rotate(t_data *data, int *array_a, t_nums *lis_a, t_error *error_code)
+static t_nums	*calc_all_lis_with_rotate(t_data *data, int *array_a, t_error *error_code)
 {
 	t_nums *new_lis_a;
 	size_t	i;
@@ -153,42 +153,43 @@ static t_nums	*calc_all_lis_with_rotate(t_data *data, int *array_a, t_nums *lis_
 		new_lis_a = calc_each_lis(data, array_a, i, error_code);
 		if (*error_code)
 			return (NULL);
+		if (data->lis_a->size < new_lis_a->size)
+			update_lis_a(data, new_lis_a, error_code);
 		free_nums(new_lis_a);
-		// update_lis_a(data, lis_a, new_lis_a);
+		if (*error_code)
+			return (NULL);
 		i++;
 	}
-	return (lis_a);
+	return (data->lis_a);
 }
 
 // LIS: longest increasing subsequence
 static t_nums	*calc_stack_a_lis(t_data *data, t_error *error_code)
 {
 	int		*array_a;
-	t_nums	*lis_a;
 
 	array_a = copy_stack_a(data->stack_a, error_code);
 	if (*error_code)
 		return (NULL);
 	print_array(array_a, data->stack_a->size, "array_a");
-	lis_a = init_and_set_pointer(data->allocated_ptrs, 0, error_code);
+	data->lis_a = init_and_set_pointer(data->allocated_ptrs, 0, error_code);
 	if (*error_code)
 	{
 		free(array_a);
 		return (NULL);
 	}
-	lis_a = calc_all_lis_with_rotate(data, array_a, lis_a, error_code);
+	data->lis_a = calc_all_lis_with_rotate(data, array_a, error_code);
 	free(array_a);
-	return (lis_a);
+	return (data->lis_a);
 }
 
 static t_nums	*generate_base_move(t_data *data, t_error *error_code)
 {
-	t_nums	*lis_a;
-
 	deque_print4(data);
-	lis_a = calc_stack_a_lis(data, error_code);
+	data->lis_a = calc_stack_a_lis(data, error_code);
 	if (*error_code)
 		return (NULL);
+	deque_print(data->lis_a->deque, "lis_a");
 	// push_to_b_without_lis();
 	// push_to_b_without_lis_with_optimize();
 	// if (*error_code)

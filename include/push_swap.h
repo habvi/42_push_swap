@@ -23,9 +23,6 @@ bool	is_stack_sorted(t_nums *stack, int *array);
 bool	is_valid_stack_nums(\
 	t_nums *stack, int **array, t_deque *allocated_ptrs, t_error *error_code);
 
-// compress.c
-t_nums	*compress_number(t_nums *nums, int *array);
-
 // nums_new.c
 t_nums	*nums_new(size_t init_size, t_error *error_code);
 t_nums	*init_nums(size_t init_size, t_error *error_code);

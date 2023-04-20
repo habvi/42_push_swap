@@ -14,9 +14,16 @@ typedef struct s_data {
 	t_deque	*allocated_ptrs;
 	t_nums	*now_op;
 	t_nums	*answer;
+	t_nums	*lis_a;
 }	t_data;
 
 // ----------------- solve------------------------
+// compress.c
+t_nums	*compress_number(t_nums *nums, int *array);
+
+// dup_num.c
+t_nums	*dup_nums(t_nums *nums, t_error *error_code);
+
 // init_set.c
 t_nums	*init_and_set_pointer(\
 			t_deque *allocated_ptrs, size_t init_num, t_error *error_code);
@@ -49,5 +56,8 @@ void	update_answer(t_data *data, t_error *error_code);
 // ---------------- solve_over_5 ----------------
 // solve.c
 void	solve_over_5(t_data *data, t_error *error_code);
+
+// update.c
+void	update_lis_a(t_data *data, t_nums *new_lis_a, t_error *error_code);
 
 #endif
