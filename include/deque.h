@@ -5,7 +5,7 @@
 # include <stdbool.h>
 
 typedef enum e_error	t_error;
-typedef struct s_data	t_data;;
+typedef struct s_data	t_data;
 
 typedef struct s_deque {
 	int				num;

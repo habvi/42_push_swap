@@ -115,7 +115,8 @@ static t_nums	*reconstruct_lis(t_nums *stack_a, t_nums *new_lis_a)
 	return (new_lis_a);
 }
 
-static t_nums	*calc_each_lis(t_data *data, int *array_a, size_t start_i, t_error *error_code)
+static t_nums	*calc_each_lis(\
+				t_data *data, int *array_a, size_t start_i, t_error *error_code)
 {
 	t_nums			*new_lis_a;
 	size_t			i;
@@ -141,7 +142,8 @@ static t_nums	*calc_each_lis(t_data *data, int *array_a, size_t start_i, t_error
 	return (new_lis_a);
 }
 
-static t_nums	*calc_all_lis_with_rotate(t_data *data, int *array_a, t_error *error_code)
+static t_nums	*calc_all_lis_with_rotate(\
+					t_data *data, int *array_a, t_error *error_code)
 {
 	t_nums *new_lis_a;
 	size_t	i;
