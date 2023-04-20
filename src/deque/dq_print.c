@@ -1,5 +1,7 @@
 #include "deque.h"
 #include "ft_dprintf.h"
+#include "push_swap.h"
+#include "solve.h"
 
 void	deque_print(t_deque *deque, char *deque_name)
 {
@@ -26,4 +28,14 @@ void	deque_print2(\
 	deque_print(deque1, deque1_name);
 	deque_print(deque2, deque2_name);
 	ft_dprintf(STDERR_FILENO, "----------\n");
+}
+
+void	deque_print4(t_data *data)
+{
+	deque_print(data->stack_a->deque, "stackA");
+	deque_print(data->stack_b->deque, "stackB");
+	deque_print(data->now_op->deque, "now_op");
+	if (data->answer)
+		deque_print(data->answer->deque, "answer");
+	ft_dprintf(STDERR_FILENO, "--------------------------------------\n");
 }

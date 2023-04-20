@@ -5,6 +5,7 @@
 # include <stdbool.h>
 
 typedef enum e_error	t_error;
+typedef struct s_data	t_data;;
 
 typedef struct s_deque {
 	int				num;
@@ -42,6 +43,7 @@ t_deque	*deque_pop_front(t_deque *deque);
 void	deque_print(t_deque *deque, char *deque_name);
 void	deque_print2(\
 		t_deque *deque1, char *deque1_name, t_deque *deque2, char *deque2_name);
+void	deque_print4(t_data *data);
 
 // dq_set_value.c
 void	deque_set_next(t_deque *deque, t_deque *next);
