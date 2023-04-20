@@ -34,6 +34,8 @@ static t_data	init_data(\
 	data.stack_b = stack_b;
 	data.sorted_array = array;
 	data.allocated_ptrs = allocated_ptrs;
+	data.now_op = NULL;
+	data.answer = NULL;
 	return (data);
 }
 
