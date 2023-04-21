@@ -3,7 +3,7 @@
 #include "error.h"
 #include "push_swap.h"
 
-static int	*allocate_array(\
+static int	*allocate_and_set_array(\
 			size_t size, t_deque *allocated_ptrs, t_error *error_code)
 {
 	int	*array;
@@ -40,7 +40,7 @@ int	*copy_to_array_and_set(\
 {
 	int	*array;
 
-	array = allocate_array(stack->size, allocated_ptrs, error_code);
+	array = allocate_and_set_array(stack->size, allocated_ptrs, error_code);
 	if (*error_code)
 		return (NULL);
 	copy_stack_a_to_array(stack, array);

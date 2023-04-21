@@ -37,6 +37,7 @@ static t_data	init_data(\
 	data.now_op = NULL;
 	data.answer = NULL;
 	data.lis_a = NULL;
+	data.copy_a = NULL;
 	return (data);
 }
 

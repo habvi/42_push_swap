@@ -32,7 +32,7 @@ static void	update_lis_a_by_num(t_nums *new_lis_a, int num, t_error *error_code)
 }
 
 static t_nums	*calc_each_lis(\
-				t_data *data, int *array_a, size_t start_i, t_error *error_code)
+				t_data *data, size_t start_i, t_error *error_code)
 {
 	t_nums			*new_lis_a;
 	size_t			i;
@@ -45,20 +45,19 @@ static t_nums	*calc_each_lis(\
 	i = 0;
 	while (i < size)
 	{
-		num = array_a[(start_i + i) % size];
+		num = data->copy_a[(start_i + i) % size];
 		update_lis_a_by_num(new_lis_a, num, error_code);
 		if (*error_code)
 			return (NULL);
 		i++;
 	}
 	// deque_print(new_lis_a->deque, "before new_lis");
-	new_lis_a = reconstruct_lis(data->stack_a, new_lis_a);
+	new_lis_a = reconstruct_lis(data, new_lis_a, error_code);
 	// deque_print(new_lis_a->deque, "after new_lis");
 	return (new_lis_a);
 }
 
-static t_nums	*calc_all_lis_with_rotate(\
-					t_data *data, int *array_a, t_error *error_code)
+static t_nums	*calc_all_lis_with_rotate(t_data *data, t_error *error_code)
 {
 	t_nums	*new_lis_a;
 	size_t	i;
@@ -66,7 +65,7 @@ static t_nums	*calc_all_lis_with_rotate(\
 	i = 0;
 	while (i < data->stack_a->size)
 	{
-		new_lis_a = calc_each_lis(data, array_a, i, error_code);
+		new_lis_a = calc_each_lis(data, i, error_code);
 		if (*error_code)
 			return (NULL);
 		if (data->lis_a->size < new_lis_a->size)
@@ -82,18 +81,19 @@ static t_nums	*calc_all_lis_with_rotate(\
 // LIS: longest increasing subsequence
 t_nums	*calc_stack_a_lis(t_data *data, t_error *error_code)
 {
-	int		*array_a;
+	int	*copy_a;
 
-	array_a = alloc_and_copy_stack_a(data->stack_a, error_code);
+	copy_a = alloc_and_copy_stack_a(data->stack_a, error_code);
 	if (*error_code)
 		return (NULL);
+	data->copy_a = copy_a;
 	data->lis_a = init_and_set_pointer(data->allocated_ptrs, 0, error_code);
 	if (*error_code)
 	{
-		free(array_a);
+		free(copy_a);
 		return (NULL);
 	}
-	data->lis_a = calc_all_lis_with_rotate(data, array_a, error_code);
-	free(array_a);
+	data->lis_a = calc_all_lis_with_rotate(data, error_code);
+	free(copy_a);
 	return (data->lis_a);
 }

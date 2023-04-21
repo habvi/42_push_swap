@@ -15,6 +15,7 @@ typedef struct s_data {
 	t_nums	*now_op;
 	t_nums	*answer;
 	t_nums	*lis_a;
+	int		*copy_a;
 }	t_data;
 
 typedef enum e_dir {
@@ -68,8 +69,13 @@ void	update_answer(t_data *data, t_error *error_code);
 // copy.c
 int		*alloc_and_copy_stack_a(t_nums *stack_a, t_error *error_code);
 
+// lis_reconstruct_find.c
+size_t	find_lis_start_i(int *array_a, size_t size, const int lis_tail);
+int		*find_insert_indexes(\
+		t_data *data, t_nums *lis_a, const size_t start_i, t_error *error_code);
+
 // lis_reconstruct.c
-t_nums	*reconstruct_lis(t_nums *stack_a, t_nums *new_lis_a);
+t_nums	*reconstruct_lis(t_data *data, t_nums *lis_a, t_error *error_code);
 
 // lis.c
 t_nums	*calc_stack_a_lis(t_data *data, t_error *error_code);

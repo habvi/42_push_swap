@@ -1,61 +1,46 @@
+#include <stdlib.h> // free
 #include "deque.h"
 #include "error.h"
 #include "push_swap.h"
 #include "solve.h"
 
-static t_deque	*move_to_target_node(t_deque *stack_a_node, const int lis_tail)
+static t_nums	*update_lis_num_from_tail(\
+				t_data *data, t_nums *lis_a, const size_t start_i, int *indexes)
 {
-	while (stack_a_node)
-	{
-		if (stack_a_node->num == lis_tail)
-			return (stack_a_node);
-		stack_a_node = stack_a_node->next;
-	}
-	return (stack_a_node);
-}
+	int				select_i;
+	t_deque			*lis_node;
+	size_t			i;
+	const size_t	size = data->stack_a->size;
+	int				num;
 
-static bool	is_update_num(t_deque *stack_a_node, t_deque *new_lis_a_node)
-{
-	if (new_lis_a_node->num <= stack_a_node->num)
-	{
-		if (new_lis_a_node->next)
-		{
-			if (stack_a_node->num <= new_lis_a_node->next->num)
-				return (true);
-		}
-		else
-			return (true);
-	}
-	return (false);
-}
-
-static t_deque	*skip_head_node(t_deque *node)
-{
-	if (node->num == 0)
-		return (node->prev);
-	return (node);
-}
-
-t_nums	*reconstruct_lis(t_nums *stack_a, t_nums *new_lis_a)
-{
-	const int	lis_tail = new_lis_a->deque->prev->num;
-	t_deque		*stack_a_node;
-	t_deque		*new_lis_a_node;
-	size_t		i;
-
-	stack_a_node = move_to_target_node(stack_a->deque->next, lis_tail);
-	new_lis_a_node = new_lis_a->deque->prev;
+	select_i = lis_a->size - 1;
+	lis_node = lis_a->deque->prev;
 	i = 0;
-	while (i < stack_a->size && new_lis_a_node->num)
+	while (i < size)
 	{
-		if (is_update_num(stack_a_node, new_lis_a_node))
+		num = data->copy_a[(start_i + size - i) % size];
+		if (indexes[size - i - 1] == select_i)
 		{
-			new_lis_a_node->num = stack_a_node->num;
-			new_lis_a_node = new_lis_a_node->prev;
+			lis_node->num = num;
+			lis_node = lis_node->prev;
+			select_i--;
 		}
-		stack_a_node = stack_a_node->prev;
-		stack_a_node = skip_head_node(stack_a_node);
 		i++;
 	}
-	return (new_lis_a);
+	free(indexes);
+	return (lis_a);
+}
+
+t_nums	*reconstruct_lis(t_data *data, t_nums *lis_a, t_error *error_code)
+{
+	int				*indexes;
+	const size_t	size = data->stack_a->size;
+	const int		lis_tail = lis_a->deque->prev->num;
+	const size_t	start_i = find_lis_start_i(data->copy_a, size, lis_tail);
+
+	indexes = find_insert_indexes(data, lis_a, start_i, error_code);
+	if (*error_code)
+		return (NULL);
+	lis_a = update_lis_num_from_tail(data, lis_a, start_i, indexes);
+	return (lis_a);
 }
