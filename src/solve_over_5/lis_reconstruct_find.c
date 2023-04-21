@@ -64,6 +64,9 @@ static size_t	update_lis_a_by_num(t_nums *lis_a, int num)
 	return (i);
 }
 
+// stack_a : 4 1 9 6 2 7 5 3 8
+// LIS     :   1     2     3 8
+// index   : 0 0 1 1 1 2 2 2 3
 int	*find_insert_indexes(\
 		t_data *data, t_nums *lis_a, const size_t start_i, t_error *error_code)
 {
