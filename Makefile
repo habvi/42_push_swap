@@ -121,6 +121,9 @@ re: fclean all
 #--------------------------------------------
 FORCE:
 
+visu: all
+	./visualizer/build/bin/visualizer
+
 norm:
 	norminette $(SRC_DIR) $(INCLUDE_DIR) $(LIBFT_DIR)
 

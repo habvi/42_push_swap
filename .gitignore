@@ -10,6 +10,7 @@
 test/
 tester/
 tmp.c
+visualizer/
 
 # include
 !test.py
