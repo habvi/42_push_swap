@@ -339,8 +339,7 @@ def move_num(A, B, op, before_place, after_place):
 
 def move_to_divide_nums(A, B, op, head, tail, stack_place, movable_stack_place, nums_range_per_block):
     total = tail - head + 1
-    # if total <= 3:
-    # else:
+    # try all if total <= 5:
     for i in range(total):
         num = get_move_num(A, B, stack_place)
         m = len(nums_range_per_block)
@@ -392,12 +391,85 @@ def stack_dfs(n, A, B, op):
         stack, A, B, op = divide_nums_to_other_stacks(stack, A, B, op, head, tail)
     return A, op
 
+def erase_adjacent_op(op, erase_1, erase_2):
+    new_op = []
+    for s in op:
+        if new_op and sorted([erase_1, erase_2]) == sorted([new_op[-1], s]):
+            new_op.pop()
+            continue
+        new_op.append(s)
+    return new_op
+
+def erase_pair_op(r_count, erase_1, erase_2, new_op):
+    while r_count[0] and r_count[1]:
+        r_count[0] -= 1
+        r_count[1] -= 1
+    new_op.extend([erase_1] * r_count[0])
+    new_op.extend([erase_2] * r_count[1])
+    return r_count, new_op
+
+def erase_unnecessary_op(op, erase_1, erase_2):
+    new_op = []
+    r_count = [0] * 2
+    for s in op:
+        if s in ("sa", "sb", "ss", "pa", "pb"):
+            r_count, new_op = erase_pair_op(r_count, erase_1, erase_2, new_op)
+            r_count = [0] * 2
+            new_op.append(s)
+            continue
+        if s == erase_1:
+            r_count[0] += 1
+        elif s == erase_2:
+            r_count[1] += 1
+        else:
+            new_op.append(s)
+    r_count, new_op = erase_pair_op(r_count, erase_1, erase_2, new_op)
+    return new_op
+
+def replace_pair_op(r_count, new_op, before_1, before_2, after):
+    while r_count[0] and r_count[1]:
+        new_op.append(after)
+        r_count[0] -= 1
+        r_count[1] -= 1
+    new_op.extend([before_1] * r_count[0])
+    new_op.extend([before_2] * r_count[1])
+    return r_count, new_op
+
+def replace_op(op, before_1, before_2, after):
+    new_op = []
+    r_count = [0] * 2
+    for s in op:
+        if s in ("sa", "sb", "ss", "pa", "pb"):
+            r_count, new_op = replace_pair_op(r_count, new_op, before_1, before_2, after)
+            r_count = [0] * 2
+            new_op.append(s)
+            continue
+        if s == before_1:
+            r_count[0] += 1
+        elif s == before_2:
+            r_count[1] += 1
+        else:
+            new_op.append(s)
+    r_count, new_op = replace_pair_op(r_count, new_op, before_1, before_2, after)
+    return new_op
+
 # n >= 6
 def solve_over_6(n, A, B):
     start_time = time.time()
     sorted_a = sorted(A)
     op = []
     A, op = stack_dfs(n, A, B, op)
+    for _ in range(20):
+        op = replace_op(op, "ra", "rb", "rr")
+        op = replace_op(op, "ra", "rrr", "rrb")
+        op = replace_op(op, "rb", "rrr", "rra")
+        op = replace_op(op, "rr", "rra", "rb")
+        op = replace_op(op, "rr", "rrb", "ra")
+        op = replace_op(op, "rra", "rrb", "rrr")
+        op = erase_unnecessary_op(op, "ra", "rra")
+        op = erase_unnecessary_op(op, "rb", "rrb")
+        op = erase_unnecessary_op(op, "rr", "rrr")
+        op = erase_adjacent_op(op, "pa", "pb")
     if not op:
         print_color_str(RED, "[NO ANS..!!]")
     else:
