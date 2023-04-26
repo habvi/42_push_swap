@@ -22,6 +22,9 @@ STACK_A_TAIL = 2
 STACK_B_HEAD = 3
 STACK_B_TAIL = 4
 
+# 3 or 4
+LAST_BLOCK_SIZE = 3
+
 RED = "red"
 GREEN = "green"
 color_dict = {"red" : "\033[31m",
@@ -166,30 +169,54 @@ def is_unnecessary_op(i, op):
         return pre_op in (RA, RB, RR)
 
 def do_op(op, A, B, i):
-    if i == SA: sa(op, A)
-    elif i == SB: sb(op, B)
-    elif i == SS: ss(op, A, B)
-    elif i == PA: pa(op, A, B)
-    elif i == PB: pb(op, A, B)
-    elif i == RA: ra(op, A)
-    elif i == RB: rb(op, B)
-    elif i == RR: rr(op, A, B)
-    elif i == RRA: rra(op, A)
-    elif i == RRB: rrb(op, B)
-    elif i == RRR: rrr(op, A, B)
+    if i == SA:
+        op, A = sa(op, A)
+    elif i == SB:
+        op, B = sb(op, B)
+    elif i == SS:
+        op, A, B = ss(op, A, B)
+    elif i == PA:
+        op, A, B = pa(op, A, B)
+    elif i == PB:
+        op, A, B = pb(op, A, B)
+    elif i == RA:
+        op, A = ra(op, A)
+    elif i == RB:
+        op, B = rb(op, B)
+    elif i == RR:
+        op, A, B = rr(op, A, B)
+    elif i == RRA:
+        op, A = rra(op, A)
+    elif i == RRB:
+        op, B = rrb(op, B)
+    elif i == RRR:
+        op, A, B = rrr(op, A, B)
+    return A, B, op
 
 def undo_op(op, A, B, i):
-    if i == SA: sa(op, A)
-    elif i == SB: sb(op, B)
-    elif i == SS: ss(op, A, B)
-    elif i == PA: pb(op, A, B)
-    elif i == PB: pa(op, A, B)
-    elif i == RA: rra(op, A)
-    elif i == RB: rrb(op, B)
-    elif i == RR: rrr(op, A, B)
-    elif i == RRA: ra(op, A)
-    elif i == RRB: rb(op, B)
-    elif i == RRR: rr(op, A, B)
+    if i == SA:
+        op, A = sa(op, A)
+    elif i == SB:
+        op, B = sb(op, B)
+    elif i == SS:
+        op, A, B = ss(op, A, B)
+    elif i == PA:
+        op, A, B = pb(op, A, B)
+    elif i == PB:
+        op, A, B = pa(op, A, B)
+    elif i == RA:
+        op, A = rra(op, A)
+    elif i == RB:
+        op, B = rrb(op, B)
+    elif i == RR:
+        op, A, B = rrr(op, A, B)
+    elif i == RRA:
+        op, A = ra(op, A)
+    elif i == RRB:
+        op, B = rb(op, B)
+    elif i == RRR:
+        op, A, B = rr(op, A, B)
+    return A, B, op
 
 def dfs(A, B, op, sorted_a, ans, ans_len):
     if len(op) >= ans_len:
@@ -227,7 +254,8 @@ def all_n_pattern():
         if not ans:
             print_color_str(RED, "[NO ANS..!!]")
         else:
-            print(*ans, end=" ")
+            print(*ans)
+            print(len(ans))
             print_color_str(GREEN, "[OK]")
         end_time = time.time()
         print("time:", end_time - start_time)
@@ -245,7 +273,8 @@ def solve_less_than_6(A, B):
     if not ans:
         print_color_str(RED, "[NO ANS..!!]")
     else:
-        print(*ans, end=" ")
+        print(*ans)
+        print(len(ans))
         print_color_str(GREEN, "[OK]")
     end_time = time.time()
     print("time:", end_time - start_time)
@@ -264,18 +293,18 @@ def find_the_block_place(A, B, mn, mx):
         elif mn <= B[-1] <= mx:
             return STACK_B_TAIL
 
-def move_sorted_from_large_num(A, B, op, head):
-    stack_place = find_the_block_place(A, B, head, head)
-    if stack_place == STACK_A_HEAD:
-        pass
-    elif stack_place == STACK_A_TAIL:
-        op, A = rra(op, A)
-    elif stack_place == STACK_B_HEAD:
-        op, A, B = pa(op, A, B)
-    elif stack_place == STACK_B_TAIL:
-        op, B = rrb(op, B)
-        op, A, B = pa(op, A, B)
-    return A, B, op
+# def move_sorted_from_large_num(A, B, op, head):
+#     stack_place = find_the_block_place(A, B, head, head)
+#     if stack_place == STACK_A_HEAD:
+#         pass
+#     elif stack_place == STACK_A_TAIL:
+#         op, A = rra(op, A)
+#     elif stack_place == STACK_B_HEAD:
+#         op, A, B = pa(op, A, B)
+#     elif stack_place == STACK_B_TAIL:
+#         op, B = rrb(op, B)
+#         op, A, B = pa(op, A, B)
+#     return A, B, op
 
 def is_num_in_move_range(A, B, stack_place, mn, mx):
     if stack_place == STACK_A_HEAD:
@@ -297,6 +326,105 @@ def get_move_num(A, B, stack_place):
     if stack_place == STACK_B_TAIL:
         return B[-1]
 
+# ----------------------------------
+def is_unnecessary_sa(A, B, head, tail):
+    return
+
+def is_unnecessary_sb(A, B, head, tail):
+    return
+
+def is_unnecessary_ss(A, B, head, tail):
+    return
+
+def is_unnecessary_pa_rb_rrb(A, B, head, tail):
+    return
+
+def is_unnecessary_pb_ra_rra(A, B, head, tail):
+    return
+
+def is_unnecessary_rr_rrr(A, B, head, tail):
+    return
+
+def is_unnecessary_op_for_under_3(A, B, i, op, head, tail):
+    if not len(op):
+        return False
+    pre_op = OPS.index(op[-1])
+    if i == SA:
+        return not (head <= A[0] <= tail and head <= A[1] <= tail) or pre_op in (SA, SB, SS)
+    if i == SB:
+        return not (head <= B[0] <= tail and head <= B[1] <= tail) or pre_op in (SA, SB, SS)
+    if i == SS:
+        if len(A) >= 2 and len(B) >= 2:
+            return not (head <= A[0] <= tail and head <= A[1] <= tail) or not (head <= B[0] <= tail and head <= B[1] <= tail) or pre_op in (SA, SB, SS)
+        if len(A) >= 2:
+            return not (head <= A[0] <= tail and head <= A[1] <= tail) or pre_op in (SA, SB, SS)
+        if len(B) >= 2:
+            return not (head <= B[0] <= tail and head <= B[1] <= tail) or pre_op in (SA, SB, SS)
+    if i == PA:
+        return not (head <= B[0] <= tail) or pre_op == PB
+    if i == PB:
+        return not (head <= A[0] <= tail) or pre_op == PA
+    if i == RA:
+        return not (head <= A[0] <= tail) or pre_op in (RB, RRA, RRR)
+    if i == RB:
+        return not (head <= B[0] <= tail) or pre_op in (RA, RRB, RRR)
+    if i == RR:
+        if len(A) and len(B):
+            return not (head <= A[0] <= tail) or not (head <= B[0] <= tail) or pre_op in (RRA, RRB, RRR)
+        if len(A):
+            return not (head <= A[0] <= tail) or pre_op in (RRA, RRB, RRR)
+        if len(B):
+            return not (head <= B[0] <= tail) or pre_op in (RRA, RRB, RRR)
+    if i == RRA:
+        return not (head <= A[0] <= tail) or pre_op in (RRB, RA, RR)
+    if i == RRB:
+        return not (head <= B[0] <= tail) or pre_op in (RRA, RB, RR)
+    if i == RRR:
+        if len(A) and len(B):
+            return not (head <= A[0] <= tail) or not (head <= B[0] <= tail) or pre_op in (RA, RB, RR)
+        if len(A):
+            return not (head <= A[0] <= tail) or pre_op in (RA, RB, RR)
+        if len(B):
+            return not (head <= B[0] <= tail) or pre_op in (RA, RB, RR)
+
+def dfs_between_stack(A, B, head, tail, sorted_num, tmp_op, ans, ans_len):
+    total = tail - head + 1
+    if len(tmp_op) >= ans_len:
+        return ans, ans_len
+    if list(A)[:total] == sorted_num:
+        ans = tmp_op.copy()
+        ans_len = len(tmp_op)
+        return ans, ans_len
+    if total <= 3 and len(tmp_op) == 8:
+        return ans, ans_len
+    if total == 4 and len(tmp_op) == 10:
+        return ans, ans_len
+    for i in range(11):
+        if is_executable_op(A, B, i) and not is_unnecessary_op_for_under_3(A, B, i, tmp_op, head, tail):
+            tmp_op.append(OPS[i])
+            A, B, _ = do_op([], A, B, i)
+            ans, ans_len = dfs_between_stack(A, B, head, tail, sorted_num, tmp_op, ans, ans_len)
+            tmp_op.pop()
+            A, B, _ = undo_op([], A, B, i)
+    return ans, ans_len
+
+def search_all_patterns(A, B, op, head, tail):
+    total = tail - head + 1
+    sorted_num = list(range(head, tail + 1))
+    tmp_op = []
+    ans = []
+    ans_len = 2147483647
+    ans, ans_len = dfs_between_stack(A, B, head, tail, sorted_num, tmp_op, ans, ans_len)
+    # if not ans and not list(A)[:total] == sorted_num:
+    #     debug(A, B)
+    #     print("error!!", head, tail)
+    #     exit(1)
+    op.extend(ans)
+    for p in ans:
+        A, B, _ = do_op([], A, B, OPS.index(p))
+    return A, B, op
+
+# ----------------------------------
 # use pointer to func
 def move_num(A, B, op, before_place, after_place):
     if before_place == STACK_A_HEAD:
@@ -339,15 +467,17 @@ def move_num(A, B, op, before_place, after_place):
 
 def move_to_divide_nums(A, B, op, head, tail, stack_place, movable_stack_place, nums_range_per_block):
     total = tail - head + 1
-    # try all if total <= 5:
-    for i in range(total):
-        num = get_move_num(A, B, stack_place)
-        m = len(nums_range_per_block)
-        for i in range(m):
-            mn, mx = nums_range_per_block[m - i - 1]
-            if mn <= num <= mx:
-                A, B, op = move_num(A, B, op, stack_place, movable_stack_place[i])
-                break
+    if total <= LAST_BLOCK_SIZE:
+        A, B, op = search_all_patterns(A, B, op, head, tail)
+    else:
+        for i in range(total):
+            num = get_move_num(A, B, stack_place)
+            m = len(nums_range_per_block)
+            for i in range(m):
+                mn, mx = nums_range_per_block[m - i - 1]
+                if mn <= num <= mx:
+                    A, B, op = move_num(A, B, op, stack_place, movable_stack_place[i])
+                    break
     return A, B, op
 
 def set_movable_stack_place(stack_place):
@@ -359,9 +489,11 @@ def set_movable_stack_place(stack_place):
 
 def set_nums_range_per_block(stack, head, tail):
     total = tail - head + 1
+    nums_range_per_block = []
+    if total <= LAST_BLOCK_SIZE:
+        return stack, nums_range_per_block
     block_size = total // 3
     new_tail = head - 1
-    nums_range_per_block = []
     for i in range(3):
         new_head = new_tail + 1
         new_tail = new_head + block_size - 1
@@ -385,12 +517,13 @@ def stack_dfs(n, A, B, op):
     while stack:
         current_node = stack.pop()
         head, tail = current_node
-        if head == tail:
-            A, B, op = move_sorted_from_large_num(A, B, op, head)
-            continue
+        # if head == tail:
+        #     A, B, op = move_sorted_from_large_num(A, B, op, head)
+        #     continue
         stack, A, B, op = divide_nums_to_other_stacks(stack, A, B, op, head, tail)
     return A, op
 
+# ----------------------------------
 def erase_adjacent_op(op, erase_1, erase_2):
     new_op = []
     for s in op:
@@ -453,6 +586,7 @@ def replace_op(op, before_1, before_2, after):
     r_count, new_op = replace_pair_op(r_count, new_op, before_1, before_2, after)
     return new_op
 
+# ----------------------------------
 # n >= 6
 def solve_over_6(n, A, B):
     start_time = time.time()
@@ -474,7 +608,7 @@ def solve_over_6(n, A, B):
         print_color_str(RED, "[NO ANS..!!]")
     else:
         print(*op)
-        print("op_len:", len(op))
+        print(len(op))
         if list(A) == sorted_a:
             print_color_str(GREEN, "[OK]")
         else:
