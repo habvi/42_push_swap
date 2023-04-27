@@ -293,18 +293,19 @@ def find_the_block_place(A, B, mn, mx):
         elif mn <= B[-1] <= mx:
             return STACK_B_TAIL
 
-# def move_sorted_from_large_num(A, B, op, head):
-#     stack_place = find_the_block_place(A, B, head, head)
-#     if stack_place == STACK_A_HEAD:
-#         pass
-#     elif stack_place == STACK_A_TAIL:
-#         op, A = rra(op, A)
-#     elif stack_place == STACK_B_HEAD:
-#         op, A, B = pa(op, A, B)
-#     elif stack_place == STACK_B_TAIL:
-#         op, B = rrb(op, B)
-#         op, A, B = pa(op, A, B)
-#     return A, B, op
+# to do: erase
+def move_sorted_from_large_num(A, B, op, head):
+    stack_place = find_the_block_place(A, B, head, head)
+    if stack_place == STACK_A_HEAD:
+        pass
+    elif stack_place == STACK_A_TAIL:
+        op, A = rra(op, A)
+    elif stack_place == STACK_B_HEAD:
+        op, A, B = pa(op, A, B)
+    elif stack_place == STACK_B_TAIL:
+        op, B = rrb(op, B)
+        op, A, B = pa(op, A, B)
+    return A, B, op
 
 def is_num_in_move_range(A, B, stack_place, mn, mx):
     if stack_place == STACK_A_HEAD:
@@ -345,47 +346,45 @@ def is_unnecessary_pb_ra_rra(A, B, head, tail):
 def is_unnecessary_rr_rrr(A, B, head, tail):
     return
 
-def is_unnecessary_op_for_under_3(A, B, i, op, head, tail):
-    if not len(op):
-        return False
-    pre_op = OPS.index(op[-1])
+def is_unnecessary_op_for_under_3(A, B, i, head, tail):
     if i == SA:
-        return not (head <= A[0] <= tail and head <= A[1] <= tail) or pre_op in (SA, SB, SS)
+        return not (head <= A[0] <= tail and head <= A[1] <= tail)
     if i == SB:
-        return not (head <= B[0] <= tail and head <= B[1] <= tail) or pre_op in (SA, SB, SS)
+        return not (head <= B[0] <= tail and head <= B[1] <= tail)
     if i == SS:
         if len(A) >= 2 and len(B) >= 2:
-            return not (head <= A[0] <= tail and head <= A[1] <= tail) or not (head <= B[0] <= tail and head <= B[1] <= tail) or pre_op in (SA, SB, SS)
+            return not (head <= A[0] <= tail and head <= A[1] <= tail) or not (head <= B[0] <= tail and head <= B[1] <= tail)
         if len(A) >= 2:
-            return not (head <= A[0] <= tail and head <= A[1] <= tail) or pre_op in (SA, SB, SS)
+            return not (head <= A[0] <= tail and head <= A[1] <= tail)
         if len(B) >= 2:
-            return not (head <= B[0] <= tail and head <= B[1] <= tail) or pre_op in (SA, SB, SS)
+            return not (head <= B[0] <= tail and head <= B[1] <= tail)
+        return True
     if i == PA:
-        return not (head <= B[0] <= tail) or pre_op == PB
+        return not (head <= B[0] <= tail)
     if i == PB:
-        return not (head <= A[0] <= tail) or pre_op == PA
+        return not (head <= A[0] <= tail)
     if i == RA:
-        return not (head <= A[0] <= tail) or pre_op in (RB, RRA, RRR)
+        return not (head <= A[0] <= tail)
     if i == RB:
-        return not (head <= B[0] <= tail) or pre_op in (RA, RRB, RRR)
+        return not (head <= B[0] <= tail)
     if i == RR:
         if len(A) and len(B):
-            return not (head <= A[0] <= tail) or not (head <= B[0] <= tail) or pre_op in (RRA, RRB, RRR)
+            return not (head <= A[0] <= tail) or not (head <= B[0] <= tail)
         if len(A):
-            return not (head <= A[0] <= tail) or pre_op in (RRA, RRB, RRR)
+            return not (head <= A[0] <= tail)
         if len(B):
-            return not (head <= B[0] <= tail) or pre_op in (RRA, RRB, RRR)
+            return not (head <= B[0] <= tail)
     if i == RRA:
-        return not (head <= A[0] <= tail) or pre_op in (RRB, RA, RR)
+        return not (head <= A[-1] <= tail)
     if i == RRB:
-        return not (head <= B[0] <= tail) or pre_op in (RRA, RB, RR)
+        return not (head <= B[-1] <= tail)
     if i == RRR:
         if len(A) and len(B):
-            return not (head <= A[0] <= tail) or not (head <= B[0] <= tail) or pre_op in (RA, RB, RR)
+            return not (head <= A[-1] <= tail) or not (head <= B[-1] <= tail)
         if len(A):
-            return not (head <= A[0] <= tail) or pre_op in (RA, RB, RR)
+            return not (head <= A[-1] <= tail)
         if len(B):
-            return not (head <= B[0] <= tail) or pre_op in (RA, RB, RR)
+            return not (head <= B[-1] <= tail)
 
 def dfs_between_stack(A, B, head, tail, sorted_num, tmp_op, ans, ans_len):
     total = tail - head + 1
@@ -400,12 +399,17 @@ def dfs_between_stack(A, B, head, tail, sorted_num, tmp_op, ans, ans_len):
     if total == 4 and len(tmp_op) == 10:
         return ans, ans_len
     for i in range(11):
-        if is_executable_op(A, B, i) and not is_unnecessary_op_for_under_3(A, B, i, tmp_op, head, tail):
-            tmp_op.append(OPS[i])
-            A, B, _ = do_op([], A, B, i)
-            ans, ans_len = dfs_between_stack(A, B, head, tail, sorted_num, tmp_op, ans, ans_len)
-            tmp_op.pop()
-            A, B, _ = undo_op([], A, B, i)
+        if not is_executable_op(A, B, i):
+            continue
+        if is_unnecessary_op(i, tmp_op):
+            continue
+        if is_unnecessary_op_for_under_3(A, B, i, head, tail):
+            continue
+        tmp_op.append(OPS[i])
+        A, B, _ = do_op([], A, B, i)
+        ans, ans_len = dfs_between_stack(A, B, head, tail, sorted_num, tmp_op, ans, ans_len)
+        tmp_op.pop()
+        A, B, _ = undo_op([], A, B, i)
     return ans, ans_len
 
 def search_all_patterns(A, B, op, head, tail):
@@ -418,7 +422,7 @@ def search_all_patterns(A, B, op, head, tail):
     # if not ans and not list(A)[:total] == sorted_num:
     #     debug(A, B)
     #     print("error!!", head, tail)
-    #     exit(1)
+    #     exit(8)
     op.extend(ans)
     for p in ans:
         A, B, _ = do_op([], A, B, OPS.index(p))
@@ -517,9 +521,10 @@ def stack_dfs(n, A, B, op):
     while stack:
         current_node = stack.pop()
         head, tail = current_node
-        # if head == tail:
-        #     A, B, op = move_sorted_from_large_num(A, B, op, head)
-        #     continue
+        # to do: erase
+        if head == tail:
+            A, B, op = move_sorted_from_large_num(A, B, op, head)
+            continue
         stack, A, B, op = divide_nums_to_other_stacks(stack, A, B, op, head, tail)
     return A, op
 
@@ -640,13 +645,3 @@ def main():
 
 if __name__=="__main__":
     main()
-
-
-'''
-n = 5
-3 4 2 1 5 : 3.8s
-4 1 3 2 5 : 3.6s
-4 3 2 1 5 : 6.7s
-python3 main.py $(python3 -c 'import random; print(*random.sample(range(1, 101), 100))')
-python3 main.py $(python3 -c 'import random; print(*random.sample(range(1, 501), 500))')
-'''
