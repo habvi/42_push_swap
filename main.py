@@ -141,7 +141,7 @@ def is_executable_op(A, B, i):
     elif i == RRR:
         return is_executable_stack_size(A) or is_executable_stack_size(B)
 
-def is_unnecessary_op(i, op):
+def is_unnecessary_compare_pre_op(i, op):
     if not len(op):
         return False
     pre_op = OPS.index(op[-1])
@@ -228,7 +228,7 @@ def dfs(A, B, op, sorted_a, ans, ans_len):
     if len(op) == 8:
         return ans, ans_len
     for i in range(11):
-        if is_executable_op(A, B, i) and not is_unnecessary_op(i, op):
+        if is_executable_op(A, B, i) and not is_unnecessary_compare_pre_op(i, op):
             op.append(OPS[i])
             do_op([], A, B, i)
             ans, ans_len = dfs(A, B, op, sorted_a, ans, ans_len)
@@ -328,63 +328,120 @@ def get_move_num(A, B, stack_place):
         return B[-1]
 
 # ----------------------------------
-def is_unnecessary_sa(A, B, head, tail):
-    return
+# idx: 0 or 1
+def is_num_in_range(stack_place, idx, head, tail, A, B):
+    if stack_place == STACK_A_HEAD:
+        return head <= A[idx] <= tail
+    if stack_place == STACK_A_TAIL:
+        return head <= A[-1] <= tail
+    if stack_place == STACK_B_HEAD:
+        return head <= B[idx] <= tail
+    if stack_place == STACK_B_TAIL:
+        return head <= B[-1] <= tail
 
-def is_unnecessary_sb(A, B, head, tail):
-    return
-
-def is_unnecessary_ss(A, B, head, tail):
-    return
-
-def is_unnecessary_pa_rb_rrb(A, B, head, tail):
-    return
-
-def is_unnecessary_pb_ra_rra(A, B, head, tail):
-    return
-
-def is_unnecessary_rr_rrr(A, B, head, tail):
-    return
-
-def is_unnecessary_op_for_under_3(A, B, i, head, tail):
-    if i == SA:
-        return not (head <= A[0] <= tail and head <= A[1] <= tail)
-    if i == SB:
-        return not (head <= B[0] <= tail and head <= B[1] <= tail)
-    if i == SS:
-        if len(A) >= 2 and len(B) >= 2:
-            return not (head <= A[0] <= tail and head <= A[1] <= tail) or not (head <= B[0] <= tail and head <= B[1] <= tail)
-        if len(A) >= 2:
-            return not (head <= A[0] <= tail and head <= A[1] <= tail)
-        if len(B) >= 2:
-            return not (head <= B[0] <= tail and head <= B[1] <= tail)
+def is_in_range_for_sa(A, B, head, tail):
+    if not is_num_in_range(STACK_A_HEAD, 0, head, tail, A, B):
         return True
+    if not is_num_in_range(STACK_A_HEAD, 1, head, tail, A, B):
+        return True
+    return False
+
+def is_in_range_for_sb(A, B, head, tail):
+    if not is_num_in_range(STACK_B_HEAD, 0, head, tail, A, B):
+        return True
+    if not is_num_in_range(STACK_B_HEAD, 1, head, tail, A, B):
+        return True
+    return False
+
+def is_in_range_for_ss(A, B, head, tail):
+    if is_executable_stack_size(A) and is_executable_stack_size(B):
+        if is_in_range_for_sa(A, B, head, tail):
+            return True
+        if is_in_range_for_sb(A, B, head, tail):
+            return True
+        return False
+    if is_executable_stack_size(A):
+        return is_in_range_for_sa(A, B, head, tail)
+    if is_executable_stack_size(B):
+        return is_in_range_for_sb(A, B, head, tail)
+    return False
+
+def is_in_range_for_pa(A, B, head, tail):
+    return not is_num_in_range(STACK_B_HEAD, 0, head, tail, A, B)
+
+def is_in_range_for_pb(A, B, head, tail):
+    return not is_num_in_range(STACK_A_HEAD, 0, head, tail, A, B)
+
+def is_in_range_for_ra(A, B, head, tail):
+    return not is_num_in_range(STACK_A_HEAD, 0, head, tail, A, B)
+
+def is_in_range_for_rb(A, B, head, tail):
+    return not is_num_in_range(STACK_B_HEAD, 0, head, tail, A, B)
+
+def is_in_range_for_rr(A, B, head, tail):
+    if not is_stack_empty(A) and not is_stack_empty(B):
+        if is_in_range_for_ra(A, B, head, tail):
+            return True
+        if is_in_range_for_rb(A, B, head, tail):
+            return True
+        return False
+    if not is_stack_empty(A):
+        return is_in_range_for_ra(A, B, head, tail)
+    if not is_stack_empty(B):
+        return is_in_range_for_rb(A, B, head, tail)
+    return False
+
+def is_in_range_for_rra(A, B, head, tail):
+    return not is_num_in_range(STACK_A_TAIL, 0, head, tail, A, B)
+
+def is_in_range_for_rrb(A, B, head, tail):
+    return not is_num_in_range(STACK_B_TAIL, 0, head, tail, A, B)
+
+def is_in_range_for_rrr(A, B, head, tail):
+    if not is_stack_empty(A) and not is_stack_empty(B):
+        if is_in_range_for_rra(A, B, head, tail):
+            return True
+        if is_in_range_for_rrb(A, B, head, tail):
+            return True
+        return False
+    if not is_stack_empty(A):
+        return is_in_range_for_rra(A, B, head, tail)
+    if not is_stack_empty(B):
+        return is_in_range_for_rrb(A, B, head, tail)
+    return False
+
+def is_num_out_of_block_range(A, B, i, head, tail):
+    if i == SA:
+        return is_in_range_for_sa(A, B, head, tail)
+    if i == SB:
+        return is_in_range_for_sb(A, B, head, tail)
+    if i == SS:
+        return is_in_range_for_ss(A, B, head, tail)
     if i == PA:
-        return not (head <= B[0] <= tail)
+        return is_in_range_for_pa(A, B, head, tail)
     if i == PB:
-        return not (head <= A[0] <= tail)
+        return is_in_range_for_pb(A, B, head, tail)
     if i == RA:
-        return not (head <= A[0] <= tail)
+        return is_in_range_for_ra(A, B, head, tail)
     if i == RB:
-        return not (head <= B[0] <= tail)
+        return is_in_range_for_rb(A, B, head, tail)
     if i == RR:
-        if len(A) and len(B):
-            return not (head <= A[0] <= tail) or not (head <= B[0] <= tail)
-        if len(A):
-            return not (head <= A[0] <= tail)
-        if len(B):
-            return not (head <= B[0] <= tail)
+        return is_in_range_for_rr(A, B, head, tail)
     if i == RRA:
-        return not (head <= A[-1] <= tail)
+        return is_in_range_for_rra(A, B, head, tail)
     if i == RRB:
-        return not (head <= B[-1] <= tail)
+        return is_in_range_for_rrb(A, B, head, tail)
     if i == RRR:
-        if len(A) and len(B):
-            return not (head <= A[-1] <= tail) or not (head <= B[-1] <= tail)
-        if len(A):
-            return not (head <= A[-1] <= tail)
-        if len(B):
-            return not (head <= B[-1] <= tail)
+        return is_in_range_for_rrr(A, B, head, tail)
+
+def is_unnecessary_op(A, B, i, tmp_op, head, tail):
+    if not is_executable_op(A, B, i):
+        return True
+    if is_unnecessary_compare_pre_op(i, tmp_op):
+        return True
+    if is_num_out_of_block_range(A, B, i, head, tail):
+        return True
+    return False
 
 def dfs_between_stack(A, B, head, tail, sorted_num, tmp_op, ans, ans_len):
     total = tail - head + 1
@@ -399,11 +456,7 @@ def dfs_between_stack(A, B, head, tail, sorted_num, tmp_op, ans, ans_len):
     if total == 4 and len(tmp_op) == 10:
         return ans, ans_len
     for i in range(11):
-        if not is_executable_op(A, B, i):
-            continue
-        if is_unnecessary_op(i, tmp_op):
-            continue
-        if is_unnecessary_op_for_under_3(A, B, i, head, tail):
+        if is_unnecessary_op(A, B, i, tmp_op, head, tail):
             continue
         tmp_op.append(OPS[i])
         A, B, _ = do_op([], A, B, i)
