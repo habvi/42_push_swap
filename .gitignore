@@ -15,3 +15,4 @@ visualizer/
 # include
 !test.py
 !main.py
+!test_python_main.py
