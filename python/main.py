@@ -23,7 +23,7 @@ STACK_B_HEAD = 3
 STACK_B_TAIL = 4
 
 # 3 or 4
-LAST_BLOCK_SIZE = 3
+LAST_BLOCK_SIZE = 4
 
 RED = "red"
 GREEN = "green"
@@ -293,7 +293,6 @@ def find_the_block_place(A, B, mn, mx):
         elif mn <= B[-1] <= mx:
             return STACK_B_TAIL
 
-# to do: erase
 def move_sorted_from_large_num(A, B, op, head):
     stack_place = find_the_block_place(A, B, head, head)
     if stack_place == STACK_A_HEAD:
@@ -537,24 +536,32 @@ def move_to_divide_nums(A, B, op, head, tail, stack_place, movable_stack_place, 
                     break
     return A, B, op
 
-def set_movable_stack_place(stack_place):
+def find_movable_stack_place(stack_place):
     movable_stack_place = []
     for i in range(1, 5):
         if i != stack_place:
             movable_stack_place.append(i)
     return movable_stack_place
 
-def set_nums_range_per_block(stack, head, tail):
-    total = tail - head + 1
-    nums_range_per_block = []
-    if total <= LAST_BLOCK_SIZE:
-        return stack, nums_range_per_block
-    block_size = total // 3
+def set_block_size(n, total):
+    if n < 250:
+        if total <= 8:
+            each_block_size = total // 2
+            block_count = 2
+        else:
+            each_block_size = total // 3
+            block_count = 3
+    else:
+        each_block_size = total // 3
+        block_count = 3
+    return each_block_size, block_count
+
+def set_block_num_range(stack, head, total, nums_range_per_block, each_block_size, block_count):
     new_tail = head - 1
-    for i in range(3):
+    for i in range(block_count):
         new_head = new_tail + 1
-        new_tail = new_head + block_size - 1
-        if total % 3 and i < total % 3:
+        new_tail = new_head + each_block_size - 1
+        if i < total % block_count:
             new_tail += 1
         if new_head > new_tail:
             continue
@@ -562,10 +569,28 @@ def set_nums_range_per_block(stack, head, tail):
         nums_range_per_block.append((new_head, new_tail))
     return stack, nums_range_per_block
 
-def divide_nums_to_other_stacks(stack, A, B, op, head, tail):
+'''
+        500        100
+    (n >= 250)  (n < 250)
+1-4 :  dfs
+  5 :  2 2 1  ->  3 2
+  6 :  2 2 2  ->  3 3
+  7 :  3 2 2  ->  4 3
+  8 :  3 3 2  ->  4 4
+'''
+def set_nums_range_per_block(n, stack, head, tail):
+    total = tail - head + 1
+    nums_range_per_block = []
+    if total <= LAST_BLOCK_SIZE:
+        return stack, nums_range_per_block
+    each_block_size, block_count = set_block_size(n, total)
+    stack, nums_range_per_block = set_block_num_range(stack, head, total, nums_range_per_block, each_block_size, block_count)
+    return stack, nums_range_per_block
+
+def divide_nums_to_other_stacks(n, stack, A, B, op, head, tail):
     stack_place = find_the_block_place(A, B, head, tail)
-    movable_stack_place = set_movable_stack_place(stack_place)
-    stack, nums_range_per_block = set_nums_range_per_block(stack, head, tail)
+    movable_stack_place = find_movable_stack_place(stack_place)
+    stack, nums_range_per_block = set_nums_range_per_block(n, stack, head, tail)
     A, B, op = move_to_divide_nums(A, B, op, head, tail, stack_place, movable_stack_place, nums_range_per_block)
     return stack, A, B, op
 
@@ -574,11 +599,10 @@ def stack_dfs(n, A, B, op):
     while stack:
         current_node = stack.pop()
         head, tail = current_node
-        # to do: erase
         if head == tail:
             A, B, op = move_sorted_from_large_num(A, B, op, head)
             continue
-        stack, A, B, op = divide_nums_to_other_stacks(stack, A, B, op, head, tail)
+        stack, A, B, op = divide_nums_to_other_stacks(n, stack, A, B, op, head, tail)
     return A, op
 
 # ----------------------------------
