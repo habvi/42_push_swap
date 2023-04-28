@@ -47,7 +47,7 @@ def run_and_calc_score():
         median.append(x)
         lowest = min(lowest, x)
 
-        cmd = "python3 checker_python/checker.py" + "<" + filepath
+        cmd = "python3 checker.py" + "<" + filepath
         run_cmd(cmd)
 
 for _ in range(int(sys.argv[2])):
@@ -57,6 +57,6 @@ print("median:", int(statistics.median(median)))
 print("min   :", lowest)
 
 # ----------------------------------------------------------
-# python3 test_python_main.py [argc] [times]
-# python3 test_python_main.py 100 500
-# python3 test_python_main.py 500 500
+# python3 test_main.py [argc] [times]
+# python3 test_main.py 100 500
+# python3 test_main.py 500 500
