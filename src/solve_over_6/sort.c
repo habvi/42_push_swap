@@ -14,8 +14,8 @@ t_nums	*divide_block_sort(t_data *data, t_error *error_code)
 		return (NULL);
 	block.wait_blocks = wait_blocks;
 	data->now_op = stack_dfs(&block, data, error_code);
-	deque_clear(wait_blocks);
 	if (*error_code)
-		return (NULL);
+		return (free_block(wait_blocks));
+	deque_clear(wait_blocks);
 	return (data->now_op);
 }

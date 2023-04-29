@@ -12,7 +12,7 @@ static bool	is_last_block(t_deque *block_range)
 	return (false);
 }
 
-static void	*free_block(t_deque	*block_range)
+void	*free_block(t_deque	*block_range)
 {
 	deque_clear(block_range);
 	return (NULL);

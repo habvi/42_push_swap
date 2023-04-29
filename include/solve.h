@@ -100,6 +100,7 @@ t_nums			*sort_last_num(\
 t_nums			*divide_block_sort(t_data *data, t_error *erorr_code);
 
 // stack_dfs.c
+void			*free_block(t_deque	*block_range);
 t_nums			*stack_dfs(t_block *block, t_data *data, t_error *error_code);
 
 #endif
