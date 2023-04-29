@@ -46,7 +46,8 @@ SRCS			+=	$(SOLVE_LE_DIR)/dfs.c \
 
 SOLVE_OVER_DIR	:=	solve_over_6
 SRCS			+=	$(SOLVE_OVER_DIR)/solve.c \
-					$(SOLVE_OVER_DIR)/sort.c
+					$(SOLVE_OVER_DIR)/sort.c \
+					$(SOLVE_OVER_DIR)/stack_dfs.c
 
 #--------------------------------------------
 # deque
@@ -127,6 +128,14 @@ visu: all
 PHONY += t100
 t100: all
 	cd tester && python3 push_swap_tester.py -l 100 -c 10 && cd ..
+
+PHONY += test
+test: all
+	./push_swap 5 -1 9 100 2 6 4 8 3 7
+
+PHONY += test_val
+test_val: all
+	valgrind ./push_swap 5 -1 9 100 2 6 4 8 3 7
 
 PHONY += val
 val: all

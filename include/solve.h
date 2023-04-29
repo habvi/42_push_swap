@@ -21,6 +21,11 @@ typedef enum e_dir {
 	PREV = 1
 }	t_dir;
 
+typedef struct s_block {
+	t_deque	*wait_blocks;
+	t_deque	*block_range;
+}	t_block;
+
 // --------------------------------------------
 //  solve
 // --------------------------------------------
@@ -69,5 +74,8 @@ void	solve_over_6(t_data *data, t_error *error_code);
 
 // sort.c
 t_nums	*divide_block_sort(t_data *data, t_error *erorr_code);
+
+// stack_dfs.c
+t_nums	*stack_dfs(t_block *block, t_data *data, t_error *error_code);
 
 #endif

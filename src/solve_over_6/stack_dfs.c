@@ -1,0 +1,46 @@
+#include "deque.h"
+#include "error.h"
+#include "push_swap.h"
+#include "solve.h"
+
+#include <stdio.h>
+
+static t_nums	*sort_from_large_num(t_deque *block, t_data *data)
+{
+	(void)block;
+	return (data->now_op);
+}
+
+static t_nums	*divide_nums_to_other_3_stacks(\
+					t_block *block, t_data *data, t_error *error_code)
+{
+	(void)block;
+	(void)data;
+	(void)error_code;
+	return (data->now_op);
+}
+
+t_nums	*stack_dfs(t_block *block, t_data *data, t_error *error_code)
+{
+	t_deque	*block_range;
+
+	printf("\n>>> %s\n", __func__);
+	deque_print(block->wait_blocks, "wating block");
+	while (!deque_is_empty(block->wait_blocks))
+	{
+		block_range = deque_pop_back(block->wait_blocks);
+		printf("(first,last):(%d,%d)\n", block_range->first, block_range->last);
+		if (block_range->first == block_range->last)
+		{
+			data->now_op = sort_from_large_num(block_range, data);
+			deque_clear(block_range);
+			continue ;
+		}
+		block->block_range = block_range;
+		data->now_op = divide_nums_to_other_3_stacks(block, data, error_code);
+		deque_clear(block->block_range);
+		if (*error_code)
+			return (NULL);
+	}
+	return (data->now_op);
+}
