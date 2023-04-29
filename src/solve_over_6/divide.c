@@ -5,7 +5,8 @@
 
 #include <stdio.h> // to do: erase
 
-static void	set_movable_stack_place(t_block *block, t_stack_place stack_place)
+static t_block	*set_movable_stack_place(\
+								t_block *block, t_stack_place stack_place)
 {
 	uint8_t	i;
 	int		count;
@@ -21,6 +22,20 @@ static void	set_movable_stack_place(t_block *block, t_stack_place stack_place)
 		}
 		count++;
 	}
+	return (block);
+}
+
+static t_deque	*set_nums_range_per_blocks(t_block *block, t_data *data)
+{
+	(void)data;
+	return (block->nums_range_per_blocks);
+}
+
+static t_nums	*move_for_divide_nums(t_block *block, t_data *data, t_error *error_code)
+{
+	(void)block;
+	(void)error_code;
+	return (data->now_op);
 }
 
 t_nums	*divide_nums_to_other_3_stacks(\
@@ -28,8 +43,9 @@ t_nums	*divide_nums_to_other_3_stacks(\
 {
 	const t_stack_place	stack_place = find_the_block_place(block_range, data);
 
-	(void)error_code;
 	block->block_range = block_range;
-	set_movable_stack_place(block, stack_place);
+	block = set_movable_stack_place(block, stack_place);
+	block->nums_range_per_blocks = set_nums_range_per_blocks(block, data);
+	data->now_op = move_for_divide_nums(block, data, error_code);
 	return (data->now_op);
 }

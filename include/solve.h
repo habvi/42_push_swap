@@ -26,6 +26,7 @@ typedef struct s_block {
 	t_deque	*wait_blocks;
 	t_deque	*block_range;
 	int		movable_stack_place[3];
+	t_deque	*nums_range_per_blocks;
 }	t_block;
 
 typedef enum e_stack_place {
