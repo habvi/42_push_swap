@@ -20,6 +20,17 @@ void	deque_print(t_deque *deque, char *deque_name)
 		node = node->next;
 	}
 	ft_dprintf(STDERR_FILENO, "]\n");
+	if (deque->num != FOR_BLOCK)
+		return ;
+	node = deque->next;
+	ft_dprintf(STDERR_FILENO, "[%s:", deque_name);
+	while (node)
+	{
+		ft_dprintf(STDERR_FILENO, "(%d,", node->first);
+		ft_dprintf(STDERR_FILENO, " %d) ", node->last);
+		node = node->next;
+	}
+	ft_dprintf(STDERR_FILENO, "]\n");
 }
 
 void	deque_print2(\

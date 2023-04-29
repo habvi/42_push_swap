@@ -4,12 +4,16 @@
 # include <stddef.h>
 # include <stdbool.h>
 
+# define FOR_BLOCK	-1
+
 typedef enum e_error	t_error;
 typedef struct s_data	t_data;
 
 typedef struct s_deque {
 	int				num;
 	void			*ptr;
+	unsigned int	first;
+	unsigned int	last;
 	struct s_deque	*next;
 	struct s_deque	*prev;
 }	t_deque;
