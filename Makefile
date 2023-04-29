@@ -46,7 +46,7 @@ SRCS			+=	$(SOLVE_LE_DIR)/dfs.c \
 
 SOLVE_OVER_DIR	:=	solve_over_6
 SRCS			+=	$(SOLVE_OVER_DIR)/solve.c \
-
+					$(SOLVE_OVER_DIR)/sort.c
 
 #--------------------------------------------
 # deque

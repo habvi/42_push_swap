@@ -5,8 +5,8 @@
 
 static t_nums	*generate_base_move(t_data *data, t_error *error_code)
 {
-	(void)error_code;
 	deque_print4(data);
+	data->now_op = divide_block_sort(data, error_code);
 	return (data->now_op);
 }
 
