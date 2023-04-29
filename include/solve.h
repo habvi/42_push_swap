@@ -114,8 +114,7 @@ t_deque			*deque_new_node_for_block(int first, int last, t_error *error);
 t_deque			*allocate_deque_for_block(t_data *data, t_error *error_code);
 
 // move.c
-t_nums			*move_for_divide_nums(\
-						t_block *block, t_data *data, t_error *error_code);
+t_nums			*move_for_divide_nums(t_block *block, const unsigned int nums_range, t_data *data, t_error *error_code);
 
 // set_range.c
 t_block			*set_nums_range_per_blocks(\
