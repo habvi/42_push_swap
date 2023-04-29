@@ -14,8 +14,6 @@ typedef struct s_data {
 	t_deque	*allocated_ptrs;
 	t_nums	*now_op;
 	t_nums	*answer;
-	t_nums	*lis_a;
-	int		*copy_a;
 }	t_data;
 
 typedef enum e_dir {
@@ -47,7 +45,7 @@ void	undo_operation(uint8_t op_i, t_data *data, t_error *error_code);
 void	solve(t_data *data, t_error *error_code);
 
 // --------------------------------------------
-//  solve_less_than_6
+//  solve_le_6
 // --------------------------------------------
 // dfs.c
 bool	is_operation_exceeded_answer_size(t_data *data);
@@ -58,38 +56,15 @@ bool	is_limit_operation_size(size_t size);
 bool	is_valid_operations(uint8_t op_i, t_data *data);
 
 // solve.c
-void	solve_less_than_6(t_data *data, t_error *error_code);
+void	solve_le_6(t_data *data, t_error *error_code);
 
 // update.c
 void	update_answer(t_data *data, t_error *error_code);
 
 // --------------------------------------------
-//  solve_over_5
+//  solve_over_6
 // --------------------------------------------
-// copy.c
-int		*alloc_and_copy_stack_a(t_nums *stack_a, t_error *error_code);
-
-// lis_reconstruct_find.c
-size_t	find_lis_start_i(int *array_a, size_t size, const int lis_tail);
-int		*find_insert_indexes(\
-		t_data *data, t_nums *lis_a, const size_t start_i, t_error *error_code);
-
-// lis_reconstruct.c
-t_nums	*reconstruct_lis(t_data *data, t_nums *lis_a, t_error *error_code);
-
-// lis.c
-t_nums	*calc_stack_a_lis(t_data *data, t_error *error_code);
-
-// pa.c
-t_nums	*pushback_to_a_and_sort(t_data *data, t_error *error_code);
-
-// pb_optimized.c
-t_nums	*push_to_b_without_lis(t_data *data, t_error *error_code);
-
 // solve.c
-void	solve_over_5(t_data *data, t_error *error_code);
-
-// update.c
-void	update_lis_a(t_data *data, t_nums *new_lis_a, t_error *error_code);
+void	solve_over_6(t_data *data, t_error *error_code);
 
 #endif

@@ -3,10 +3,10 @@
 
 # include <stdbool.h>
 
-# define TOTAL_OPERATIONS				11
-# define OPERATION_LIMIT_LESS_THAN_6	11
-# define TWO_OP							1
-# define ONE_OP							0
+# define TOTAL_OPERATIONS		11
+# define OPERATION_LIMIT_LE_6	11
+# define TWO_OP					1
+# define ONE_OP					0
 
 typedef struct s_nums	t_nums;
 typedef struct s_data	t_data;

@@ -47,7 +47,7 @@ static void	try_next_operations(t_data *data, t_error *error_code)
 	}
 }
 
-void	solve_less_than_6(t_data *data, t_error *error_code)
+void	solve_le_6(t_data *data, t_error *error_code)
 {
 	t_nums	*now_op;
 	t_nums	*answer;
