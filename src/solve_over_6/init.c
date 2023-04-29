@@ -17,7 +17,14 @@ t_block	init_block(void)
 		block.movable_stack_place[i] = 0;
 		i++;
 	}
-	block.nums_range_per_blocks = NULL;
+	i = 0;
+	while (i < OTHER_STACK_NUMS_RANGE)
+	{
+		block.nums_range_per_blocks[i] = 0;
+		i++;
+	}
+	block.base_block_size = 0;
+	block.total_block_count = 0;
 	return (block);
 }
 

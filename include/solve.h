@@ -3,8 +3,11 @@
 
 # include <stdint.h>
 
-# define RECURSION_LIMIT	6
-# define TOTAL_STACK_ENTRY	4
+# define RECURSION_LIMIT		6
+# define TOTAL_STACK_ENTRY		4
+# define OTHER_STACK_NUMS_RANGE	7
+// 3 or 4
+# define LAST_BLOCK_SIZE		4
 
 typedef struct s_nums	t_nums;
 
@@ -26,7 +29,9 @@ typedef struct s_block {
 	t_deque	*wait_blocks;
 	t_deque	*block_range;
 	int		movable_stack_place[3];
-	t_deque	*nums_range_per_blocks;
+	int		nums_range_per_blocks[7];
+	unsigned int	base_block_size;
+	unsigned int	total_block_count;
 }	t_block;
 
 typedef enum e_stack_place {
@@ -91,6 +96,12 @@ t_stack_place	find_the_block_place(t_deque *block_range, t_data *data);
 // init.c
 t_block			init_block(void);
 t_deque			*allocate_deque_for_block(t_data *data, t_error *error_code);
+
+// move.c
+t_nums			*move_for_divide_nums(t_block *block, t_data *data, t_error *error_code);
+
+// set_range.c
+t_block			*set_nums_range_per_blocks(t_block *block, t_data *data);
 
 // solve.c
 void			solve_over_6(t_data *data, t_error *error_code);

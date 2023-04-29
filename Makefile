@@ -48,6 +48,8 @@ SOLVE_OVER_DIR	:=	solve_over_6
 SRCS			+=	$(SOLVE_OVER_DIR)/divide.c \
 					$(SOLVE_OVER_DIR)/find_block_place.c \
 					$(SOLVE_OVER_DIR)/init.c \
+					$(SOLVE_OVER_DIR)/move.c \
+					$(SOLVE_OVER_DIR)/set_range.c \
 					$(SOLVE_OVER_DIR)/solve.c \
 					$(SOLVE_OVER_DIR)/sort_last.c \
 					$(SOLVE_OVER_DIR)/sort.c \
