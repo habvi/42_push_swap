@@ -9,11 +9,12 @@
 typedef enum e_error	t_error;
 typedef struct s_data	t_data;
 
+// use for block: num = FOR_BLOCK
 typedef struct s_deque {
 	int				num;
 	void			*ptr;
-	unsigned int	first;
-	unsigned int	last;
+	int				first;
+	int				last;
 	struct s_deque	*next;
 	struct s_deque	*prev;
 }	t_deque;
@@ -31,7 +32,7 @@ void	deque_clear(t_deque *deque);
 void	deque_init(t_deque *deque, int init_num, t_deque *init_node);
 
 // dq_is_empty.c
-bool	deque_is_empty(t_deque *deque);
+bool	deque_is_empty(const t_deque *deque);
 
 // dq_new.c
 t_deque	*deque_new_head(int init_num, void *ptr, t_error *error);
