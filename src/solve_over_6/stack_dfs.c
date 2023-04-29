@@ -12,10 +12,10 @@ static bool	is_last_block(t_deque *block_range)
 	return (false);
 }
 
-static t_nums	*sort_from_large_num(t_deque *block, t_data *data)
+static void	*free_block(t_deque	*block_range)
 {
-	(void)block;
-	return (data->now_op);
+	deque_clear(block_range);
+	return (NULL);
 }
 
 static t_nums	*divide_nums_to_other_3_stacks(\
@@ -39,14 +39,15 @@ t_nums	*stack_dfs(t_block *block, t_data *data, t_error *error_code)
 		printf("(first,last):(%d,%d)\n", block_range->first, block_range->last);
 		if (is_last_block(block_range))
 		{
-			data->now_op = sort_from_large_num(block_range, data);
-			deque_clear(block_range);
+			data->now_op = sort_from_large_num(block_range, data, error_code);
+			if (*error_code)
+				return (free_block(block_range));
 			continue ;
 		}
 		data->now_op = divide_nums_to_other_3_stacks(block, block_range, data, error_code);
-		deque_clear(block->block_range);
 		if (*error_code)
-			return (NULL);
+			return (free_block(block_range));
+		deque_clear(block_range);
 	}
 	return (data->now_op);
 }

@@ -72,6 +72,9 @@ void	update_answer(t_data *data, t_error *error_code);
 // solve.c
 void	solve_over_6(t_data *data, t_error *error_code);
 
+// sort_last.c
+t_nums	*sort_from_large_num(t_deque *block, t_data *data, t_error *error_code);
+
 // sort.c
 t_nums	*divide_block_sort(t_data *data, t_error *erorr_code);
 
