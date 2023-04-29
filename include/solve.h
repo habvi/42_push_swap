@@ -92,6 +92,11 @@ void			update_answer(t_data *data, t_error *error_code);
 // --------------------------------------------
 //  solve_over_6
 // --------------------------------------------
+// block_info.c
+t_stack_place	find_the_block_place(t_deque *block_range, t_data *data);
+t_block			*set_movable_stack_place(t_block *block, t_stack_place stack_place);
+t_block			*set_block_info(t_block *block, t_deque *block_range, t_data *data, t_error *error_code);
+
 // calc_block.c
 t_block			*calc_base_block_size(\
 					t_block *block, const unsigned block_range, t_data *data);
@@ -99,9 +104,6 @@ t_block			*calc_base_block_size(\
 // divide.c
 t_nums			*divide_nums_to_other_3_stacks(\
 	t_block *block, t_deque *block_range, t_data *data, t_error *error_code);
-
-// find_block_place.c
-t_stack_place	find_the_block_place(t_deque *block_range, t_data *data);
 
 // init.c
 t_block			init_block(void);
@@ -117,14 +119,13 @@ t_block			*set_nums_range_per_blocks(\
 						t_block *block, t_data *data, t_error *error_code);
 
 // solve.c
+t_nums			*divide_block_sort(t_data *data, t_error *erorr_code);
 void			solve_over_6(t_data *data, t_error *error_code);
 
 // sort_last.c
 t_nums			*sort_last_num(\
 				t_deque *block_range, t_data *data, t_error *error_code);
 
-// sort.c
-t_nums			*divide_block_sort(t_data *data, t_error *erorr_code);
 
 // stack_dfs.c
 void			*free_block(t_deque	*block_range);

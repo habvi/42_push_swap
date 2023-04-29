@@ -33,3 +33,32 @@ t_stack_place	find_the_block_place(t_deque *block_range, t_data *data)
 	}
 	return (NONE);
 }
+
+t_block	*set_movable_stack_place(t_block *block, t_stack_place stack_place)
+{
+	uint8_t	i;
+	int		count;
+
+	i = 0;
+	count = 1;
+	while (count <= TOTAL_STACK_ENTRY)
+	{
+		if (count != (int)stack_place)
+		{
+			block->movable_stack_place[i] = count;
+			i++;
+		}
+		count++;
+	}
+	return (block);
+}
+
+t_block	*set_block_info(t_block *block, t_deque *block_range, t_data *data, t_error *error_code)
+{
+	block->stack_place = find_the_block_place(block_range, data);
+	block = set_movable_stack_place(block, block->stack_place);
+	block = set_nums_range_per_blocks(block, data, error_code);
+	if (*error_code)
+		return (NULL);
+	return (block);
+}
