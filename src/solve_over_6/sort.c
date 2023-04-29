@@ -36,7 +36,7 @@ static t_deque	*allocate_deque_for_block(t_data *data, t_error *error_code)
 	if (*error_code)
 		return (NULL);
 	deque_add_back(wait_blocks, new_node);
-	deque_print(wait_blocks, "wating block");
+	deque_print(wait_blocks, "wating block"); // to do: erase
 	return (wait_blocks);
 }
 
@@ -50,8 +50,8 @@ t_nums	*divide_block_sort(t_data *data, t_error *error_code)
 		return (NULL);
 	block.wait_blocks = wait_blocks;
 	data->now_op = stack_dfs(&block, data, error_code);
+	deque_clear(wait_blocks);
 	if (*error_code)
 		return (NULL);
-	deque_clear(wait_blocks);
 	return (data->now_op);
 }
