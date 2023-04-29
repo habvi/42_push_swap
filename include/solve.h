@@ -101,6 +101,9 @@ t_block			*set_block_info(t_block *block, t_deque *block_range, t_data *data, t_
 t_block			*calc_base_block_size(\
 					t_block *block, const unsigned block_range, t_data *data);
 
+// dfs.c
+t_nums			*search_all_patterns(t_block *block, t_data *data, t_error *error_code);
+
 // divide.c
 t_nums			*divide_nums_to_other_3_stacks(\
 	t_block *block, t_deque *block_range, t_data *data, t_error *error_code);
