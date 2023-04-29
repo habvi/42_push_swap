@@ -30,15 +30,6 @@ typedef enum e_dir {
 	PREV = 1
 }	t_dir;
 
-typedef struct s_block {
-	t_deque			*wait_blocks;
-	t_deque			*block_range;
-	int				movable_stack_place[3];
-	int				nums_range_per_blocks[7];
-	unsigned int	base_block_size;
-	unsigned int	total_block_count;
-}	t_block;
-
 typedef enum e_stack_place {
 	NONE = 0,
 	STACK_A_HEAD = 1,
@@ -46,6 +37,16 @@ typedef enum e_stack_place {
 	STACK_B_HEAD = 3,
 	STACK_B_TAIL = 4
 }	t_stack_place;
+
+typedef struct s_block {
+	t_deque			*wait_blocks;
+	t_deque			*block_range;
+	t_stack_place	stack_place;
+	int				movable_stack_place[3];
+	int				nums_range_per_blocks[7];
+	unsigned int	base_block_size;
+	unsigned int	total_block_count;
+}	t_block;
 
 // --------------------------------------------
 //  solve

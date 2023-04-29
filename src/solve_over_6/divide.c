@@ -28,10 +28,9 @@ static t_block	*set_movable_stack_place(\
 t_nums	*divide_nums_to_other_3_stacks(\
 		t_block *block, t_deque *block_range, t_data *data, t_error *error_code)
 {
-	const t_stack_place	stack_place = find_the_block_place(block_range, data);
-
 	block->block_range = block_range;
-	block = set_movable_stack_place(block, stack_place);
+	block->stack_place = find_the_block_place(block_range, data);
+	block = set_movable_stack_place(block, block->stack_place);
 	block = set_nums_range_per_blocks(block, data, error_code);
 	if (*error_code)
 		return (NULL);

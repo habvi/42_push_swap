@@ -11,6 +11,7 @@ t_block	init_block(void)
 
 	block.wait_blocks = NULL;
 	block.block_range = NULL;
+	block.stack_place = 0;
 	i = 0;
 	while (i + 1 < TOTAL_STACK_ENTRY)
 	{
