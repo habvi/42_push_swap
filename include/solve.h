@@ -26,6 +26,14 @@ typedef struct s_block {
 	t_deque	*block_range;
 }	t_block;
 
+typedef enum e_stack_place {
+	NONE = 0,
+	STACK_A_HEAD = 1,
+	STACK_A_TAIL = 2,
+	STACK_B_HEAD = 3,
+	STACK_B_TAIL = 4
+}	t_stack_place;
+
 // --------------------------------------------
 //  solve
 // --------------------------------------------

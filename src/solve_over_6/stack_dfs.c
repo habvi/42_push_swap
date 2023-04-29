@@ -42,9 +42,11 @@ t_nums	*stack_dfs(t_block *block, t_data *data, t_error *error_code)
 			data->now_op = sort_from_large_num(block_range, data, error_code);
 			if (*error_code)
 				return (free_block(block_range));
+			deque_clear(block_range);
 			continue ;
 		}
-		data->now_op = divide_nums_to_other_3_stacks(block, block_range, data, error_code);
+		data->now_op = divide_nums_to_other_3_stacks(\
+								block, block_range, data, error_code);
 		if (*error_code)
 			return (free_block(block_range));
 		deque_clear(block_range);
