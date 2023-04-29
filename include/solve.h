@@ -6,8 +6,13 @@
 # define RECURSION_LIMIT		6
 # define TOTAL_STACK_ENTRY		4
 # define OTHER_STACK_NUMS_RANGE	7
+
 // 3 or 4
 # define LAST_BLOCK_SIZE		4
+# define SWITCH_SOLUTION_NUMS	250
+# define NUMS_SEPARATE_2		8
+# define SEPARATE_2_BLOCKS		2
+# define SEPARATE_3_BLOCKS		3
 
 typedef struct s_nums	t_nums;
 
@@ -26,10 +31,10 @@ typedef enum e_dir {
 }	t_dir;
 
 typedef struct s_block {
-	t_deque	*wait_blocks;
-	t_deque	*block_range;
-	int		movable_stack_place[3];
-	int		nums_range_per_blocks[7];
+	t_deque			*wait_blocks;
+	t_deque			*block_range;
+	int				movable_stack_place[3];
+	int				nums_range_per_blocks[7];
 	unsigned int	base_block_size;
 	unsigned int	total_block_count;
 }	t_block;
@@ -86,6 +91,10 @@ void			update_answer(t_data *data, t_error *error_code);
 // --------------------------------------------
 //  solve_over_6
 // --------------------------------------------
+// calc_block.c
+t_block			*calc_base_block_size(\
+					t_block *block, const unsigned block_range, t_data *data);
+
 // divide.c
 t_nums			*divide_nums_to_other_3_stacks(\
 	t_block *block, t_deque *block_range, t_data *data, t_error *error_code);
@@ -95,13 +104,16 @@ t_stack_place	find_the_block_place(t_deque *block_range, t_data *data);
 
 // init.c
 t_block			init_block(void);
+t_deque			*deque_new_node_for_block(int first, int last, t_error *error);
 t_deque			*allocate_deque_for_block(t_data *data, t_error *error_code);
 
 // move.c
-t_nums			*move_for_divide_nums(t_block *block, t_data *data, t_error *error_code);
+t_nums			*move_for_divide_nums(\
+						t_block *block, t_data *data, t_error *error_code);
 
 // set_range.c
-t_block			*set_nums_range_per_blocks(t_block *block, t_data *data);
+t_block			*set_nums_range_per_blocks(\
+						t_block *block, t_data *data, t_error *error_code);
 
 // solve.c
 void			solve_over_6(t_data *data, t_error *error_code);

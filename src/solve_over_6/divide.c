@@ -32,7 +32,11 @@ t_nums	*divide_nums_to_other_3_stacks(\
 
 	block->block_range = block_range;
 	block = set_movable_stack_place(block, stack_place);
-	block = set_nums_range_per_blocks(block, data);
+	block = set_nums_range_per_blocks(block, data, error_code);
+	if (*error_code)
+		return (NULL);
 	data->now_op = move_for_divide_nums(block, data, error_code);
+	if (*error_code)
+		return (NULL);
 	return (data->now_op);
 }

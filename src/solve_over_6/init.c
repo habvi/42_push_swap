@@ -28,8 +28,7 @@ t_block	init_block(void)
 	return (block);
 }
 
-static t_deque	*deque_new_node_for_block(\
-					unsigned int first, unsigned int last, t_error *error)
+t_deque	*deque_new_node_for_block(int first, int last, t_error *error)
 {
 	t_deque	*node;
 

@@ -26,8 +26,9 @@ t_nums	*stack_dfs(t_block *block, t_data *data, t_error *error_code)
 	deque_print(block->wait_blocks, "wating block");
 	while (!deque_is_empty(block->wait_blocks))
 	{
+		deque_print(block->wait_blocks, "wating block");
 		block_range = deque_pop_back(block->wait_blocks);
-		printf("(first,last):(%d,%d)\n", block_range->first, block_range->last);
+		printf("(first,last):(%d,%d)\n\n", block_range->first, block_range->last);
 		if (is_last_block(block_range))
 		{
 			data->now_op = sort_last_num(block_range, data, error_code);

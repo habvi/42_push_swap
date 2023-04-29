@@ -45,7 +45,8 @@ SRCS			+=	$(SOLVE_LE_DIR)/dfs.c \
 					$(SOLVE_LE_DIR)/update.c
 
 SOLVE_OVER_DIR	:=	solve_over_6
-SRCS			+=	$(SOLVE_OVER_DIR)/divide.c \
+SRCS			+=	$(SOLVE_OVER_DIR)/calc_block.c \
+					$(SOLVE_OVER_DIR)/divide.c \
 					$(SOLVE_OVER_DIR)/find_block_place.c \
 					$(SOLVE_OVER_DIR)/init.c \
 					$(SOLVE_OVER_DIR)/move.c \
