@@ -80,19 +80,21 @@ void			update_answer(t_data *data, t_error *error_code);
 // --------------------------------------------
 //  solve_over_6
 // --------------------------------------------
-// init.c
-t_block			init_block(void);
-t_deque			*allocate_deque_for_block(t_data *data, t_error *error_code);
-
 // divide.c
 t_nums			*divide_nums_to_other_3_stacks(\
 	t_block *block, t_deque *block_range, t_data *data, t_error *error_code);
+
+// find_block_place.c
+t_stack_place	find_the_block_place(t_deque *block_range, t_data *data);
+
+// init.c
+t_block			init_block(void);
+t_deque			*allocate_deque_for_block(t_data *data, t_error *error_code);
 
 // solve.c
 void			solve_over_6(t_data *data, t_error *error_code);
 
 // sort_last.c
-t_stack_place	find_the_block_place(t_deque *block_range, t_data *data);
 t_nums			*sort_last_num(\
 				t_deque *block_range, t_data *data, t_error *error_code);
 
