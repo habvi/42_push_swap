@@ -11,6 +11,8 @@ t_nums	*dup_nums(t_nums *nums, t_error *error_code)
 	dup_nums = init_nums(nums->size, error_code);
 	if (*error_code)
 		return (NULL);
+	if (deque_is_empty(nums->deque))
+		return (dup_nums);
 	node = nums->deque->next;
 	while (node)
 	{

@@ -69,7 +69,7 @@ void			print_operations(t_nums *answer, t_error *error_code);
 
 // run.c
 void			run_operation(t_operation op_i, t_data *data, t_run run, t_error *error_code);
-void			undo_operation(t_operation op_i, t_data *data, t_error *error_code);
+void			undo_operation(t_operation op_i, t_data *data, t_run run, t_error *error_code);
 
 // solve.c
 void			solve(t_data *data, t_error *error_code);
@@ -84,6 +84,8 @@ bool			is_stack_a_sorted(\
 bool			is_limit_operation_size(size_t size);
 
 // operations.c
+bool			is_executable_operation(t_operation op_i, t_data *data);
+bool			is_unnecessary_oparation(t_operation op_i, t_nums *op_deque);
 bool			is_valid_operations(t_operation op_i, t_data *data);
 
 // solve.c
@@ -91,6 +93,7 @@ void			solve_le_6(t_data *data, t_error *error_code);
 
 // update.c
 void			update_answer(t_data *data, t_error *error_code);
+void			update_min_op(t_data *data, t_error *error_code);
 
 // --------------------------------------------
 //  solve_over_6
@@ -140,7 +143,6 @@ void			solve_over_6(t_data *data, t_error *error_code);
 // sort_last.c
 t_nums			*sort_last_num(\
 				t_deque *block_range, t_data *data, t_error *error_code);
-
 
 // stack_dfs.c
 void			*free_block(t_deque	*block_range);

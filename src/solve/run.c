@@ -6,51 +6,51 @@
 void	run_operation(t_operation op_i, t_data *data, t_run run, t_error *error_code)
 {
 	if (op_i == SA)
-		sa(data, ONE_OP, run, error_code);
+		run_sa(data, run, error_code);
 	else if (op_i == SB)
-		sb(data, ONE_OP, run, error_code);
+		run_sb(data, run, error_code);
 	else if (op_i == SS)
-		ss(data, TWO_OP, run, error_code);
+		run_ss(data, run, error_code);
 	else if (op_i == PA)
-		pa(data, run, error_code);
+		run_pa(data, run, error_code);
 	else if (op_i == PB)
-		pb(data, run, error_code);
+		run_pb(data, run, error_code);
 	else if (op_i == RA)
-		ra(data, ONE_OP, run, error_code);
+		run_ra(data, run, error_code);
 	else if (op_i == RB)
-		rb(data, ONE_OP, run, error_code);
+		run_rb(data, run, error_code);
 	else if (op_i == RR)
-		rr(data, TWO_OP, run, error_code);
+		run_rr(data, run, error_code);
 	else if (op_i == RRA)
-		rra(data, ONE_OP, run, error_code);
+		run_rra(data, run, error_code);
 	else if (op_i == RRB)
-		rrb(data, ONE_OP, run, error_code);
+		run_rrb(data, run, error_code);
 	else if (op_i == RRR)
-		rrr(data, TWO_OP, run, error_code);
+		run_rrr(data, run, error_code);
 }
 
-void	undo_operation(t_operation op_i, t_data *data, t_error *error_code)
+void	undo_operation(t_operation op_i, t_data *data, t_run run, t_error *error_code)
 {
 	if (op_i == SA)
-		sa(data, ONE_OP, UNDO, error_code);
+		run_sa(data, run, error_code);
 	else if (op_i == SB)
-		sb(data, ONE_OP, UNDO, error_code);
+		run_sb(data, run, error_code);
 	else if (op_i == SS)
-		ss(data, TWO_OP, UNDO, error_code);
+		run_ss(data, run, error_code);
 	else if (op_i == PA)
-		pb(data, UNDO, error_code);
+		run_pb(data, run, error_code);
 	else if (op_i == PB)
-		pa(data, UNDO, error_code);
+		run_pa(data, run, error_code);
 	else if (op_i == RA)
-		rra(data, ONE_OP, UNDO, error_code);
+		run_rra(data, run, error_code);
 	else if (op_i == RB)
-		rrb(data, ONE_OP, UNDO, error_code);
+		run_rrb(data, run, error_code);
 	else if (op_i == RR)
-		rrr(data, TWO_OP, UNDO, error_code);
+		run_rrr(data, run, error_code);
 	else if (op_i == RRA)
-		ra(data, ONE_OP, UNDO, error_code);
+		run_ra(data, run, error_code);
 	else if (op_i == RRB)
-		rb(data, ONE_OP, UNDO, error_code);
+		run_rb(data, run, error_code);
 	else if (op_i == RRR)
-		rr(data, TWO_OP, UNDO, error_code);
+		run_rr(data, run, error_code);
 }

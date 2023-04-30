@@ -30,33 +30,45 @@ typedef enum e_operation {
 typedef enum e_run {
 	NONE = 0,
 	RUN = 1,
-	UNDO = 2
+	UNDO = 2,
+	RUN_TMP_OP = 3,
+	UNDO_TMP_OP = 4
 }	t_run;
 
 // append_op.c
 void	append_now_op(t_data *data, t_operation op, t_error *error_code);
+void	append_op(t_nums *op_deque, t_operation op, t_error *error_code);
 
 // pop_op.c
 void	pop_now_op(t_nums *now_op);
+void	pop_op(t_nums *op);
 
 // push.c
-void	pa(t_data *data, t_run run, t_error *error_code);
-void	pb(t_data *data, t_run run, t_error *error_code);
+void	pa(t_data *data);
+void	run_pa(t_data *data, t_run run, t_error *error_code);
+void	pb(t_data *data);
+void	run_pb(t_data *data, t_run run, t_error *error_code);
 
 // reverse_rotate.c
-void	rra(t_data *data, bool is_rrr, t_run run, t_error *error_code);
-void	rrb(t_data *data, bool is_rrr, t_run run, t_error *error_code);
-void	rrr(t_data *data, bool is_rrr, t_run run, t_error *error_code);
+void	rra(t_data *data);
+void	run_rra(t_data *data, t_run run, t_error *error_code);
+void	rrb(t_data *data);
+void	run_rrb(t_data *data, t_run run, t_error *error_code);
+void	run_rrr(t_data *data, t_run run, t_error *error_code);
 
 // rotate.c
-void	ra(t_data *data, bool is_rr, t_run run, t_error *error_code);
-void	rb(t_data *data, bool is_rr, t_run run, t_error *error_code);
-void	rr(t_data *data, bool is_rr, t_run run, t_error *error_code);
+void	ra(t_data *data);
+void	run_ra(t_data *data, t_run run, t_error *error_code);
+void	rb(t_data *data);
+void	run_rb(t_data *data, t_run run, t_error *error_code);
+void	run_rr(t_data *data, t_run run, t_error *error_code);
 
 // swap.c
-void	sa(t_data *data, bool is_ss, t_run run, t_error *error_code);
-void	sb(t_data *data, bool is_ss, t_run run, t_error *error_code);
-void	ss(t_data *data, bool is_ss, t_run run, t_error *error_code);
+void	sa(t_data *data);
+void	run_sa(t_data *data, t_run run, t_error *error_code);
+void	sb(t_data *data);
+void	run_sb(t_data *data, t_run run, t_error *error_code);
+void	run_ss(t_data *data, t_run run, t_error *error_code);
 
 // test.c
 void	test(t_nums *stack_a, t_nums *stack_b);

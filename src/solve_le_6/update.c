@@ -26,3 +26,15 @@ void	update_answer(t_data *data, t_error *error_code)
 	data->answer = tmp;
 	data->answer->size = data->now_op->size;
 }
+
+void	update_min_op(t_data *data, t_error *error_code)
+{
+	t_nums	*tmp;
+
+	tmp = dup_nums(data->tmp_op, error_code);
+	if (*error_code)
+		return ;
+	free_nums(data->min_op);
+	data->min_op = tmp;
+	data->min_op->size = data->tmp_op->size;
+}

@@ -14,15 +14,15 @@ t_nums	*sort_last_num(t_deque *block_range, t_data *data, t_error *error_code)
 	if (stack_place == STACK_A_HEAD)
 		return (data->now_op);
 	else if (stack_place == STACK_A_TAIL)
-		rra(data, false, RUN, error_code);
+		run_rra(data, RUN, error_code);
 	else if (stack_place == STACK_B_HEAD)
-		pa(data, RUN, error_code);
+		run_pa(data, RUN, error_code);
 	else if (stack_place == STACK_B_TAIL)
 	{
-		rrb(data, false, RUN, error_code);
+		run_rrb(data, RUN, error_code);
 		if (*error_code)
 			return (NULL);
-		pa(data, RUN, error_code);
+		run_pa(data, RUN, error_code);
 	}
 	if (*error_code)
 		return (NULL);

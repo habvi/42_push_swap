@@ -10,7 +10,7 @@ static bool	is_executable_size(t_nums *nums)
 	return (false);
 }
 
-static bool	is_executable_operation(t_operation op_i, t_data *data)
+bool	is_executable_operation(t_operation op_i, t_data *data)
 {
 	if (op_i == SA || op_i == RA || op_i == RRA)
 		return (is_executable_size(data->stack_a));
@@ -28,13 +28,13 @@ static bool	is_executable_operation(t_operation op_i, t_data *data)
 	return (true);
 }
 
-static bool	is_unnecessary_oparation(t_operation op_i, t_data *data)
+bool	is_unnecessary_oparation(t_operation op_i, t_nums *op_deque)
 {
 	t_operation	pre_op;
 
-	if (data->now_op->size == 0)
+	if (op_deque->size == 0)
 		return (false);
-	pre_op = data->now_op->deque->prev->num;
+	pre_op = op_deque->deque->prev->num;
 	if (op_i == SA || op_i == SB || op_i == SS)
 		return (pre_op == SA || pre_op == SB || pre_op == SS);
 	if (op_i == PA)
@@ -60,7 +60,7 @@ bool	is_valid_operations(t_operation op_i, t_data *data)
 {
 	if (!is_executable_operation(op_i, data))
 		return (false);
-	if (is_unnecessary_oparation(op_i, data))
+	if (is_unnecessary_oparation(op_i, data->now_op))
 		return (false);
 	return (true);
 }

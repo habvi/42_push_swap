@@ -12,7 +12,7 @@ static void	rotate_head_to_tail(t_deque *stack)
 	deque_add_back(stack, move_node);
 }
 
-void	ra(t_data *data, bool is_rr, t_run run, t_error *error_code)
+void	ra(t_data *data)
 {
 	t_deque			*stack_a;
 	const size_t	size = data->stack_a->size;
@@ -21,15 +21,22 @@ void	ra(t_data *data, bool is_rr, t_run run, t_error *error_code)
 		return ;
 	stack_a = data->stack_a->deque;
 	rotate_head_to_tail(stack_a);
-	if (is_rr)
-		return ;
-	if (run == RUN)
-		append_now_op(data, RA, error_code);
-	else if (run == UNDO)
-		pop_now_op(data->now_op);
 }
 
-void	rb(t_data *data, bool is_rr, t_run run, t_error *error_code)
+void	run_ra(t_data *data, t_run run, t_error *error_code)
+{
+	ra(data);
+	if (run == RUN)
+		append_op(data->now_op, RA, error_code);
+	else if (run == UNDO)
+		pop_op(data->now_op);
+	else if (run == RUN_TMP_OP)
+		append_op(data->tmp_op, RA, error_code);
+	else if (run == UNDO_TMP_OP)
+		pop_op(data->tmp_op);
+}
+
+void	rb(t_data *data)
 {
 	t_deque			*stack_b;
 	const size_t	size = data->stack_b->size;
@@ -38,24 +45,31 @@ void	rb(t_data *data, bool is_rr, t_run run, t_error *error_code)
 		return ;
 	stack_b = data->stack_b->deque;
 	rotate_head_to_tail(stack_b);
-	if (is_rr)
-		return ;
-	if (run == RUN)
-		append_now_op(data, RB, error_code);
-	else if (run == UNDO)
-		pop_now_op(data->now_op);
 }
 
-void	rr(t_data *data, bool is_rr, t_run run, t_error *error_code)
+void	run_rb(t_data *data, t_run run, t_error *error_code)
 {
-	ra(data, is_rr, run, error_code);
-	if (*error_code)
-		return ;
-	rb(data, is_rr, run, error_code);
-	if (*error_code)
-		return ;
+	rb(data);
 	if (run == RUN)
-		append_now_op(data, RR, error_code);
+		append_op(data->now_op, RB, error_code);
 	else if (run == UNDO)
-		pop_now_op(data->now_op);
+		pop_op(data->now_op);
+	else if (run == RUN_TMP_OP)
+		append_op(data->tmp_op, RB, error_code);
+	else if (run == UNDO_TMP_OP)
+		pop_op(data->tmp_op);
+}
+
+void	run_rr(t_data *data, t_run run, t_error *error_code)
+{
+	ra(data);
+	rb(data);
+	if (run == RUN)
+		append_op(data->now_op, RR, error_code);
+	else if (run == UNDO)
+		pop_op(data->now_op);
+	else if (run == RUN_TMP_OP)
+		append_op(data->tmp_op, RR, error_code);
+	else if (run == UNDO_TMP_OP)
+		pop_op(data->tmp_op);
 }

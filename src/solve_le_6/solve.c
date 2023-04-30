@@ -40,7 +40,7 @@ static void	try_next_operations(t_data *data, t_error *error_code)
 		try_all_patterns(data, error_code);
 		if (*error_code)
 			return ;
-		undo_operation(op_i, data, error_code);
+		undo_operation(op_i, data, UNDO, error_code);
 		if (*error_code)
 			return ;
 		op_i++;

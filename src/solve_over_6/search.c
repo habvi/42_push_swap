@@ -2,6 +2,7 @@
 #include <limits.h>
 #include "deque.h"
 #include "error.h"
+#include "free.h"
 #include "operations.h"
 #include "push_swap.h"
 #include "solve.h"
@@ -48,9 +49,9 @@ t_nums	*search_all_patterns(t_block *block, t_data *data, t_error *error_code)
 	data = set_dfs_info(block, data, error_code);
 	if (*error_code)
 		return (NULL);
-	data->now_op = last_nums_dfs(block, data, error_code);
+	data->min_op = last_nums_dfs(block, data, error_code);
 	if (*error_code)
-		return (NULL);
+		return (free_nums(data->min_op));
 	data = move_min_op(data, data->min_op->deque, error_code);
 	data->now_op = extend_min_op(data, data->min_op);
 	return (data->now_op);
