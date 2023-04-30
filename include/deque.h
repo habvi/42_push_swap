@@ -28,6 +28,9 @@ void	deque_add_front(t_deque *deque, t_deque *new_node);
 // dq_clear.c
 void	deque_clear(t_deque *deque);
 
+// dq_extend.c
+void	deque_extend(t_deque *deque, t_deque *new_deque);
+
 // dq_init.c
 void	deque_init(t_deque *deque, int init_num, t_deque *init_node);
 

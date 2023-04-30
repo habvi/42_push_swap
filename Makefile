@@ -64,6 +64,7 @@ DEQUE_DIR	:=	deque
 DEQUE_SRCS	:=	$(DEQUE_DIR)/dq_add_back.c \
 				$(DEQUE_DIR)/dq_add_front.c \
 				$(DEQUE_DIR)/dq_clear.c \
+				$(DEQUE_DIR)/dq_extend.c \
 				$(DEQUE_DIR)/dq_init.c \
 				$(DEQUE_DIR)/dq_is_empty.c \
 				$(DEQUE_DIR)/dq_new.c \
