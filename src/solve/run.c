@@ -3,30 +3,30 @@
 #include "push_swap.h"
 
 // pointer to func list?
-void	run_operation(t_operation op_i, t_data *data, t_error *error_code)
+void	run_operation(t_operation op_i, t_data *data, t_run run, t_error *error_code)
 {
 	if (op_i == SA)
-		sa(data, ONE_OP, RUN, error_code);
+		sa(data, ONE_OP, run, error_code);
 	else if (op_i == SB)
-		sb(data, ONE_OP, RUN, error_code);
+		sb(data, ONE_OP, run, error_code);
 	else if (op_i == SS)
-		ss(data, TWO_OP, RUN, error_code);
+		ss(data, TWO_OP, run, error_code);
 	else if (op_i == PA)
-		pa(data, RUN, error_code);
+		pa(data, run, error_code);
 	else if (op_i == PB)
-		pb(data, RUN, error_code);
+		pb(data, run, error_code);
 	else if (op_i == RA)
-		ra(data, ONE_OP, RUN, error_code);
+		ra(data, ONE_OP, run, error_code);
 	else if (op_i == RB)
-		rb(data, ONE_OP, RUN, error_code);
+		rb(data, ONE_OP, run, error_code);
 	else if (op_i == RR)
-		rr(data, TWO_OP, RUN, error_code);
+		rr(data, TWO_OP, run, error_code);
 	else if (op_i == RRA)
-		rra(data, ONE_OP, RUN, error_code);
+		rra(data, ONE_OP, run, error_code);
 	else if (op_i == RRB)
-		rrb(data, ONE_OP, RUN, error_code);
+		rrb(data, ONE_OP, run, error_code);
 	else if (op_i == RRR)
-		rrr(data, TWO_OP, RUN, error_code);
+		rrr(data, TWO_OP, run, error_code);
 }
 
 void	undo_operation(t_operation op_i, t_data *data, t_error *error_code)

@@ -65,7 +65,7 @@ t_nums			*init_and_set_pointer(\
 void			print_operations(t_nums *answer, t_error *error_code);
 
 // run.c
-void			run_operation(t_operation op_i, t_data *data, t_error *error_code);
+void			run_operation(t_operation op_i, t_data *data, t_run run, t_error *error_code);
 void			undo_operation(t_operation op_i, t_data *data, t_error *error_code);
 
 // solve.c

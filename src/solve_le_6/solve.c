@@ -34,7 +34,7 @@ static void	try_next_operations(t_data *data, t_error *error_code)
 			op_i++;
 			continue ;
 		}
-		run_operation(op_i, data, error_code);
+		run_operation(op_i, data, RUN, error_code);
 		if (*error_code)
 			return ;
 		try_all_patterns(data, error_code);
