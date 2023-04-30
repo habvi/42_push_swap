@@ -61,7 +61,5 @@ t_deque	*allocate_deque_for_block(t_data *data, t_error *error_code)
 	if (*error_code)
 		return (NULL);
 	deque_add_back(wait_blocks, new_node);
-	deque_print(wait_blocks, "wating block"); // to do: erase
-	deque_print4(data); // to do: erase
 	return (wait_blocks);
 }

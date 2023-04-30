@@ -40,11 +40,13 @@ static bool	is_dfs_end(t_block *block, t_data *data, t_error *error_code)
 	return (false);
 }
 
-static bool	is_valid_tmp_operations(t_operation op, t_data *data)
+static bool	is_valid_tmp_operations(t_operation op, t_deque *block_range, t_data *data)
 {
 	if (!is_executable_operation(op, data))
 		return (false);
 	if (is_unnecessary_oparation(op, data->tmp_op))
+		return (false);
+	if (is_num_out_of_block_range(op, block_range, data))
 		return (false);
 	return (true);
 }
@@ -58,7 +60,7 @@ t_nums	*last_nums_dfs(t_block *block, t_data *data, t_error *error_code)
 	op = 1;
 	while (op <= TOTAL_OPERATIONS)
 	{
-		if (!is_valid_tmp_operations(op, data))
+		if (!is_valid_tmp_operations(op, block->block_range, data))
 		{
 			op++;
 			continue ;

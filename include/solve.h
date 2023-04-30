@@ -84,6 +84,7 @@ bool			is_stack_a_sorted(\
 bool			is_limit_operation_size(size_t size);
 
 // operations.c
+bool			is_executable_size(t_nums *nums);
 bool			is_executable_operation(t_operation op_i, t_data *data);
 bool			is_unnecessary_oparation(t_operation op_i, t_nums *op_deque);
 bool			is_valid_operations(t_operation op_i, t_data *data);
@@ -103,6 +104,27 @@ bool			is_num_in_range(int num, const int min, const int max);
 t_stack_place	find_the_block_place(t_deque *block_range, t_data *data);
 t_block			*set_movable_stack_place(t_block *block, t_stack_place stack_place);
 t_block			*set_block_info(t_block *block, t_deque *block_range, t_data *data, t_error *error_code);
+
+// block_range_r.c
+bool			is_in_range_for_ra(t_deque *block_range, t_data *data);
+bool			is_in_range_for_rb(t_deque *block_range, t_data *data);
+bool			is_in_range_for_rr(t_deque *block_range, t_data *data);
+
+// block_range_rr.c
+bool			is_in_range_for_rra(t_deque *block_range, t_data *data);
+bool			is_in_range_for_rrb(t_deque *block_range, t_data *data);
+bool			is_in_range_for_rrr(t_deque *block_range, t_data *data);
+
+// block_range_s.c
+bool			is_in_range_for_sa(t_deque *block_range, t_data *data);
+bool			is_in_range_for_sb(t_deque *block_range, t_data *data);
+bool			is_in_range_for_ss(t_deque *block_range, t_data *data);
+
+// block_range.c
+bool			is_stack_head_num_in_range(t_deque *block_range, t_deque *stack);
+bool			is_stack_next_num_in_range(t_deque *block_range, t_deque *stack);
+bool			is_stack_tail_num_in_range(t_deque *block_range, t_deque *stack);
+bool			is_num_out_of_block_range(t_operation op, t_deque *block_range, t_data *data);
 
 // calc_block.c
 t_block			*calc_base_block_size(\

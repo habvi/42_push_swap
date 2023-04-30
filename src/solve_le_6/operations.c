@@ -3,7 +3,7 @@
 #include "push_swap.h"
 #include "solve.h"
 
-static bool	is_executable_size(t_nums *nums)
+bool	is_executable_size(t_nums *nums)
 {
 	if (nums->size >= 2)
 		return (true);
