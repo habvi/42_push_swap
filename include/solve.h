@@ -93,6 +93,7 @@ void			update_answer(t_data *data, t_error *error_code);
 //  solve_over_6
 // --------------------------------------------
 // block_info.c
+bool			is_num_in_range(int num, const int min, const int max);
 t_stack_place	find_the_block_place(t_deque *block_range, t_data *data);
 t_block			*set_movable_stack_place(t_block *block, t_stack_place stack_place);
 t_block			*set_block_info(t_block *block, t_deque *block_range, t_data *data, t_error *error_code);

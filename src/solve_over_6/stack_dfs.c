@@ -27,6 +27,7 @@ t_nums	*stack_dfs(t_block *block, t_data *data, t_error *error_code)
 	while (!deque_is_empty(block->wait_blocks))
 	{
 		deque_print(block->wait_blocks, "wating block");
+		deque_print4(data);
 		block_range = deque_pop_back(block->wait_blocks);
 		printf("(first,last):(%d,%d)\n\n", block_range->first, block_range->last);
 		if (is_last_block(block_range))

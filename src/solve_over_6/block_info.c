@@ -3,7 +3,7 @@
 #include "push_swap.h"
 #include "solve.h"
 
-static	bool	is_num_in_range(int num, const int min, const int max)
+bool	is_num_in_range(int num, const int min, const int max)
 {
 	if (min <= num && num <= max)
 		return (true);

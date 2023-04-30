@@ -1,5 +1,6 @@
 #include "deque.h"
 #include "error.h"
+#include "operations.h"
 #include "push_swap.h"
 #include "solve.h"
 
@@ -12,24 +13,127 @@ static int	get_move_num(t_stack_place stack_place, t_data *data)
 	if (stack_place == STACK_A_TAIL)
 		return (data->stack_a->deque->prev->num);
 	if (stack_place == STACK_B_HEAD)
-		return (data->stack_a->deque->next->num);
+		return (data->stack_b->deque->next->num);
 	if (stack_place == STACK_B_TAIL)
-		return (data->stack_a->deque->prev->num);
+		return (data->stack_b->deque->prev->num);
 	return (NONE);
 }
 
+static t_nums	*move_nums(t_block *block, unsigned int i, t_data *data, t_error *error_code)
+{
+	const int	before_place = block->stack_place;
+	const int	after_place = block->movable_stack_place[i];
+
+	if (before_place == STACK_A_HEAD)
+	{
+		if (after_place == STACK_A_TAIL)
+			ra(data, false, RUN, error_code);
+		else if (after_place == STACK_B_HEAD)
+			pb(data, RUN, error_code);
+		else if (after_place == STACK_B_TAIL)
+		{
+			pb(data, RUN, error_code);
+			if (*error_code)
+				return (NULL);
+			rb(data, false, RUN, error_code);
+		}
+	}
+	else if (before_place == STACK_A_TAIL)
+	{
+		if (after_place == STACK_A_HEAD)
+			rra(data, false, RUN, error_code);
+		else if (after_place == STACK_B_HEAD)
+		{
+			rra(data, false, RUN, error_code);
+			if (*error_code)
+				return (NULL);
+			pb(data, RUN, error_code);
+		}
+		else if (after_place == STACK_B_TAIL)
+		{
+			rra(data, false, RUN, error_code);
+			if (*error_code)
+				return (NULL);
+			pb(data, RUN, error_code);
+			if (*error_code)
+				return (NULL);
+			rb(data, false, RUN, error_code);
+		}
+	}
+	else if (before_place == STACK_B_HEAD)
+	{
+		if (after_place == STACK_A_HEAD)
+			pa(data, RUN, error_code);
+		else if (after_place == STACK_A_TAIL)
+		{
+			pa(data, RUN, error_code);
+			if (*error_code)
+				return (NULL);
+			ra(data, false, RUN, error_code);
+		}
+		else if (after_place == STACK_B_TAIL)
+			rb(data, false, RUN, error_code);
+	}
+	else if (before_place == STACK_B_TAIL)
+	{
+		if (after_place == STACK_A_HEAD)
+		{
+			rrb(data, false, RUN, error_code);
+			if (*error_code)
+				return (NULL);
+			pa(data, RUN, error_code);
+		}
+		else if (after_place == STACK_A_TAIL)
+		{
+			rrb(data, false, RUN, error_code);
+			if (*error_code)
+				return (NULL);
+			pa(data, RUN, error_code);
+			if (*error_code)
+				return (NULL);
+			ra(data, false, RUN, error_code);
+		}
+		else if (after_place == STACK_B_HEAD)
+			rrb(data, false, RUN, error_code);
+	}
+	if (*error_code)
+		return (NULL);
+	return (data->now_op);
+}
+
+/*
+index: 0 1 2 3 4 5 6
+       1 2 3 4 5 6 0
+       1 2 3 4 0
+*/
 t_nums	*move_for_divide_nums(t_block *block, const unsigned int nums_range, t_data *data, t_error *error_code)
 {
-	uint8_t	i;
-	int		num;
+	unsigned int	i;
+	unsigned int	j;
+	unsigned int	k;
+	int				total;
+	int				num;
 
 	i = 0;
 	while (i < nums_range)
 	{
 		num = get_move_num(block->stack_place, data);
-		printf("%d\n", num);
+		total = block->total_block_count;
+		k = 0;
+		while (total)
+		{
+			j = (total - 1) * 2;
+			if (is_num_in_range(num, block->nums_range_per_blocks[j], block->nums_range_per_blocks[j + 1]))
+			{
+				data->now_op = move_nums(block, k, data, error_code);
+				if (*error_code)
+					return (NULL);
+				break ;
+			}
+			total--;
+			k++;
+		}
 		i++;
 	}
-	(void)error_code;
 	return (data->now_op);
 }
