@@ -34,7 +34,7 @@ static t_nums	*move_nums(t_block *block, unsigned int i, t_data *data, t_error *
 	return (data->now_op);
 }
 
-/*
+/* to do
 index: 0 1 2 3 4 5 6
        1 2 3 4 5 6 0
        1 2 3 4 0

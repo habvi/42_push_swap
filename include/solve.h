@@ -23,6 +23,8 @@ typedef struct s_data {
 	t_deque	*allocated_ptrs;
 	t_nums	*now_op;
 	t_nums	*answer;
+	t_nums	*tmp_op;
+	t_nums	*min_op;
 }	t_data;
 
 typedef enum e_dir {
@@ -46,6 +48,7 @@ typedef struct s_block {
 	int				nums_range_per_blocks[7];
 	unsigned int	base_block_size;
 	unsigned int	total_block_count;
+	int				each_block_range;
 }	t_block;
 
 // --------------------------------------------

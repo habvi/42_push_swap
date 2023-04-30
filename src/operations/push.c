@@ -1,4 +1,3 @@
-#include <stdint.h>
 #include "deque.h"
 #include "error.h"
 #include "operations.h"

@@ -36,6 +36,8 @@ static t_data	init_data(\
 	data.allocated_ptrs = allocated_ptrs;
 	data.now_op = NULL;
 	data.answer = NULL;
+	data.tmp_op = NULL;
+	data.min_op = NULL;
 	return (data);
 }
 

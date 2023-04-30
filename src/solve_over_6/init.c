@@ -26,6 +26,7 @@ t_block	init_block(void)
 	}
 	block.base_block_size = 0;
 	block.total_block_count = 0;
+	block.each_block_range = 0;
 	return (block);
 }
 
