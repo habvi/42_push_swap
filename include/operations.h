@@ -13,6 +13,7 @@ typedef struct s_data	t_data;
 typedef enum e_error	t_error;
 
 typedef enum e_operation {
+	OP_NONE = 0,
 	SA = 1,
 	SB = 2,
 	SS = 3,
@@ -27,6 +28,7 @@ typedef enum e_operation {
 }	t_operation;
 
 typedef enum e_run {
+	NONE = 0,
 	RUN = 1,
 	UNDO = 2
 }	t_run;

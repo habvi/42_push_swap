@@ -1,8 +1,6 @@
 #ifndef SOLVE_H
 # define SOLVE_H
 
-# include <stdint.h>
-
 # define RECURSION_LIMIT		6
 # define TOTAL_STACK_ENTRY		4
 # define OTHER_STACK_NUMS_RANGE	7
@@ -14,7 +12,9 @@
 # define SEPARATE_2_BLOCKS		2
 # define SEPARATE_3_BLOCKS		3
 
-typedef struct s_nums	t_nums;
+typedef struct s_nums		t_nums;
+typedef enum e_operation	t_operation;
+typedef enum e_run			t_run;
 
 typedef struct s_data {
 	t_nums	*stack_a;
@@ -31,7 +31,7 @@ typedef enum e_dir {
 }	t_dir;
 
 typedef enum e_stack_place {
-	NONE = 0,
+	STACK_NONE = 0,
 	STACK_A_HEAD = 1,
 	STACK_A_TAIL = 2,
 	STACK_B_HEAD = 3,
@@ -65,8 +65,8 @@ t_nums			*init_and_set_pointer(\
 void			print_operations(t_nums *answer, t_error *error_code);
 
 // run.c
-void			run_operation(uint8_t op_i, t_data *data, t_error *error_code);
-void			undo_operation(uint8_t op_i, t_data *data, t_error *error_code);
+void			run_operation(t_operation op_i, t_data *data, t_error *error_code);
+void			undo_operation(t_operation op_i, t_data *data, t_error *error_code);
 
 // solve.c
 void			solve(t_data *data, t_error *error_code);
@@ -81,7 +81,7 @@ bool			is_stack_a_sorted(\
 bool			is_limit_operation_size(size_t size);
 
 // operations.c
-bool			is_valid_operations(uint8_t op_i, t_data *data);
+bool			is_valid_operations(t_operation op_i, t_data *data);
 
 // solve.c
 void			solve_le_6(t_data *data, t_error *error_code);

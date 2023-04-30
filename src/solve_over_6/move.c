@@ -13,7 +13,7 @@ static int	get_move_num(t_stack_place stack_place, t_data *data)
 		return (data->stack_b->deque->next->num);
 	if (stack_place == STACK_B_TAIL)
 		return (data->stack_b->deque->prev->num);
-	return (NONE);
+	return (STACK_NONE);
 }
 
 static t_nums	*move_nums(t_block *block, unsigned int i, t_data *data, t_error *error_code)

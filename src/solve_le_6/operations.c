@@ -10,9 +10,8 @@ static bool	is_executable_size(t_nums *nums)
 	return (false);
 }
 
-static bool	is_executable_operation(uint8_t op_i, t_data *data)
+static bool	is_executable_operation(t_operation op_i, t_data *data)
 {
-	op_i++;
 	if (op_i == SA || op_i == RA || op_i == RRA)
 		return (is_executable_size(data->stack_a));
 	if (op_i == SB || op_i == RB || op_i == RRB)
@@ -29,13 +28,12 @@ static bool	is_executable_operation(uint8_t op_i, t_data *data)
 	return (true);
 }
 
-static bool	is_unnecessary_oparation(uint8_t op_i, t_data *data)
+static bool	is_unnecessary_oparation(t_operation op_i, t_data *data)
 {
-	uint8_t	pre_op;
+	t_operation	pre_op;
 
 	if (data->now_op->size == 0)
 		return (false);
-	op_i++;
 	pre_op = data->now_op->deque->prev->num;
 	if (op_i == SA || op_i == SB || op_i == SS)
 		return (pre_op == SA || pre_op == SB || pre_op == SS);
@@ -58,7 +56,7 @@ static bool	is_unnecessary_oparation(uint8_t op_i, t_data *data)
 	return (true);
 }
 
-bool	is_valid_operations(uint8_t op_i, t_data *data)
+bool	is_valid_operations(t_operation op_i, t_data *data)
 {
 	if (!is_executable_operation(op_i, data))
 		return (false);

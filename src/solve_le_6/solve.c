@@ -24,10 +24,10 @@ static void	try_all_patterns(t_data *data, t_error *error_code)
 
 static void	try_next_operations(t_data *data, t_error *error_code)
 {
-	uint8_t	op_i;
+	t_operation	op_i;
 
-	op_i = 0;
-	while (op_i < TOTAL_OPERATIONS)
+	op_i = 1;
+	while (op_i <= TOTAL_OPERATIONS)
 	{
 		if (!is_valid_operations(op_i, data))
 		{

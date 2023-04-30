@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include "deque.h"
 #include "error.h"
 #include "push_swap.h"
@@ -31,7 +32,7 @@ t_stack_place	find_the_block_place(t_deque *block_range, t_data *data)
 		if (is_num_in_range(stack_b->prev->num, min, max))
 			return (STACK_B_TAIL);
 	}
-	return (NONE);
+	return (STACK_NONE);
 }
 
 t_block	*set_movable_stack_place(t_block *block, t_stack_place stack_place)
