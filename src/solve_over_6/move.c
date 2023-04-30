@@ -1,10 +1,7 @@
 #include "deque.h"
 #include "error.h"
-#include "operations.h"
 #include "push_swap.h"
 #include "solve.h"
-
-#include <stdio.h> // to do: erase
 
 static int	get_move_num(t_stack_place stack_place, t_data *data)
 {
@@ -25,77 +22,13 @@ static t_nums	*move_nums(t_block *block, unsigned int i, t_data *data, t_error *
 	const int	after_place = block->movable_stack_place[i];
 
 	if (before_place == STACK_A_HEAD)
-	{
-		if (after_place == STACK_A_TAIL)
-			ra(data, false, RUN, error_code);
-		else if (after_place == STACK_B_HEAD)
-			pb(data, RUN, error_code);
-		else if (after_place == STACK_B_TAIL)
-		{
-			pb(data, RUN, error_code);
-			if (*error_code)
-				return (NULL);
-			rb(data, false, RUN, error_code);
-		}
-	}
+		data->now_op = move_from_stack_a_head(after_place, data, error_code);
 	else if (before_place == STACK_A_TAIL)
-	{
-		if (after_place == STACK_A_HEAD)
-			rra(data, false, RUN, error_code);
-		else if (after_place == STACK_B_HEAD)
-		{
-			rra(data, false, RUN, error_code);
-			if (*error_code)
-				return (NULL);
-			pb(data, RUN, error_code);
-		}
-		else if (after_place == STACK_B_TAIL)
-		{
-			rra(data, false, RUN, error_code);
-			if (*error_code)
-				return (NULL);
-			pb(data, RUN, error_code);
-			if (*error_code)
-				return (NULL);
-			rb(data, false, RUN, error_code);
-		}
-	}
+		data->now_op = move_from_stack_a_tail(after_place, data, error_code);
 	else if (before_place == STACK_B_HEAD)
-	{
-		if (after_place == STACK_A_HEAD)
-			pa(data, RUN, error_code);
-		else if (after_place == STACK_A_TAIL)
-		{
-			pa(data, RUN, error_code);
-			if (*error_code)
-				return (NULL);
-			ra(data, false, RUN, error_code);
-		}
-		else if (after_place == STACK_B_TAIL)
-			rb(data, false, RUN, error_code);
-	}
+		data->now_op = move_from_stack_b_head(after_place, data, error_code);
 	else if (before_place == STACK_B_TAIL)
-	{
-		if (after_place == STACK_A_HEAD)
-		{
-			rrb(data, false, RUN, error_code);
-			if (*error_code)
-				return (NULL);
-			pa(data, RUN, error_code);
-		}
-		else if (after_place == STACK_A_TAIL)
-		{
-			rrb(data, false, RUN, error_code);
-			if (*error_code)
-				return (NULL);
-			pa(data, RUN, error_code);
-			if (*error_code)
-				return (NULL);
-			ra(data, false, RUN, error_code);
-		}
-		else if (after_place == STACK_B_HEAD)
-			rrb(data, false, RUN, error_code);
-	}
+		data->now_op = move_from_stack_b_tail(after_place, data, error_code);
 	if (*error_code)
 		return (NULL);
 	return (data->now_op);

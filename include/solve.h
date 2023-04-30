@@ -114,6 +114,12 @@ t_block			init_block(void);
 t_deque			*deque_new_node_for_block(int first, int last, t_error *error);
 t_deque			*allocate_deque_for_block(t_data *data, t_error *error_code);
 
+// move_sub.c
+t_nums			*move_from_stack_a_head(const int after_place, t_data *data, t_error *error_code);
+t_nums			*move_from_stack_a_tail(const int after_place, t_data *data, t_error *error_code);
+t_nums			*move_from_stack_b_head(const int after_place, t_data *data, t_error *error_code);
+t_nums			*move_from_stack_b_tail(const int after_place, t_data *data, t_error *error_code);
+
 // move.c
 t_nums			*move_for_divide_nums(t_block *block, const unsigned int nums_range, t_data *data, t_error *error_code);
 
