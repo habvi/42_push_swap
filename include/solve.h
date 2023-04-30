@@ -103,7 +103,7 @@ t_block			*calc_base_block_size(\
 					t_block *block, const unsigned block_range, t_data *data);
 
 // dfs.c
-t_nums			*search_all_patterns(t_block *block, t_data *data, t_error *error_code);
+t_nums			*last_nums_dfs(t_block *block, t_data *data, t_error *error_code);
 
 // divide.c
 t_nums			*divide_nums_to_other_3_stacks(\
@@ -122,6 +122,9 @@ t_nums			*move_from_stack_b_tail(const int after_place, t_data *data, t_error *e
 
 // move.c
 t_nums			*move_for_divide_nums(t_block *block, const unsigned int nums_range, t_data *data, t_error *error_code);
+
+// search.c
+t_nums			*search_all_patterns(t_block *block, t_data *data, t_error *error_code);
 
 // set_range.c
 t_block			*set_nums_range_per_blocks(\

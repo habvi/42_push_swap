@@ -52,6 +52,7 @@ SRCS			+=	$(SOLVE_OVER_DIR)/block_info.c \
 					$(SOLVE_OVER_DIR)/init.c \
 					$(SOLVE_OVER_DIR)/move_sub.c \
 					$(SOLVE_OVER_DIR)/move.c \
+					$(SOLVE_OVER_DIR)/search.c \
 					$(SOLVE_OVER_DIR)/set_range.c \
 					$(SOLVE_OVER_DIR)/solve.c \
 					$(SOLVE_OVER_DIR)/sort_last.c \
@@ -133,6 +134,10 @@ FORCE:
 PHONY += visu
 visu: all
 	./visualizer/build/bin/visualizer
+
+PHONY += t4
+t4: all
+	cd tester && python3 push_swap_tester.py -l 4 -c 20 && cd ..
 
 PHONY += t100
 t100: all
