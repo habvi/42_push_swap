@@ -19,6 +19,16 @@ bool	is_separate_op(t_operation op)
 	return (false);
 }
 
+bool	is_target_pair(\
+		t_operation left, t_operation right, t_operation op1, t_operation op2)
+{
+	if (left == op1 && right == op2)
+		return (true);
+	if (left == op2 && right == op1)
+		return (true);
+	return (false);
+}
+
 t_nums	*optimize_op(t_nums *now_op)
 {
 	if (deque_is_empty(now_op->deque))

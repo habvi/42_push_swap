@@ -3,16 +3,6 @@
 #include "push_swap.h"
 #include "solve.h"
 
-static bool	is_target_pair(\
-		t_operation left, t_operation right, t_operation op1, t_operation op2)
-{
-	if (left == op1 && right == op2)
-		return (true);
-	if (left == op2 && right == op1)
-		return (true);
-	return (false);
-}
-
 static void	search_right_with_fixed_left(\
 			t_deque *node, t_operation left, t_operation op1, t_operation op2)
 {

@@ -3,7 +3,8 @@
 #include "push_swap.h"
 #include "solve.h"
 
-static void	search_right_adjacent_left(t_deque *node, t_operation op2)
+static void	search_right_adjacent_left(\
+			t_deque *node, t_operation left, t_operation op1, t_operation op2)
 {
 	t_deque		*tmp;
 	t_operation	right;
@@ -12,7 +13,7 @@ static void	search_right_adjacent_left(t_deque *node, t_operation op2)
 	if (tmp == NULL)
 		return ;
 	right = tmp->num;
-	if (right == op2)
+	if (is_target_pair(left, right, op1, op2))
 	{
 		node->num = OP_NONE;
 		tmp->num = OP_NONE;
@@ -31,12 +32,12 @@ t_nums	*erase_adjacent_op(t_nums *now_op, t_operation op1, t_operation op2)
 	while (node)
 	{
 		left = node->num;
-		if (left != op1)
+		if (!(left == op1 || left == op2))
 		{
 			node = node->next;
 			continue ;
 		}
-		search_right_adjacent_left(node, op2);
+		search_right_adjacent_left(node, left, op1, op2);
 		node = node->next;
 	}
 	return (now_op);

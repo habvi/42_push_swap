@@ -193,6 +193,8 @@ t_nums			*replace_op(t_nums *now_op, t_operation before1, \
 
 // optimize.c
 bool			is_separate_op(t_operation op);
+bool			is_target_pair(\
+		t_operation left, t_operation right, t_operation op1, t_operation op2);
 t_nums			*optimize_op(t_nums *now_op);
 
 // search.c

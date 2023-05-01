@@ -3,7 +3,7 @@
 #include "push_swap.h"
 #include "solve.h"
 
-static bool	is_target_pair(t_optimize *opt)
+static bool	is_target_pair_for_opt(t_optimize *opt)
 {
 	if (opt->left == opt->before1 && opt->right == opt->before2)
 		return (true);
@@ -24,7 +24,7 @@ static void	search_right_with_fixed_left(t_deque *node, t_optimize *opt)
 		if (is_separate_op(right))
 			return ;
 		opt->right = right;
-		if (is_target_pair(opt))
+		if (is_target_pair_for_opt(opt))
 		{
 			node->num = opt->after;
 			tmp->num = OP_NONE;
