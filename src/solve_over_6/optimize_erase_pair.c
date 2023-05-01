@@ -37,7 +37,7 @@ static void	search_right_with_fixed_left(\
 
 // {sa,sb,ss,pa,pb} x op1or2 x x x op1or2 x x {sa,sb,ss,pa,pb}
 // {sa,sb,ss,pa,pb} x    0   x x x    0   x x {sa,sb,ss,pa,pb}
-t_nums	*erase_unnecessary_op(t_nums *now_op, t_operation op1, t_operation op2)
+t_nums	*erase_pair_op(t_nums *now_op, t_operation op1, t_operation op2)
 {
 	t_deque		*node;
 	t_operation	left;

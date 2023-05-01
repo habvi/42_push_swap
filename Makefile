@@ -60,7 +60,8 @@ SRCS			+=	$(SOLVE_OVER_DIR)/block_info.c \
 					$(SOLVE_OVER_DIR)/init.c \
 					$(SOLVE_OVER_DIR)/move_sub.c \
 					$(SOLVE_OVER_DIR)/move.c \
-					$(SOLVE_OVER_DIR)/optimize_erase.c \
+					$(SOLVE_OVER_DIR)/optimize_erase_adjacent.c \
+					$(SOLVE_OVER_DIR)/optimize_erase_pair.c \
 					$(SOLVE_OVER_DIR)/optimize_replace.c \
 					$(SOLVE_OVER_DIR)/optimize.c \
 					$(SOLVE_OVER_DIR)/search.c \

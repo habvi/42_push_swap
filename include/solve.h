@@ -179,9 +179,14 @@ t_nums			*move_from_stack_b_tail(\
 t_nums			*move_for_divide_nums(t_block *block, \
 			const unsigned int nums_range, t_data *data, t_error *error_code);
 
-// optimize_erase.c
-t_nums			*erase_unnecessary_op(\
+// optimize_erase_adjacent.c
+t_nums			*erase_adjacent_op(\
 							t_nums *now_op, t_operation op1, t_operation op2);
+
+// optimize_erase_pair.c
+t_nums			*erase_pair_op(\
+							t_nums *now_op, t_operation op1, t_operation op2);
+
 // optimize_replace.c
 t_nums			*replace_op(t_nums *now_op, t_operation before1, \
 										t_operation before2, t_operation after);
