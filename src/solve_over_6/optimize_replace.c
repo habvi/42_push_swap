@@ -1,24 +1,7 @@
-#include <stdint.h>
 #include "deque.h"
-#include "error.h"
 #include "operations.h"
 #include "push_swap.h"
 #include "solve.h"
-
-static bool	is_separate_op(t_operation op)
-{
-	static const t_operation	ops[] = {SA, SB, SS, PA, PB, OP_NONE};
-	uint8_t						i;
-
-	i = 0;
-	while (ops[i])
-	{
-		if (op == ops[i])
-			return (true);
-		i++;
-	}
-	return (false);
-}
 
 static bool	is_target_pair(t_optimize *opt)
 {
