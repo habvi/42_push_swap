@@ -1,5 +1,4 @@
 #include "deque.h"
-#include "error.h"
 #include "push_swap.h"
 #include "solve.h"
 
@@ -15,7 +14,8 @@ bool	is_in_range_for_rb(t_deque *block_range, t_data *data)
 
 bool	is_in_range_for_rr(t_deque *block_range, t_data *data)
 {
-	if (!deque_is_empty(data->stack_a->deque) && !deque_is_empty(data->stack_b->deque))
+	if (!deque_is_empty(data->stack_a->deque) \
+		&& !deque_is_empty(data->stack_b->deque))
 	{
 		if (is_in_range_for_ra(block_range, data))
 			return (true);

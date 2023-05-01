@@ -26,8 +26,11 @@ OPRATIONS_DIR	:=	operations
 SRCS			+=	$(OPRATIONS_DIR)/append_op.c \
 					$(OPRATIONS_DIR)/pop_op.c \
 					$(OPRATIONS_DIR)/push.c \
+					$(OPRATIONS_DIR)/reverse_rotate_sub.c \
 					$(OPRATIONS_DIR)/reverse_rotate.c \
+					$(OPRATIONS_DIR)/rotate_sub.c \
 					$(OPRATIONS_DIR)/rotate.c \
+					$(OPRATIONS_DIR)/swap_sub.c \
 					$(OPRATIONS_DIR)/swap.c
 
 SOLVE_DIR		:=	solve
@@ -46,6 +49,7 @@ SRCS			+=	$(SOLVE_LESS_THAN_DIR)/dfs.c \
 
 SOLVE_OVER_DIR	:=	solve_over_6
 SRCS			+=	$(SOLVE_OVER_DIR)/block_info.c \
+					$(SOLVE_OVER_DIR)/block_range_p.c \
 					$(SOLVE_OVER_DIR)/block_range_r.c \
 					$(SOLVE_OVER_DIR)/block_range_rr.c \
 					$(SOLVE_OVER_DIR)/block_range_s.c \

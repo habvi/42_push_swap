@@ -16,7 +16,8 @@ static int	get_move_num(t_stack_place stack_place, t_data *data)
 	return (STACK_NONE);
 }
 
-static t_nums	*move_nums(t_block *block, unsigned int i, t_data *data, t_error *error_code)
+static t_nums	*move_nums(\
+			t_block *block, unsigned int i, t_data *data, t_error *error_code)
 {
 	const int	before_place = block->stack_place;
 	const int	after_place = block->movable_stack_place[i];
@@ -39,7 +40,8 @@ index: 0 1 2 3 4 5 6
        1 2 3 4 5 6 0
        1 2 3 4 0
 */
-t_nums	*move_for_divide_nums(t_block *block, const unsigned int nums_range, t_data *data, t_error *error_code)
+t_nums	*move_for_divide_nums(t_block *block, const unsigned int nums_range, \
+								t_data *data, t_error *error_code)
 {
 	unsigned int	i;
 	unsigned int	j;
@@ -56,7 +58,9 @@ t_nums	*move_for_divide_nums(t_block *block, const unsigned int nums_range, t_da
 		while (total)
 		{
 			j = (total - 1) * 2;
-			if (is_num_in_range(num, block->nums_range_per_blocks[j], block->nums_range_per_blocks[j + 1]))
+			if (is_num_in_range(num, \
+								block->nums_range_per_blocks[j], \
+								block->nums_range_per_blocks[j + 1]))
 			{
 				data->now_op = move_nums(block, k, data, error_code);
 				if (*error_code)

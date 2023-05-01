@@ -78,8 +78,10 @@ t_nums			*init_and_set_pointer(\
 void			print_operations(t_nums *answer, t_error *error_code);
 
 // run.c
-void			run_operation(t_operation op_i, t_data *data, t_run run, t_error *error_code);
-void			undo_operation(t_operation op_i, t_data *data, t_run run, t_error *error_code);
+void			run_operation(\
+				t_operation op_i, t_data *data, t_run run, t_error *error_code);
+void			undo_operation(\
+				t_operation op_i, t_data *data, t_run run, t_error *error_code);
 
 // solve.c
 void			solve(t_data *data, t_error *error_code);
@@ -112,8 +114,14 @@ void			update_min_op(t_data *data, t_error *error_code);
 // block_info.c
 bool			is_num_in_range(int num, const int min, const int max);
 t_stack_place	find_the_block_place(t_deque *block_range, t_data *data);
-t_block			*set_movable_stack_place(t_block *block, t_stack_place stack_place);
-t_block			*set_block_info(t_block *block, t_deque *block_range, t_data *data, t_error *error_code);
+t_block			*set_movable_stack_place(\
+									t_block *block, t_stack_place stack_place);
+t_block			*set_block_info(\
+	t_block *block, t_deque *block_range, t_data *data, t_error *error_code);
+
+// block_range_p.c
+bool			is_in_range_for_pa(t_deque *block_range, t_data *data);
+bool			is_in_range_for_pb(t_deque *block_range, t_data *data);
 
 // block_range_r.c
 bool			is_in_range_for_ra(t_deque *block_range, t_data *data);
@@ -131,17 +139,22 @@ bool			is_in_range_for_sb(t_deque *block_range, t_data *data);
 bool			is_in_range_for_ss(t_deque *block_range, t_data *data);
 
 // block_range.c
-bool			is_stack_head_num_in_range(t_deque *block_range, t_deque *stack);
-bool			is_stack_next_num_in_range(t_deque *block_range, t_deque *stack);
-bool			is_stack_tail_num_in_range(t_deque *block_range, t_deque *stack);
-bool			is_num_out_of_block_range(t_operation op, t_deque *block_range, t_data *data);
+bool			is_stack_head_num_in_range(\
+										t_deque *block_range, t_deque *stack);
+bool			is_stack_next_num_in_range(\
+										t_deque *block_range, t_deque *stack);
+bool			is_stack_tail_num_in_range(\
+										t_deque *block_range, t_deque *stack);
+bool			is_num_out_of_block_range(\
+							t_operation op, t_deque *block_range, t_data *data);
 
 // calc_block.c
 t_block			*calc_base_block_size(\
 					t_block *block, const unsigned block_range, t_data *data);
 
 // dfs.c
-t_nums			*last_nums_dfs(t_block *block, t_data *data, t_error *error_code);
+t_nums			*last_nums_dfs(\
+							t_block *block, t_data *data, t_error *error_code);
 
 // divide.c
 t_nums			*divide_nums_to_other_3_stacks(\
@@ -153,23 +166,29 @@ t_deque			*deque_new_node_for_block(int first, int last, t_error *error);
 t_deque			*allocate_deque_for_block(t_data *data, t_error *error_code);
 
 // move_sub.c
-t_nums			*move_from_stack_a_head(const int after_place, t_data *data, t_error *error_code);
-t_nums			*move_from_stack_a_tail(const int after_place, t_data *data, t_error *error_code);
-t_nums			*move_from_stack_b_head(const int after_place, t_data *data, t_error *error_code);
-t_nums			*move_from_stack_b_tail(const int after_place, t_data *data, t_error *error_code);
+t_nums			*move_from_stack_a_head(\
+					const int after_place, t_data *data, t_error *error_code);
+t_nums			*move_from_stack_a_tail(\
+					const int after_place, t_data *data, t_error *error_code);
+t_nums			*move_from_stack_b_head(\
+					const int after_place, t_data *data, t_error *error_code);
+t_nums			*move_from_stack_b_tail(\
+					const int after_place, t_data *data, t_error *error_code);
 
 // move.c
-t_nums			*move_for_divide_nums(t_block *block, const unsigned int nums_range, t_data *data, t_error *error_code);
+t_nums			*move_for_divide_nums(t_block *block, \
+			const unsigned int nums_range, t_data *data, t_error *error_code);
 
 // optimize_replace.c
-t_nums			*replace_op(\
-	t_nums *now_op, t_operation before1, t_operation before2, t_operation after);
+t_nums			*replace_op(t_nums *now_op, t_operation before1, \
+										t_operation before2, t_operation after);
 
 // optimize.c
 t_nums			*optimize_op(t_nums *now_op);
 
 // search.c
-t_nums			*search_all_patterns(t_block *block, t_data *data, t_error *error_code);
+t_nums			*search_all_patterns(\
+							t_block *block, t_data *data, t_error *error_code);
 
 // set_range.c
 t_block			*set_nums_range_per_blocks(\

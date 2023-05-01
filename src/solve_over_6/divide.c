@@ -15,7 +15,8 @@ t_nums	*divide_nums_to_other_3_stacks(\
 	if (nums_range <= LAST_BLOCK_SIZE)
 		data->now_op = search_all_patterns(block, data, error_code);
 	else
-		data->now_op = move_for_divide_nums(block, nums_range, data, error_code);
+		data->now_op = move_for_divide_nums(\
+										block, nums_range, data, error_code);
 	if (*error_code)
 		return (NULL);
 	return (data->now_op);

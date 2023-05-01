@@ -3,7 +3,8 @@
 #include "push_swap.h"
 
 // pointer to func list?
-void	run_operation(t_operation op_i, t_data *data, t_run run, t_error *error_code)
+void	run_operation(\
+				t_operation op_i, t_data *data, t_run run, t_error *error_code)
 {
 	if (op_i == SA)
 		run_sa(data, run, error_code);
@@ -29,7 +30,8 @@ void	run_operation(t_operation op_i, t_data *data, t_run run, t_error *error_cod
 		run_rrr(data, run, error_code);
 }
 
-void	undo_operation(t_operation op_i, t_data *data, t_run run, t_error *error_code)
+void	undo_operation(\
+				t_operation op_i, t_data *data, t_run run, t_error *error_code)
 {
 	if (op_i == SA)
 		run_sa(data, run, error_code);

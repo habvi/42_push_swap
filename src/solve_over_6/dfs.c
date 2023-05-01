@@ -40,7 +40,8 @@ static bool	is_dfs_end(t_block *block, t_data *data, t_error *error_code)
 	return (false);
 }
 
-static bool	is_valid_tmp_operations(t_operation op, t_deque *block_range, t_data *data)
+static bool	is_valid_tmp_operations(\
+						t_operation op, t_deque *block_range, t_data *data)
 {
 	if (!is_executable_operation(op, data))
 		return (false);

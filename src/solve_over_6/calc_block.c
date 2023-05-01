@@ -4,7 +4,7 @@
 #include "solve.h"
 
 static t_block	*calc_block_size(\
-		t_block *block, const unsigned block_range, unsigned int block_count)
+	t_block *block, const unsigned int block_range, unsigned int block_count)
 {
 	block->total_block_count = block_count;
 	block->base_block_size = block_range / block_count;

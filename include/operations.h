@@ -46,24 +46,30 @@ void	run_pa(t_data *data, t_run run, t_error *error_code);
 void	pb(t_data *data);
 void	run_pb(t_data *data, t_run run, t_error *error_code);
 
-// reverse_rotate.c
+// reverse_rotate_sub.c
 void	rra(t_data *data);
-void	run_rra(t_data *data, t_run run, t_error *error_code);
 void	rrb(t_data *data);
+
+// reverse_rotate.c
+void	run_rra(t_data *data, t_run run, t_error *error_code);
 void	run_rrb(t_data *data, t_run run, t_error *error_code);
 void	run_rrr(t_data *data, t_run run, t_error *error_code);
 
-// rotate.c
+// rotate_sub.c
 void	ra(t_data *data);
-void	run_ra(t_data *data, t_run run, t_error *error_code);
 void	rb(t_data *data);
+
+// rotate.c
+void	run_ra(t_data *data, t_run run, t_error *error_code);
 void	run_rb(t_data *data, t_run run, t_error *error_code);
 void	run_rr(t_data *data, t_run run, t_error *error_code);
 
-// swap.c
+// swap_sub.c
 void	sa(t_data *data);
-void	run_sa(t_data *data, t_run run, t_error *error_code);
 void	sb(t_data *data);
+
+// swap.c
+void	run_sa(t_data *data, t_run run, t_error *error_code);
 void	run_sb(t_data *data, t_run run, t_error *error_code);
 void	run_ss(t_data *data, t_run run, t_error *error_code);
 

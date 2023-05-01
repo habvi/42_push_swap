@@ -1,5 +1,4 @@
 #include "deque.h"
-#include "error.h"
 #include "push_swap.h"
 #include "solve.h"
 
@@ -8,7 +7,7 @@ bool	is_in_range_for_sa(t_deque *block_range, t_data *data)
 	if (!is_stack_head_num_in_range(block_range, data->stack_a->deque))
 		return (true);
 	if (!is_stack_next_num_in_range(block_range, data->stack_a->deque))
-		return  (true);
+		return (true);
 	return (false);
 }
 
@@ -17,7 +16,7 @@ bool	is_in_range_for_sb(t_deque *block_range, t_data *data)
 	if (!is_stack_head_num_in_range(block_range, data->stack_b->deque))
 		return (true);
 	if (!is_stack_next_num_in_range(block_range, data->stack_b->deque))
-		return  (true);
+		return (true);
 	return (false);
 }
 

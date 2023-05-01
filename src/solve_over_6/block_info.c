@@ -54,7 +54,8 @@ t_block	*set_movable_stack_place(t_block *block, t_stack_place stack_place)
 	return (block);
 }
 
-t_block	*set_block_info(t_block *block, t_deque *block_range, t_data *data, t_error *error_code)
+t_block	*set_block_info(\
+		t_block *block, t_deque *block_range, t_data *data, t_error *error_code)
 {
 	block->stack_place = find_the_block_place(block_range, data);
 	block = set_movable_stack_place(block, block->stack_place);
