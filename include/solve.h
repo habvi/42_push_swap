@@ -1,6 +1,8 @@
 #ifndef SOLVE_H
 # define SOLVE_H
 
+# include "operations.h"
+
 # define RECURSION_LIMIT				5
 # define OPERATION_LIMIT_LESS_THAN_6	8
 
@@ -13,9 +15,8 @@
 # define SEPARATE_2_BLOCKS		2
 # define SEPARATE_3_BLOCKS		3
 
-typedef struct s_nums		t_nums;
-typedef enum e_operation	t_operation;
-typedef enum e_run			t_run;
+typedef struct s_nums	t_nums;
+typedef enum e_run		t_run;
 
 typedef struct s_data {
 	t_nums	*stack_a;
@@ -51,6 +52,14 @@ typedef struct s_block {
 	unsigned int	total_block_count;
 	int				each_block_range;
 }	t_block;
+
+typedef struct s_optimize {
+	t_operation	before1;
+	t_operation	before2;
+	t_operation	after;
+	t_operation	left;
+	t_operation	right;
+}	t_optimize;
 
 // --------------------------------------------
 //  solve
@@ -151,6 +160,10 @@ t_nums			*move_from_stack_b_tail(const int after_place, t_data *data, t_error *e
 
 // move.c
 t_nums			*move_for_divide_nums(t_block *block, const unsigned int nums_range, t_data *data, t_error *error_code);
+
+// optimize_replace.c
+t_nums			*replace_op(\
+	t_nums *now_op, t_operation before1, t_operation before2, t_operation after);
 
 // optimize.c
 t_nums			*optimize_op(t_nums *now_op);
