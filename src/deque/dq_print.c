@@ -3,6 +3,20 @@
 #include "push_swap.h"
 #include "solve.h"
 
+static void	print_not_for_block(t_deque *deque, char *deque_name)
+{
+	t_deque	*node;
+
+	node = deque->next;
+	ft_dprintf(STDERR_FILENO, "[%s:", deque_name);
+	while (node)
+	{
+		ft_dprintf(STDERR_FILENO, " %d", node->num);
+		node = node->next;
+	}
+	ft_dprintf(STDERR_FILENO, "]\n");
+}
+
 void	deque_print(t_deque *deque, char *deque_name)
 {
 	t_deque	*node;
@@ -14,17 +28,9 @@ void	deque_print(t_deque *deque, char *deque_name)
 	}
 	if (deque->num != FOR_BLOCK)
 	{
-		node = deque->next;
-		ft_dprintf(STDERR_FILENO, "[%s:", deque_name);
-		while (node)
-		{
-			ft_dprintf(STDERR_FILENO, " %d", node->num);
-			node = node->next;
-		}
-		ft_dprintf(STDERR_FILENO, "]\n");
-	}
-	if (deque->num != FOR_BLOCK)
+		print_not_for_block(deque, deque_name);
 		return ;
+	}
 	node = deque->next;
 	ft_dprintf(STDERR_FILENO, "[%s:", deque_name);
 	while (node)
