@@ -56,6 +56,7 @@ SRCS			+=	$(SOLVE_OVER_DIR)/block_info.c \
 					$(SOLVE_OVER_DIR)/init.c \
 					$(SOLVE_OVER_DIR)/move_sub.c \
 					$(SOLVE_OVER_DIR)/move.c \
+					$(SOLVE_OVER_DIR)/optimize.c \
 					$(SOLVE_OVER_DIR)/search.c \
 					$(SOLVE_OVER_DIR)/set_range.c \
 					$(SOLVE_OVER_DIR)/solve.c \

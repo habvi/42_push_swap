@@ -1,6 +1,7 @@
 #include "ft_dprintf.h"
 #include "deque.h"
 #include "error.h"
+#include "operations.h"
 #include "push_swap.h"
 
 void	print_operations(t_nums *answer, t_error *error_code)
@@ -24,7 +25,8 @@ void	print_operations(t_nums *answer, t_error *error_code)
 	node = answer->deque->next;
 	while (node)
 	{
-		ft_dprintf(STDOUT_FILENO, "%s\n", op_strs[node->num]);
+		if (node->num != OP_NONE)
+			ft_dprintf(STDOUT_FILENO, "%s\n", op_strs[node->num]);
 		node = node->next;
 	}
 	ft_dprintf(STDERR_FILENO, "\ntotal: %zu\n", answer->size);

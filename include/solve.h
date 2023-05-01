@@ -152,6 +152,9 @@ t_nums			*move_from_stack_b_tail(const int after_place, t_data *data, t_error *e
 // move.c
 t_nums			*move_for_divide_nums(t_block *block, const unsigned int nums_range, t_data *data, t_error *error_code);
 
+// optimize.c
+t_nums			*optimize_op(t_nums *now_op);
+
 // search.c
 t_nums			*search_all_patterns(t_block *block, t_data *data, t_error *error_code);
 

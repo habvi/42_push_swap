@@ -34,6 +34,6 @@ void	solve_over_6(t_data *data, t_error *error_code)
 	data->now_op = generate_base_move(data, error_code);
 	if (*error_code)
 		return ;
-	// optimize_base_move(now_op, data, error_code);
+	data->now_op = optimize_op(data->now_op);
 	print_operations(data->now_op, error_code);
 }
