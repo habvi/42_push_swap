@@ -1,11 +1,12 @@
 #ifndef SOLVE_H
 # define SOLVE_H
 
-# define RECURSION_LIMIT		6
+# define RECURSION_LIMIT				5
+# define OPERATION_LIMIT_LESS_THAN_6	8
+
 # define TOTAL_STACK_ENTRY		4
 # define OTHER_STACK_NUMS_RANGE	7
 
-// 3 or 4
 # define LAST_BLOCK_SIZE		4
 # define SWITCH_SOLUTION_NUMS	250
 # define NUMS_SEPARATE_2		8
@@ -75,7 +76,7 @@ void			undo_operation(t_operation op_i, t_data *data, t_run run, t_error *error_
 void			solve(t_data *data, t_error *error_code);
 
 // --------------------------------------------
-//  solve_le_6
+//  solve_less_than_6
 // --------------------------------------------
 // dfs.c
 bool			is_operation_exceeded_answer_size(t_data *data);

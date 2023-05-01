@@ -21,7 +21,7 @@ bool	is_stack_a_sorted(t_nums *stack_a, t_nums *stack_b, int *sorted_array)
 
 bool	is_limit_operation_size(size_t size)
 {
-	if (size == OPERATION_LIMIT_LE_6)
+	if (size == OPERATION_LIMIT_LESS_THAN_6)
 		return (true);
 	return (false);
 }

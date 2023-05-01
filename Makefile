@@ -38,11 +38,11 @@ SRCS			+=	$(SOLVE_DIR)/compress.c \
 					$(SOLVE_DIR)/run.c \
 					$(SOLVE_DIR)/solve.c
 
-SOLVE_LE_DIR	:=	solve_le_6
-SRCS			+=	$(SOLVE_LE_DIR)/dfs.c \
-					$(SOLVE_LE_DIR)/operations.c \
-					$(SOLVE_LE_DIR)/solve.c \
-					$(SOLVE_LE_DIR)/update.c
+SOLVE_LESS_THAN_DIR	:=	solve_less_than_6
+SRCS			+=	$(SOLVE_LESS_THAN_DIR)/dfs.c \
+					$(SOLVE_LESS_THAN_DIR)/operations.c \
+					$(SOLVE_LESS_THAN_DIR)/solve.c \
+					$(SOLVE_LESS_THAN_DIR)/update.c
 
 SOLVE_OVER_DIR	:=	solve_over_6
 SRCS			+=	$(SOLVE_OVER_DIR)/block_info.c \
