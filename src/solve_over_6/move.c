@@ -35,41 +35,45 @@ static t_nums	*move_nums(\
 	return (data->now_op);
 }
 
-/* to do
-index: 0 1 2 3 4 5 6
-       1 2 3 4 5 6 0
-       1 2 3 4 0
-*/
+static void	move(t_block *block, t_data *data, t_error *error_code)
+{
+	unsigned int	i;
+	unsigned int	j;
+	int				total;
+	int				num;
+
+	num = get_move_num(block->stack_place, data);
+	total = block->total_block_count;
+	i = 0;
+	while (total)
+	{
+		j = (total - 1) * 2;
+		if (is_num_in_range(num, \
+							block->nums_range_per_blocks[j], \
+							block->nums_range_per_blocks[j + 1]))
+		{
+			data->now_op = move_nums(block, i, data, error_code);
+			return ;
+		}
+		total--;
+		i++;
+	}
+}
+
+// index: 0 1 2 3 4 5 6
+//        1 2 3 4 5 6 0
+//        1 2 3 4 0
 t_nums	*move_for_divide_nums(t_block *block, const unsigned int nums_range, \
 								t_data *data, t_error *error_code)
 {
 	unsigned int	i;
-	unsigned int	j;
-	unsigned int	k;
-	int				total;
-	int				num;
 
 	i = 0;
 	while (i < nums_range)
 	{
-		num = get_move_num(block->stack_place, data);
-		total = block->total_block_count;
-		k = 0;
-		while (total)
-		{
-			j = (total - 1) * 2;
-			if (is_num_in_range(num, \
-								block->nums_range_per_blocks[j], \
-								block->nums_range_per_blocks[j + 1]))
-			{
-				data->now_op = move_nums(block, k, data, error_code);
-				if (*error_code)
-					return (NULL);
-				break ;
-			}
-			total--;
-			k++;
-		}
+		move(block, data, error_code);
+		if (*error_code)
+			return (NULL);
 		i++;
 	}
 	return (data->now_op);

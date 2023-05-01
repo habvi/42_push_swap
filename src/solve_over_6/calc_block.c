@@ -16,7 +16,6 @@ t_block	*calc_base_block_size(\
 {
 	const size_t	total_nums = data->stack_a->size;
 
-	(void)data;
 	if (total_nums < SWITCH_SOLUTION_NUMS)
 	{
 		if (block_range <= NUMS_SEPARATE_2)

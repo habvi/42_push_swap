@@ -26,6 +26,8 @@ static bool	is_block_sorted(t_block *block, t_data *data)
 
 static bool	is_dfs_end(t_block *block, t_data *data, t_error *error_code)
 {
+	int	each_block_range;
+
 	if (data->tmp_op->size >= data->min_op->size)
 		return (true);
 	if (is_block_sorted(block, data))
@@ -33,9 +35,10 @@ static bool	is_dfs_end(t_block *block, t_data *data, t_error *error_code)
 		update_min_op(data, error_code);
 		return (true);
 	}
-	if (block->each_block_range <= 3 && data->tmp_op->size == 8)
+	each_block_range = block->each_block_range;
+	if (each_block_range <= BLOCK_3 && data->tmp_op->size == BLOCK_3_LIMIT)
 		return (true);
-	if (block->each_block_range == 4 && data->tmp_op->size == 10)
+	if (each_block_range == BLOCK_4 && data->tmp_op->size == BLOCK_4_LIMIT)
 		return (true);
 	return (false);
 }

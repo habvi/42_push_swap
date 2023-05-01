@@ -15,6 +15,11 @@
 # define SEPARATE_2_BLOCKS		2
 # define SEPARATE_3_BLOCKS		3
 
+# define BLOCK_3				3
+# define BLOCK_3_LIMIT			8
+# define BLOCK_4				4
+# define BLOCK_4_LIMIT			10
+
 typedef struct s_nums	t_nums;
 typedef enum e_run		t_run;
 
