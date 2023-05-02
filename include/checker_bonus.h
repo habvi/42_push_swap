@@ -32,6 +32,7 @@ t_operation	get_op_i(const char *op);
 void		put_result(t_result result);
 
 // sort.c
-t_result	sort_and_judge(t_nums *stack_a, t_nums *ops, int *sorted_a, t_error *error_code);
+t_result	sort_and_judge(\
+			t_nums *stack_a, t_nums *ops, int *sorted_a, t_error *error_code);
 
 #endif

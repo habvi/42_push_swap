@@ -36,7 +36,8 @@ bool	is_stack_a_sorted_bonus(t_nums *stack_a, const size_t size_a)
 	return (true);
 }
 
-t_result	sort_and_judge(t_nums *stack_a, t_nums *ops, int *sorted_a, t_error *error_code)
+t_result	sort_and_judge(\
+			t_nums *stack_a, t_nums *ops, int *sorted_a, t_error *error_code)
 {
 	const size_t	size_a = stack_a->size;
 	t_nums			*stack_b;
