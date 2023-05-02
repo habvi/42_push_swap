@@ -1,3 +1,4 @@
+#include <stdlib.h> // free
 #include "checker_bonus.h"
 #include "deque.h"
 #include "error.h"
@@ -35,16 +36,17 @@ bool	is_stack_a_sorted_bonus(t_nums *stack_a, const size_t size_a)
 	return (true);
 }
 
-t_result	sort_and_judge(t_nums *stack_a, t_nums *ops, t_error *error_code)
+t_result	sort_and_judge(t_nums *stack_a, t_nums *ops, int *sorted_a, t_error *error_code)
 {
 	const size_t	size_a = stack_a->size;
 	t_nums			*stack_b;
 	t_deque			*node;
 	t_operation		op;
 
+	stack_a = compress_number(stack_a, sorted_a);
 	stack_b = init_nums(0, error_code);
 	if (*error_code)
-		return (RESULT_ERROR);
+		return (RESULT_NONE);
 	node = ops->deque->next;
 	while (node)
 	{
@@ -52,6 +54,7 @@ t_result	sort_and_judge(t_nums *stack_a, t_nums *ops, t_error *error_code)
 		move_op(stack_a, stack_b, op, error_code);
 		node = node->next;
 	}
+	// to do: erase
 	deque_print(stack_a->deque, "after stack_a");
 	free_nums(stack_b);
 	if (is_stack_a_sorted_bonus(stack_a, size_a))

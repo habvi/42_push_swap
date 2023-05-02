@@ -13,13 +13,13 @@ typedef enum e_error		t_error;
 typedef enum e_operation	t_operation;
 
 typedef enum e_result {
-	RESULT_ERROR = 0,
+	RESULT_NONE = 0,
 	OK = 1,
 	KO = 2
 }	t_result;
 
 // check.c
-void		check_op(t_nums *stack_a, t_error *error_code);
+void		check_op(t_nums *stack_a, int *sorted_a, t_error *error_code);
 
 // ft_strncmp.c
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -32,6 +32,6 @@ t_operation	get_op_i(const char *op);
 void		put_result(t_result result);
 
 // sort.c
-t_result	sort_and_judge(t_nums *stack_a, t_nums *ops, t_error *error_code);
+t_result	sort_and_judge(t_nums *stack_a, t_nums *ops, int *sorted_a, t_error *error_code);
 
 #endif

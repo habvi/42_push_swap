@@ -9,44 +9,47 @@
 #include "operations.h"
 #include "push_swap.h"
 
-void	check_op(t_nums *stack_a, t_error *error_code)
+t_result	read_input(t_nums *op, t_error *error_code)
 {
-	t_nums		*op;
 	char		*line;
-	t_result	result;
 	t_deque		*new_node;
 	t_operation	op_i;
 
-	deque_print(stack_a->deque, "stackA");
-	op = init_nums(0, error_code);
-	if (*error_code)
-		return ;
-	result = OK;
 	while (true)
 	{
 		line = get_next_line(STDIN_FILENO);
-		printf("%s", line);
 		if (line == NULL)
-			break ;
+			return (OK);
 		if (!is_valid_op(line))
 		{
-			result = KO;
 			free(line);
-			break ;
+			return (KO);
 		}
 		op_i = get_op_i(line);
 		new_node = deque_new_node(op_i, NULL, error_code);
 		if (*error_code)
 		{
-			result = KO;
 			free(line);
-			break ;
+			return (RESULT_NONE);
 		}
 		deque_add_back(op->deque, new_node);
 		free(line);
 	}
+	return (OK);
+}
+
+void	check_op(t_nums *stack_a, int *sorted_a, t_error *error_code)
+{
+	t_nums		*op;
+	t_result	result;
+
+	op = init_nums(0, error_code);
+	if (*error_code)
+		return ;
+	result = read_input(op, error_code);
 	if (result == OK)
-		result = sort_and_judge(stack_a, op, error_code);
+		result = sort_and_judge(stack_a, op, sorted_a, error_code);
 	free_nums(op);
+	free(sorted_a);
 	put_result(result);
 }
