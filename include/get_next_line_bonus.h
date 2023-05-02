@@ -4,7 +4,7 @@
 # include <stddef.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE	5
+#  define BUFFER_SIZE	10
 # endif
 
 # define LF         '\n'
