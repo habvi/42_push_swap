@@ -3,9 +3,6 @@
 
 # include <stdbool.h>
 
-// to do: erase
-# include <stdio.h>
-
 # define MAX_OP_LEN	4
 
 typedef struct s_nums		t_nums;

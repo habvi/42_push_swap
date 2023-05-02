@@ -55,8 +55,6 @@ t_result	sort_and_judge(\
 		move_op(stack_a, stack_b, op, error_code);
 		node = node->next;
 	}
-	// to do: erase
-	deque_print(stack_a->deque, "after stack_a");
 	free_nums(stack_b);
 	if (is_stack_a_sorted_bonus(stack_a, size_a))
 		return (OK);
