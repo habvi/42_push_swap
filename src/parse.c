@@ -21,6 +21,11 @@ static void	add_strs_to_deque(char **strs, t_deque *deque, t_error *error_code)
 	t_deque	*new_node;
 	int		num;
 
+	if (strs[0] == NULL)
+	{
+		*error_code = ERROR_ARGS;
+		return ;
+	}
 	i = 0;
 	while (strs[i])
 	{
