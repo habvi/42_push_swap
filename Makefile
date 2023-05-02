@@ -155,6 +155,7 @@ BONUS_SRCS		:=	$(BONUS_DIR)/check_bonus.c \
 					$(BONUS_DIR)/get_next_line_bonus.c \
 					$(BONUS_DIR)/get_next_line_utils_bonus.c \
 					$(BONUS_DIR)/main_bonus.c \
+					$(BONUS_DIR)/operation_bonus.c \
 					$(BONUS_DIR)/put_bonus.c \
 					$(BONUS_DIR)/sort_bonus.c
 
