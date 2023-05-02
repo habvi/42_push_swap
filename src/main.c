@@ -17,7 +17,7 @@ int	main(int argc, char *argv[])
 
 	error_code = 0;
 	if (!is_valid_argc(argc))
-		return (put_error());
+		return (EXIT_SUCCESS);
 	stack_a = parse_nums_from_argv(&argv[1], &error_code);
 	if (error_code)
 		return (error_exit(stack_a));
