@@ -83,7 +83,7 @@ void	check_op(t_nums *stack_a, t_error *error_code)
 		free(line);
 	}
 	if (result == OK)
-		result = sort_and_judge(stack_a, op);
+		result = sort_and_judge(stack_a, op, error_code);
 	free_nums(op);
 	put_result(result);
 }

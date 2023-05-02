@@ -10,6 +10,7 @@ typedef struct s_nums	t_nums;
 typedef enum e_error	t_error;
 
 typedef enum e_result {
+	RESULT_ERROR = 0,
 	OK = 1,
 	KO = 2
 }	t_result;
@@ -24,6 +25,6 @@ int			ft_strncmp(const char *s1, const char *s2, size_t n);
 void		put_result(t_result result);
 
 // sort.c
-t_result	sort_and_judge(t_nums *stack_a, t_nums *op);
+t_result	sort_and_judge(t_nums *stack_a, t_nums *ops, t_error *error_code);
 
 #endif

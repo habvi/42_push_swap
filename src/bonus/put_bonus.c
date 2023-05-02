@@ -8,4 +8,6 @@ void	put_result(t_result result)
 		ft_dprintf(STDOUT_FILENO, "OK\n");
 	else if (result == KO)
 		ft_dprintf(STDOUT_FILENO, "KO\n");
+	else
+		ft_dprintf(STDERR_FILENO, "Error\n");
 }
