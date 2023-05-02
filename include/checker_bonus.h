@@ -6,6 +6,7 @@
 
 # define MAX_OP_LEN	4
 
+typedef struct s_deque		t_deque;
 typedef struct s_nums		t_nums;
 typedef enum e_error		t_error;
 typedef enum e_operation	t_operation;
@@ -16,7 +17,11 @@ typedef enum e_result {
 	KO = 2
 }	t_result;
 
-// check.c
+// check_nums.c
+bool		is_valid_stack_nums_bonus(\
+	t_nums *stack, int **array, t_deque *allocated_ptrs, t_error *error_code);
+
+// check_op.c
 void		check_op(t_nums *stack_a, int *sorted_a, t_error *error_code);
 
 // ft_strncmp.c

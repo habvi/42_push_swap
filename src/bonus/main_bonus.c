@@ -14,7 +14,7 @@ static bool	is_valid_argc(const int argc)
 
 static bool	is_valid_argv(t_nums *stack_a, int **array, t_error *error_code)
 {
-	if (!is_valid_stack_nums(stack_a, array, NULL, error_code))
+	if (!is_valid_stack_nums_bonus(stack_a, array, NULL, error_code))
 	{
 		free(*array);
 		return (false);
