@@ -134,15 +134,54 @@ clean:
 
 PHONY += fclean
 fclean: clean
-	$(RM) $(NAME) $(LIBFT)
+	$(RM) $(NAME) $(LIBFT) $(CHECKER)
 
 PHONY += re
 re: fclean all
 
-#--------------------------------------------
 PHONY += FORCE
 FORCE:
 
+#--------------------------------------------
+# bonus
+#--------------------------------------------
+# to do: rename -> checker
+CHECKER			:=	my_checker
+
+MANDATORY_SRCS	:=	$(filter-out main.c, $(SRCS))
+BONUS_DIR		:=	bonus
+BONUS_SRCS		:=	$(BONUS_DIR)/check_bonus.c \
+					$(BONUS_DIR)/ft_strncmp_bonus.c \
+					$(BONUS_DIR)/get_next_line_bonus.c \
+					$(BONUS_DIR)/get_next_line_utils_bonus.c \
+					$(BONUS_DIR)/main_bonus.c \
+					$(BONUS_DIR)/put_bonus.c \
+					$(BONUS_DIR)/sort_bonus.c
+
+MANDATORY_OBJS	:=	$(filter-out obj/main.o, $(OBJS))
+BONUS_OBJS		:=	$(BONUS_SRCS:%.c=$(OBJ_DIR)/%.o)
+
+BONUS_DEPS		:=	$(MANDATORY_OBJS:.o=.d) $(BONUS_OBJS:.o=.d)
+
+$(CHECKER): $(MANDATORY_OBJS) $(BONUS_OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) -o $@ $(MANDATORY_OBJS) $(BONUS_OBJS) $(LIBFT)
+
+PHONY += bonus
+bonus: $(CHECKER)
+
+# to do: doesn't work..
+-include $(BONUS_DEPS)
+
+PHONY += bonus_info
+bonus_info:
+	$(info >>> m-srcs : $(MANDATORY_SRCS))
+	$(info >>> b-srcs : $(BONUS_SRCS))
+	$(info >>> m-objs : $(MANDATORY_OBJS))
+	$(info >>> b-objs : $(BONUS_OBJS))
+
+#--------------------------------------------
+# utils
+#--------------------------------------------
 PHONY += visu
 visu: all
 	./visualizer/build/bin/visualizer
