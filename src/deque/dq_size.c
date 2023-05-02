@@ -1,5 +1,4 @@
 #include "deque.h"
-#include <stdio.h>
 
 size_t	deque_size(t_deque *deque)
 {

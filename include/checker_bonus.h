@@ -2,6 +2,7 @@
 # define CHECKER_BONUS_H
 
 # include <stdbool.h>
+# include <stddef.h>
 
 # define MAX_OP_LEN	4
 
