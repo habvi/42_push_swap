@@ -28,23 +28,6 @@ static bool	is_duplicate_numbers(\
 	return (false);
 }
 
-bool	is_stack_sorted(t_nums *stack, int *array)
-{
-	t_deque	*node;
-	size_t	i;
-
-	node = stack->deque->next;
-	i = 0;
-	while (i < stack->size)
-	{
-		if (node->num != array[i])
-			return (false);
-		node = node->next;
-		i++;
-	}
-	return (true);
-}
-
 bool	is_valid_stack_nums(\
 	t_nums *stack, int **array, t_deque *allocated_ptrs, t_error *error_code)
 {
@@ -55,8 +38,6 @@ bool	is_valid_stack_nums(\
 		return (false);
 	sort_array(*array, stack->size);
 	if (is_duplicate_numbers(*array, stack->size, error_code))
-		return (false);
-	if (is_stack_sorted(stack, *array))
 		return (false);
 	return (true);
 }

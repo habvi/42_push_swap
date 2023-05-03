@@ -17,10 +17,6 @@ typedef enum e_result {
 	KO = 2
 }	t_result;
 
-// check_nums.c
-bool		is_valid_stack_nums_bonus(\
-	t_nums *stack, int **array, t_deque *allocated_ptrs, t_error *error_code);
-
 // check_op.c
 void		check_op(t_nums *stack_a, int *sorted_a, t_error *error_code);
 

@@ -10,6 +10,23 @@ bool	is_operation_exceeded_answer_size(t_data *data)
 	return (false);
 }
 
+static bool	is_stack_sorted(t_nums *stack, int *array)
+{
+	t_deque	*node;
+	size_t	i;
+
+	node = stack->deque->next;
+	i = 0;
+	while (i < stack->size)
+	{
+		if (node->num != array[i])
+			return (false);
+		node = node->next;
+		i++;
+	}
+	return (true);
+}
+
 bool	is_stack_a_sorted(t_nums *stack_a, t_nums *stack_b, int *sorted_array)
 {
 	if (!deque_is_empty(stack_b->deque))

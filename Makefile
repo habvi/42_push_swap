@@ -150,8 +150,7 @@ CHECKER			:=	my_checker
 
 MANDATORY_SRCS	:=	$(filter-out main.c, $(SRCS))
 BONUS_DIR		:=	bonus
-BONUS_SRCS		:=	$(BONUS_DIR)/check_nums_bonus.c \
-					$(BONUS_DIR)/check_op_bonus.c \
+BONUS_SRCS		:=	$(BONUS_DIR)/check_op_bonus.c \
 					$(BONUS_DIR)/ft_strncmp_bonus.c \
 					$(BONUS_DIR)/get_next_line_bonus.c \
 					$(BONUS_DIR)/get_next_line_utils_bonus.c \
@@ -171,7 +170,6 @@ $(CHECKER): $(MANDATORY_OBJS) $(BONUS_OBJS) $(LIBFT)
 PHONY += bonus
 bonus: $(CHECKER)
 
-# to do: doesn't work..
 -include $(BONUS_DEPS)
 
 PHONY += bonus_info
