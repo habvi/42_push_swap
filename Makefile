@@ -150,8 +150,9 @@ MANDATORY_SRCS	:=	$(filter-out main.c, $(SRCS))
 BONUS_DIR		:=	bonus
 BONUS_SRCS		:=	$(BONUS_DIR)/check_op_bonus.c \
 					$(BONUS_DIR)/ft_strncmp_bonus.c \
-					$(BONUS_DIR)/get_next_line_bonus.c \
-					$(BONUS_DIR)/get_next_line_utils_bonus.c \
+					$(BONUS_DIR)/gnl_bonus.c \
+					$(BONUS_DIR)/gnl_check_bonus.c \
+					$(BONUS_DIR)/gnl_utils_bonus.c \
 					$(BONUS_DIR)/main_bonus.c \
 					$(BONUS_DIR)/operation_bonus.c \
 					$(BONUS_DIR)/put_bonus.c \

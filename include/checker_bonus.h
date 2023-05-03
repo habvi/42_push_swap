@@ -18,7 +18,7 @@ typedef enum e_operation	t_operation;
 typedef enum e_result {
 	RESULT_NONE = 0,
 	OK = 1,
-	KO = 2, 
+	KO = 2,
 	ERROR = 3
 }	t_result;
 

@@ -9,15 +9,31 @@
 #include "operations.h"
 #include "push_swap.h"
 
+static t_nums	*add_back_new_op(t_nums *op, char *line, t_error *error_code)
+{
+	t_operation	op_i;
+	t_deque		*new_node;
+
+	op_i = get_op_index(line);
+	new_node = deque_new_node(op_i, NULL, error_code);
+	if (*error_code)
+	{
+		free(line);
+		return (NULL);
+	}
+	deque_add_back(op->deque, new_node);
+	return (op);
+}
+
 t_result	read_input(t_nums *op, t_error *error_code)
 {
-	char		*line;
-	t_deque		*new_node;
-	t_operation	op_i;
+	char	*line;
 
 	while (true)
 	{
-		line = get_next_line(STDIN_FILENO);
+		line = get_next_line(STDIN_FILENO, error_code);
+		if (*error_code)
+			return (ERROR);
 		if (line == NULL)
 			return (OK);
 		if (!is_valid_op(line))
@@ -25,14 +41,12 @@ t_result	read_input(t_nums *op, t_error *error_code)
 			free(line);
 			return (ERROR);
 		}
-		op_i = get_op_index(line);
-		new_node = deque_new_node(op_i, NULL, error_code);
+		op = add_back_new_op(op, line, error_code);
 		if (*error_code)
 		{
 			free(line);
-			return (RESULT_NONE);
+			return (ERROR);
 		}
-		deque_add_back(op->deque, new_node);
 		free(line);
 	}
 	return (OK);
@@ -49,6 +63,8 @@ void	check_op(t_nums *stack_a, int *sorted_a, t_error *error_code)
 	result = read_input(op, error_code);
 	if (result == OK)
 		result = sort_and_judge(stack_a, op, sorted_a, error_code);
+	if (result == ERROR)
+		*error_code = ERROR;
 	free_nums(op);
 	free(sorted_a);
 	put_result(result);

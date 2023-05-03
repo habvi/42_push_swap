@@ -1,21 +1,7 @@
 #include <stdlib.h>
 #include <unistd.h>
-#include <stdbool.h>
-#include <limits.h>
 #include "get_next_line_bonus.h"
-
-static bool	is_new_line(char *str)
-{
-	if (str == NULL)
-		return (false);
-	while (*str)
-	{
-		if (*str == LF)
-			return (true);
-		str++;
-	}
-	return (false);
-}
+#include "error.h"
 
 static void	*ft_free(char **saved, char *ps)
 {
@@ -46,7 +32,14 @@ static char	*read_buf(char **saved, int fd, bool *finish_read)
 	return (buf);
 }
 
-static char	*output(char **saved)
+static void	*set_error_and_free(char **saved, char *ps, t_error *error_code)
+{
+	*error_code = ERROR_GNL;
+	ft_free(saved, ps);
+	return (NULL);
+}
+
+static char	*output(char **saved, t_error *error_code)
 {
 	char	*ps;
 	char	*left;
@@ -59,7 +52,7 @@ static char	*output(char **saved)
 		ps++;
 	left = ft_substr_for_gnl(*saved, 0, ps - *saved + 1);
 	if (left == NULL)
-		return (ft_free(saved, NULL));
+		return (set_error_and_free(saved, NULL, error_code));
 	if (*left == '\0')
 		return (ft_free(saved, left));
 	tail = ps;
@@ -73,14 +66,14 @@ static char	*output(char **saved)
 	return (left);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, t_error *error_code)
 {
 	static char	*saved = NULL;
 	bool		finish_read;
 	char		*buf;
 	char		*tmp;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX)
+	if (!is_valid_args(fd, error_code))
 		return (NULL);
 	finish_read = false;
 	while (!finish_read)
@@ -89,12 +82,12 @@ char	*get_next_line(int fd)
 			break ;
 		buf = read_buf(&saved, fd, &finish_read);
 		if (buf == NULL)
-			return (ft_free(&saved, NULL));
+			return (set_error_and_free(&saved, NULL, error_code));
 		tmp = ft_strjoin(saved, buf);
-		ft_free(&saved, buf);
 		if (tmp == NULL)
-			return (NULL);
+			return (set_error_and_free(&saved, buf, error_code));
+		ft_free(&saved, buf);
 		saved = tmp;
 	}
-	return (output(&saved));
+	return (output(&saved, error_code));
 }
