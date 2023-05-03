@@ -48,12 +48,15 @@ t_result	sort_and_judge(\
 	stack_b = init_nums(0, error_code);
 	if (*error_code)
 		return (RESULT_NONE);
-	node = ops->deque->next;
-	while (node)
+	if (!deque_is_empty(ops->deque))
 	{
-		op = node->num;
-		move_op(stack_a, stack_b, op, error_code);
-		node = node->next;
+		node = ops->deque->next;
+		while (node)
+		{
+			op = node->num;
+			move_op(stack_a, stack_b, op, error_code);
+			node = node->next;
+		}
 	}
 	free_nums(stack_b);
 	if (is_stack_a_sorted_bonus(stack_a, size_a))
