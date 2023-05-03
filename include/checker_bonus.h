@@ -7,6 +7,9 @@
 # define MAX_OP_LEN		4
 # define SAME_STRING	0
 
+# define OK_MSG			"OK\n"
+# define KO_MSG			"KO\n"
+
 typedef struct s_deque		t_deque;
 typedef struct s_nums		t_nums;
 typedef enum e_error		t_error;
@@ -15,7 +18,8 @@ typedef enum e_operation	t_operation;
 typedef enum e_result {
 	RESULT_NONE = 0,
 	OK = 1,
-	KO = 2
+	KO = 2, 
+	ERROR = 3
 }	t_result;
 
 // check_op.c

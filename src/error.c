@@ -10,7 +10,6 @@ int	put_error(void)
 	return (EXIT_FAILURE);
 }
 
-// error_code : malloc?
 int	error_exit(t_nums *nums)
 {
 	put_error();
