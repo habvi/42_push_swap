@@ -18,10 +18,7 @@ void	print_operations(t_nums *answer, t_error *error_code)
 		return ;
 	}
 	if (answer == NULL || deque_is_empty(answer->deque))
-	{
-		ft_dprintf(STDERR_FILENO, "op is empty!\n");
 		return ;
-	}
 	node = answer->deque->next;
 	while (node)
 	{
@@ -29,5 +26,4 @@ void	print_operations(t_nums *answer, t_error *error_code)
 			ft_dprintf(STDOUT_FILENO, "%s\n", op_strs[node->num]);
 		node = node->next;
 	}
-	ft_dprintf(STDERR_FILENO, "\ntotal: %zu\n", answer->size);
 }
