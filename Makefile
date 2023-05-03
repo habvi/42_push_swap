@@ -107,8 +107,7 @@ INCLUDES	:=	-I./$(INCLUDE_DIR)/ -I$(LIBFT_DIR)/$(INCLUDE_DIR)/
 DEPS		:=	$(OBJS:.o=.d)
 
 #--------------------------------------------
-# to do -> cc
-CC			:=	clang
+CC			:=	cc
 CFLAGS		:=	-Wall -Wextra -Werror -MMD -MP
 MKDIR		:=	mkdir -p
 
@@ -145,8 +144,7 @@ FORCE:
 #--------------------------------------------
 # bonus
 #--------------------------------------------
-# to do: rename -> checker
-CHECKER			:=	my_checker
+CHECKER			:=	checker
 
 MANDATORY_SRCS	:=	$(filter-out main.c, $(SRCS))
 BONUS_DIR		:=	bonus
