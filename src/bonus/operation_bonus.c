@@ -13,14 +13,14 @@ bool	is_valid_op(const char *line)
 	i = 0;
 	while (ops[i])
 	{
-		if (ft_strncmp(line, ops[i], MAX_OP_LEN) == 0)
+		if (ft_strncmp(line, ops[i], MAX_OP_LEN) == SAME_STRING)
 			return (true);
 		i++;
 	}
 	return (false);
 }
 
-t_operation	get_op_i(const char *op)
+t_operation	get_op_index(const char *op)
 {
 	static const char	*ops[] = {"sa\n", "sb\n", "ss\n", \
 								"pa\n", "pb\n", \
@@ -31,7 +31,7 @@ t_operation	get_op_i(const char *op)
 	i = 0;
 	while (ops[i])
 	{
-		if (ft_strncmp(op, ops[i], MAX_OP_LEN) == 0)
+		if (ft_strncmp(op, ops[i], MAX_OP_LEN) == SAME_STRING)
 			return (i + 1);
 		i++;
 	}

@@ -25,7 +25,7 @@ t_result	read_input(t_nums *op, t_error *error_code)
 			free(line);
 			return (KO);
 		}
-		op_i = get_op_i(line);
+		op_i = get_op_index(line);
 		new_node = deque_new_node(op_i, NULL, error_code);
 		if (*error_code)
 		{

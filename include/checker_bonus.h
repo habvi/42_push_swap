@@ -4,7 +4,8 @@
 # include <stdbool.h>
 # include <stddef.h>
 
-# define MAX_OP_LEN	4
+# define MAX_OP_LEN		4
+# define SAME_STRING	0
 
 typedef struct s_deque		t_deque;
 typedef struct s_nums		t_nums;
@@ -25,7 +26,7 @@ int			ft_strncmp(const char *s1, const char *s2, size_t n);
 
 // operation.c
 bool		is_valid_op(const char *line);
-t_operation	get_op_i(const char *op);
+t_operation	get_op_index(const char *op);
 
 // put.c
 void		put_result(t_result result);

@@ -1,7 +1,7 @@
 #ifndef ERROR_H
 # define ERROR_H
 
-# define ERROR_MSG	"Error"
+# define ERROR_MSG	"Error\n"
 
 typedef struct s_nums	t_nums;
 

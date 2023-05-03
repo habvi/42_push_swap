@@ -6,7 +6,7 @@
 
 int	put_error(void)
 {
-	ft_dprintf(STDERR_FILENO, "%s\n", ERROR_MSG);
+	ft_dprintf(STDERR_FILENO, "%s", ERROR_MSG);
 	return (EXIT_FAILURE);
 }
 
