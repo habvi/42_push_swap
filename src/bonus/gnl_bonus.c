@@ -15,26 +15,32 @@ static void	*ft_free(char **saved, char *ps)
 	return (NULL);
 }
 
-static char	*read_buf(char **saved, int fd, bool *finish_read)
+static char	*read_buf(\
+				char **saved, int fd, bool *finish_read, t_error *error_code)
 {
 	char	*buf;
 	ssize_t	read_size;
 
 	buf = (char *)malloc(sizeof(char) * ((size_t)BUFFER_SIZE + 1));
 	if (buf == NULL)
+	{
+		*error_code = ERROR_GNL;
 		return (NULL);
+	}
 	read_size = read(fd, buf, BUFFER_SIZE);
 	if (read_size == READ_ERROR)
+	{
+		*error_code = ERROR_GNL;
 		return (ft_free(saved, buf));
+	}
 	buf[read_size] = '\0';
 	if (read_size < BUFFER_SIZE)
 		*finish_read = true;
 	return (buf);
 }
 
-static void	*set_error_and_free(char **saved, char *ps, t_error *error_code)
+static void	*set_error_and_free(char **saved, char *ps)
 {
-	*error_code = ERROR_GNL;
 	ft_free(saved, ps);
 	return (NULL);
 }
@@ -50,9 +56,9 @@ static char	*output(char **saved, t_error *error_code)
 		return (ft_free(saved, NULL));
 	while (*ps && *ps != LF)
 		ps++;
-	left = ft_substr_for_gnl(*saved, 0, ps - *saved + 1);
+	left = ft_substr_for_gnl(*saved, 0, ps - *saved + 1, error_code);
 	if (left == NULL)
-		return (set_error_and_free(saved, NULL, error_code));
+		return (set_error_and_free(saved, NULL));
 	if (*left == '\0')
 		return (ft_free(saved, left));
 	tail = ps;
@@ -80,12 +86,12 @@ char	*get_next_line(int fd, t_error *error_code)
 	{
 		if (is_new_line(saved))
 			break ;
-		buf = read_buf(&saved, fd, &finish_read);
+		buf = read_buf(&saved, fd, &finish_read, error_code);
 		if (buf == NULL)
-			return (set_error_and_free(&saved, NULL, error_code));
-		tmp = ft_strjoin(saved, buf);
+			return (set_error_and_free(&saved, NULL));
+		tmp = ft_strjoin(saved, buf, error_code);
 		if (tmp == NULL)
-			return (set_error_and_free(&saved, buf, error_code));
+			return (set_error_and_free(&saved, buf));
 		ft_free(&saved, buf);
 		saved = tmp;
 	}

@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "get_next_line_bonus.h"
+#include "error.h"
 
 static size_t	ft_strlen(const char *s)
 {
@@ -25,7 +26,7 @@ static void	ft_strlcpy_for_gnl(char *dst, const char *src, size_t dstsize)
 		dst[i] = '\0';
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2, t_error *error_code)
 {
 	size_t	len_s1;
 	size_t	len_s2;
@@ -34,20 +35,24 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (s1 == NULL && s2 == NULL)
 		return (NULL);
 	if (s1 == NULL)
-		return (ft_substr_for_gnl(s2, 0, ft_strlen(s2)));
+		return (ft_substr_for_gnl(s2, 0, ft_strlen(s2), error_code));
 	if (s2 == NULL)
-		return (ft_substr_for_gnl(s1, 0, ft_strlen(s1)));
+		return (ft_substr_for_gnl(s1, 0, ft_strlen(s1), error_code));
 	len_s1 = ft_strlen(s1);
 	len_s2 = ft_strlen(s2);
 	res = (char *)malloc(sizeof(char) * (len_s1 + len_s2 + 1));
 	if (res == NULL)
+	{
+		*error_code = ERROR_GNL;
 		return (NULL);
+	}
 	ft_strlcpy_for_gnl(res, s1, len_s1 + 1);
 	ft_strlcpy_for_gnl(res + len_s1, s2, len_s2 + 1);
 	return (res);
 }
 
-char	*ft_substr_for_gnl(char const *s, unsigned int start, size_t len)
+char	*ft_substr_for_gnl(\
+			char const *s, unsigned int start, size_t len, t_error *error_code)
 {
 	char	*res;
 
@@ -55,7 +60,10 @@ char	*ft_substr_for_gnl(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	res = (char *)malloc(sizeof(char) * (len + 1));
 	if (res == NULL)
+	{
+		*error_code = ERROR_GNL;
 		return (NULL);
+	}
 	ft_strlcpy_for_gnl(res, s + start, len + 1);
 	return (res);
 }
