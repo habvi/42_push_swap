@@ -19,11 +19,12 @@ typedef enum e_result {
 	RESULT_NONE = 0,
 	OK = 1,
 	KO = 2,
-	ERROR = 3
+	RESULT_ERROR = 3
 }	t_result;
 
-// check_op.c
-void		check_op(t_nums *stack_a, int *sorted_a, t_error *error_code);
+// check_operations.c
+void		check_operations(\
+						t_nums *stack_a, int *sorted_a, t_error *error_code);
 
 // ft_strncmp.c
 int			ft_strncmp(const char *s1, const char *s2, size_t n);

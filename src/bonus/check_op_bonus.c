@@ -33,26 +33,26 @@ t_result	read_input(t_nums *op, t_error *error_code)
 	{
 		line = get_next_line(STDIN_FILENO, error_code);
 		if (*error_code)
-			return (ERROR);
+			return (RESULT_ERROR);
 		if (line == NULL)
 			return (OK);
 		if (!is_valid_op(line))
 		{
 			free(line);
-			return (ERROR);
+			return (RESULT_ERROR);
 		}
 		op = add_back_new_op(op, line, error_code);
 		if (*error_code)
 		{
 			free(line);
-			return (ERROR);
+			return (RESULT_ERROR);
 		}
 		free(line);
 	}
 	return (OK);
 }
 
-void	check_op(t_nums *stack_a, int *sorted_a, t_error *error_code)
+void	check_operations(t_nums *stack_a, int *sorted_a, t_error *error_code)
 {
 	t_nums		*op;
 	t_result	result;
@@ -63,8 +63,8 @@ void	check_op(t_nums *stack_a, int *sorted_a, t_error *error_code)
 	result = read_input(op, error_code);
 	if (result == OK)
 		result = sort_and_judge(stack_a, op, sorted_a, error_code);
-	if (result == ERROR)
-		*error_code = ERROR;
+	if (result == RESULT_ERROR)
+		*error_code = ERROR_RESULT;
 	free_nums(op);
 	free(sorted_a);
 	put_result(result);

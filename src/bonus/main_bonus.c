@@ -36,7 +36,7 @@ int	main(int argc, char *argv[])
 		return (error_exit(stack_a));
 	if (!is_valid_argv(stack_a, &array, &error_code))
 		return (error_exit(stack_a));
-	check_op(stack_a, array, &error_code);
+	check_operations(stack_a, array, &error_code);
 	if (error_code)
 		return (error_exit(stack_a));
 	free_nums(stack_a);
