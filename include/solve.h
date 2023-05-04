@@ -89,17 +89,14 @@ void			undo_operation(\
 				t_operation op_i, t_data *data, t_run run, t_error *error_code);
 
 // solve.c
+bool			is_stack_sorted(t_nums *stack, int *array);
+bool			is_stack_a_sorted(\
+				t_nums *stack_a, t_nums *stack_b, int *sorted_array);
 void			solve(t_data *data, t_error *error_code);
 
 // --------------------------------------------
 //  solve_less_than_6
 // --------------------------------------------
-// dfs.c
-bool			is_operation_exceeded_answer_size(t_data *data);
-bool			is_stack_a_sorted(\
-				t_nums *stack_a, t_nums *stack_b, int *sorted_array);
-bool			is_limit_operation_size(size_t size);
-
 // operations.c
 bool			is_executable_size(t_nums *nums);
 bool			is_executable_operation(t_operation op_i, t_data *data);

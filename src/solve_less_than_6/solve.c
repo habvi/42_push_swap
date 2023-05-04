@@ -7,6 +7,20 @@
 
 static void	try_next_operations(t_data *data, t_error *error_code);
 
+static bool	is_operation_exceeded_answer_size(t_data *data)
+{
+	if (data->now_op->size >= data->answer->size)
+		return (true);
+	return (false);
+}
+
+static bool	is_limit_operation_size(size_t size)
+{
+	if (size == OPERATION_LIMIT_LESS_THAN_6)
+		return (true);
+	return (false);
+}
+
 // dfs
 static void	try_all_patterns(t_data *data, t_error *error_code)
 {
