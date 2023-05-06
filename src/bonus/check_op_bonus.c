@@ -35,7 +35,7 @@ t_result	read_input(t_nums *op, t_error *error_code)
 		if (*error_code)
 			return (RESULT_ERROR);
 		if (line == NULL)
-			return (OK);
+			break ;
 		if (!is_valid_op(line))
 		{
 			free(line);
@@ -49,7 +49,7 @@ t_result	read_input(t_nums *op, t_error *error_code)
 		}
 		free(line);
 	}
-	return (OK);
+	return (RESULT_OK);
 }
 
 void	check_operations(t_nums *stack_a, int *sorted_a, t_error *error_code)
@@ -63,7 +63,7 @@ void	check_operations(t_nums *stack_a, int *sorted_a, t_error *error_code)
 	result = read_input(op, error_code);
 	if (result == RESULT_ERROR)
 		*error_code = ERROR_RESULT;
-	else if (result == OK)
+	else if (result == RESULT_OK)
 		result = sort_and_judge(stack_a, op, sorted_a, error_code);
 	free_nums(op);
 	free(sorted_a);

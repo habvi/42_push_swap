@@ -4,8 +4,8 @@
 
 void	put_result(t_result result)
 {
-	if (result == OK)
+	if (result == RESULT_OK)
 		ft_dprintf(STDOUT_FILENO, OK_MSG);
-	else if (result == KO)
+	else if (result == RESULT_KO)
 		ft_dprintf(STDOUT_FILENO, KO_MSG);
 }

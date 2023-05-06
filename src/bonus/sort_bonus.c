@@ -47,7 +47,7 @@ t_result	sort_and_judge(\
 	stack_a = compress_number(stack_a, sorted_a);
 	stack_b = init_nums(0, error_code);
 	if (*error_code)
-		return (RESULT_NONE);
+		return (RESULT_ERROR);
 	if (!deque_is_empty(ops->deque))
 	{
 		node = ops->deque->next;
@@ -60,6 +60,6 @@ t_result	sort_and_judge(\
 	}
 	free_nums(stack_b);
 	if (is_stack_a_sorted_bonus(stack_a, size_a))
-		return (OK);
-	return (KO);
+		return (RESULT_OK);
+	return (RESULT_KO);
 }
