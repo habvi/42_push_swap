@@ -61,10 +61,10 @@ void	check_operations(t_nums *stack_a, int *sorted_a, t_error *error_code)
 	if (*error_code)
 		return ;
 	result = read_input(op, error_code);
-	if (result == OK)
-		result = sort_and_judge(stack_a, op, sorted_a, error_code);
 	if (result == RESULT_ERROR)
 		*error_code = ERROR_RESULT;
+	else if (result == OK)
+		result = sort_and_judge(stack_a, op, sorted_a, error_code);
 	free_nums(op);
 	free(sorted_a);
 	put_result(result);

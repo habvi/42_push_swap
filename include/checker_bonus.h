@@ -4,7 +4,6 @@
 # include <stdbool.h>
 # include <stddef.h>
 
-# define MAX_OP_LEN		4
 # define SAME_STRING	0
 
 # define OK_MSG			"OK\n"

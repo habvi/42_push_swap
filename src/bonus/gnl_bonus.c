@@ -67,8 +67,6 @@ static char	*output(char **saved, t_error *error_code)
 	if (*ps == LF)
 		ps++;
 	*saved = ft_memmove_for_gnl(*saved, ps, tail - ps + 1);
-	free(*saved);
-	*saved = NULL;
 	return (left);
 }
 

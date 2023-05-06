@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "libft.h"
 #include "checker_bonus.h"
 #include "operations.h"
 
@@ -13,7 +14,7 @@ bool	is_valid_op(const char *line)
 	i = 0;
 	while (ops[i])
 	{
-		if (ft_strncmp(line, ops[i], MAX_OP_LEN) == SAME_STRING)
+		if (ft_strncmp(line, ops[i], ft_strlen(line)) == SAME_STRING)
 			return (true);
 		i++;
 	}
@@ -31,7 +32,7 @@ t_operation	get_op_index(const char *op)
 	i = 0;
 	while (ops[i])
 	{
-		if (ft_strncmp(op, ops[i], MAX_OP_LEN) == SAME_STRING)
+		if (ft_strncmp(op, ops[i], ft_strlen(op)) == SAME_STRING)
 			return (i + 1);
 		i++;
 	}
