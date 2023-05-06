@@ -17,10 +17,7 @@ static t_nums	*add_back_new_op(t_nums *op, char *line, t_error *error_code)
 	op_i = get_op_index(line);
 	new_node = deque_new_node(op_i, NULL, error_code);
 	if (*error_code)
-	{
-		free(line);
 		return (NULL);
-	}
 	deque_add_back(op->deque, new_node);
 	return (op);
 }
