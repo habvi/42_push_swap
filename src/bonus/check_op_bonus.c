@@ -22,7 +22,7 @@ static t_nums	*add_back_new_op(t_nums *op, char *line, t_error *error_code)
 	return (op);
 }
 
-t_result	read_input(t_nums *op, t_error *error_code)
+static t_result	input_operations(t_nums *op, t_error *error_code)
 {
 	char	*line;
 
@@ -57,7 +57,7 @@ void	push_swap_checker(t_nums *stack_a, int *sorted_a, t_error *error_code)
 	op = init_nums(0, error_code);
 	if (*error_code)
 		return ;
-	result = read_input(op, error_code);
+	result = input_operations(op, error_code);
 	if (result == RESULT_ERROR)
 		return ;
 	result = sort_and_judge(stack_a, op, sorted_a, error_code);
