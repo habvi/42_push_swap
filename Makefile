@@ -166,7 +166,7 @@ $(CHECKER): $(MANDATORY_OBJS) $(BONUS_OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) -o $@ $(MANDATORY_OBJS) $(BONUS_OBJS) $(LIBFT)
 
 PHONY += bonus
-bonus: $(CHECKER)
+bonus: all $(CHECKER)
 
 -include $(BONUS_DEPS)
 
