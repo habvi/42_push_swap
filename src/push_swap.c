@@ -52,7 +52,7 @@ void	*push_swap(t_nums *stack_a, t_error *error_code)
 	if (*error_code)
 		return (NULL);
 	// sep: allocate array
-	if (!is_valid_stack_nums(stack_a, &array, allocated_ptrs, error_code))
+	if (!has_valid_stack_nums(stack_a, &array, allocated_ptrs, error_code))
 		return (free_all_pointers(allocated_ptrs));
 	// in init_data?
 	init_stack_b(&stack_b, allocated_ptrs, error_code);

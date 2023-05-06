@@ -28,7 +28,7 @@ static bool	is_duplicate_numbers(\
 	return (false);
 }
 
-bool	is_valid_stack_nums(\
+bool	has_valid_stack_nums(\
 	t_nums *stack, int **array, t_deque *allocated_ptrs, t_error *error_code)
 {
 	if (is_stack_a_empty(stack->size))
@@ -41,3 +41,5 @@ bool	is_valid_stack_nums(\
 		return (false);
 	return (true);
 }
+
+// has
