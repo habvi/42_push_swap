@@ -28,8 +28,8 @@ void		check_operations(\
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 
 // operation.c
-bool		is_valid_op(const char *line);
-t_operation	get_op_index(const char *op);
+t_operation	get_op_num(const char *op);
+bool		is_valid_op(const char *line, t_error *error_code);
 
 // put.c
 void		put_result(t_result result);

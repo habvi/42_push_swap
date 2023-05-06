@@ -14,7 +14,7 @@ static t_nums	*add_back_new_op(t_nums *op, char *line, t_error *error_code)
 	t_operation	op_i;
 	t_deque		*new_node;
 
-	op_i = get_op_index(line);
+	op_i = get_op_num(line);
 	new_node = deque_new_node(op_i, NULL, error_code);
 	if (*error_code)
 		return (NULL);
@@ -33,7 +33,7 @@ t_result	read_input(t_nums *op, t_error *error_code)
 			return (RESULT_ERROR);
 		if (line == NULL)
 			break ;
-		if (!is_valid_op(line))
+		if (!is_valid_op(line, error_code))
 		{
 			free(line);
 			return (RESULT_ERROR);
