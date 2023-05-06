@@ -20,8 +20,8 @@ typedef enum e_result {
 	RESULT_ERROR = 3
 }	t_result;
 
-// check_operations.c
-void		check_operations(\
+// push_swap_checker.c
+void		push_swap_checker(\
 						t_nums *stack_a, int *sorted_a, t_error *error_code);
 
 // ft_strncmp.c

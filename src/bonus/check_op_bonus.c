@@ -49,7 +49,7 @@ t_result	read_input(t_nums *op, t_error *error_code)
 	return (RESULT_OK);
 }
 
-void	check_operations(t_nums *stack_a, int *sorted_a, t_error *error_code)
+void	push_swap_checker(t_nums *stack_a, int *sorted_a, t_error *error_code)
 {
 	t_nums		*op;
 	t_result	result;
