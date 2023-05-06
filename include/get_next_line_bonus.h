@@ -8,6 +8,7 @@
 #  define BUFFER_SIZE	10
 # endif
 
+# define MY_OPEN_MAX 1024
 # define LF         '\n'
 # define READ_ERROR -1
 

@@ -4,7 +4,8 @@
 
 bool	is_valid_args(const int fd, t_error *error_code)
 {
-	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX)
+	if (fd < 0 || fd >= MY_OPEN_MAX || \
+		BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX)
 	{
 		*error_code = ERROR_GNL;
 		return (false);

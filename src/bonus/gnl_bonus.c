@@ -34,7 +34,7 @@ static char	*read_buf(\
 		return (ft_free(saved, buf));
 	}
 	buf[read_size] = '\0';
-	if (read_size < BUFFER_SIZE)
+	if (!read_size)
 		*finish_read = true;
 	return (buf);
 }
