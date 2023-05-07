@@ -1,4 +1,3 @@
-#include <unistd.h>
 #include <stdlib.h> // free
 #include "checker_bonus.h"
 #include "deque.h"

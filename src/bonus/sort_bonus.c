@@ -1,9 +1,6 @@
-#include <stdlib.h> // free
-#include "checker_bonus.h"
 #include "deque.h"
 #include "error.h"
 #include "free.h"
-#include "operations.h"
 #include "push_swap.h"
 #include "solve.h"
 
@@ -46,5 +43,3 @@ void	move_op(t_nums *stack_a, t_nums *ops, t_error *error_code)
 	}
 	free_nums(stack_b);
 }
-
-// same type
