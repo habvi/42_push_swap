@@ -70,9 +70,8 @@ static char	*output(char **saved, t_error *error_code)
 	return (left);
 }
 
-char	*get_next_line(int fd, t_error *error_code)
+char	*get_next_line(int fd, char **saved, t_error *error_code)
 {
-	static char	*saved = NULL;
 	bool		finish_read;
 	char		*buf;
 	char		*tmp;
@@ -82,16 +81,16 @@ char	*get_next_line(int fd, t_error *error_code)
 	finish_read = false;
 	while (!finish_read)
 	{
-		if (is_new_line(saved))
+		if (is_new_line(*saved))
 			break ;
-		buf = read_buf(&saved, fd, &finish_read, error_code);
+		buf = read_buf(saved, fd, &finish_read, error_code);
 		if (buf == NULL)
-			return (set_error_and_free(&saved, NULL));
-		tmp = ft_strjoin(saved, buf, error_code);
+			return (set_error_and_free(saved, NULL));
+		tmp = ft_strjoin(*saved, buf, error_code);
 		if (tmp == NULL)
-			return (set_error_and_free(&saved, buf));
-		ft_free(&saved, buf);
-		saved = tmp;
+			return (set_error_and_free(saved, buf));
+		ft_free(saved, buf);
+		*saved = tmp;
 	}
-	return (output(&saved, error_code));
+	return (output(saved, error_code));
 }

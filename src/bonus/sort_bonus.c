@@ -7,59 +7,44 @@
 #include "push_swap.h"
 #include "solve.h"
 
-// no error returns
-void	move_op(\
-		t_nums *stack_a, t_nums *stack_b, t_operation op, t_error *error_code)
+bool	is_stack_a_sorted_bonus(t_nums *stack_a)
 {
-	t_data	data;
-
-	data = (t_data){.stack_a = stack_a, .stack_b = stack_b};
-	run_operation(op, &data, NONE, error_code);
-}
-
-bool	is_stack_a_sorted_bonus(t_nums *stack_a, const size_t size_a)
-{
-	t_deque	*node;
-	int		num;
+	t_deque			*node;
+	size_t			i;
+	const size_t	size = stack_a->size;
 
 	node = stack_a->deque->next;
-	num = 1;
-	while (node)
+	i = 0;
+	while (i + 1 < size)
 	{
-		if (node->num != num)
+		if (node->num > node->next->num)
 			return (false);
 		node = node->next;
-		num++;
+		i++;
 	}
-	if ((size_t)num != size_a + 1)
-		return (false);
 	return (true);
 }
 
-t_result	sort_and_judge(\
-			t_nums *stack_a, t_nums *ops, int *sorted_a, t_error *error_code)
+// run_operation: no error returns
+void	move_op(t_nums *stack_a, t_nums *ops, t_error *error_code)
 {
-	const size_t	size_a = stack_a->size;
-	t_nums			*stack_b;
-	t_deque			*node;
-	t_operation		op;
+	t_data	data;
+	t_deque	*node;
+	t_nums	*stack_b;
 
-	stack_a = compress_number(stack_a, sorted_a);
+	if (deque_is_empty(ops->deque))
+		return ;
 	stack_b = init_nums(0, error_code);
 	if (*error_code)
-		return (RESULT_ERROR);
-	if (!deque_is_empty(ops->deque))
+		return ;
+	data = (t_data){.stack_a = stack_a, .stack_b = stack_b};
+	node = ops->deque->next;
+	while (node)
 	{
-		node = ops->deque->next;
-		while (node)
-		{
-			op = node->num;
-			move_op(stack_a, stack_b, op, error_code);
-			node = node->next;
-		}
+		run_operation(node->num, &data, NONE, error_code);
+		node = node->next;
 	}
 	free_nums(stack_b);
-	if (is_stack_a_sorted_bonus(stack_a, size_a))
-		return (RESULT_OK);
-	return (RESULT_KO);
 }
+
+// same type

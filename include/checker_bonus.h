@@ -14,15 +14,8 @@ typedef struct s_nums		t_nums;
 typedef enum e_error		t_error;
 typedef enum e_operation	t_operation;
 
-typedef enum e_result {
-	RESULT_OK = 1,
-	RESULT_KO = 2,
-	RESULT_ERROR = 3
-}	t_result;
-
-// push_swap_checker.c
-void		push_swap_checker(\
-						t_nums *stack_a, int *sorted_a, t_error *error_code);
+// checker.c
+void		push_swap_checker(t_nums *stack_a, t_error *error_code);
 
 // ft_strncmp.c
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -32,10 +25,10 @@ t_operation	get_op_num(const char *op);
 bool		is_valid_op(const char *line, t_error *error_code);
 
 // put.c
-void		put_result(t_result result);
+void		put_result(const char *result_message);
 
 // sort.c
-t_result	sort_and_judge(\
-			t_nums *stack_a, t_nums *ops, int *sorted_a, t_error *error_code);
+bool		is_stack_a_sorted_bonus(t_nums *stack_a);
+void		move_op(t_nums *stack_a, t_nums *ops, t_error *error_code);
 
 #endif

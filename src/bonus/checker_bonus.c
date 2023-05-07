@@ -1,4 +1,3 @@
-#include <stdbool.h>
 #include <unistd.h>
 #include <stdlib.h> // free
 #include "checker_bonus.h"
@@ -22,46 +21,54 @@ static t_nums	*add_back_new_op(t_nums *op, char *line, t_error *error_code)
 	return (op);
 }
 
-static t_result	input_operations(t_nums *op, t_error *error_code)
+static void	read_and_add_valid_op(t_nums *ops, t_error *error_code)
 {
+	char	*saved;
 	char	*line;
 
+	saved = NULL;
 	while (true)
 	{
-		line = get_next_line(STDIN_FILENO, error_code);
+		line = get_next_line(STDIN_FILENO, &saved, error_code);
 		if (*error_code)
-			return (RESULT_ERROR);
+		{
+			free(line);
+			return ;
+		}
 		if (line == NULL)
-			break ;
+			return ;
 		if (!is_valid_op(line, error_code))
 		{
+			free(saved);
 			free(line);
-			return (RESULT_ERROR);
+			return ;
 		}
-		op = add_back_new_op(op, line, error_code);
-		if (*error_code)
-		{
-			free(line);
-			return (RESULT_ERROR);
-		}
+		ops = add_back_new_op(ops, line, error_code);
 		free(line);
+		if (*error_code)
+			return ;
 	}
-	return (RESULT_OK);
 }
 
-void	push_swap_checker(t_nums *stack_a, int *sorted_a, t_error *error_code)
+void	push_swap_checker(t_nums *stack_a, t_error *error_code)
 {
-	t_nums		*op;
-	t_result	result;
+	t_nums	*ops;
 
-	op = init_nums(0, error_code);
+	ops = init_nums(0, error_code);
 	if (*error_code)
 		return ;
-	result = input_operations(op, error_code);
-	if (result == RESULT_ERROR)
+	read_and_add_valid_op(ops, error_code);
+	if (*error_code)
+	{
+		free_nums(ops);
 		return ;
-	result = sort_and_judge(stack_a, op, sorted_a, error_code);
-	put_result(result);
-	free_nums(op);
-	free(sorted_a);
+	}
+	move_op(stack_a, ops, error_code);
+	free_nums(ops);
+	if (*error_code)
+		return ;
+	if (is_stack_a_sorted_bonus(stack_a))
+		put_result(OK_MSG);
+	else
+		put_result(KO_MSG);
 }

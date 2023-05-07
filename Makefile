@@ -147,7 +147,7 @@ CHECKER			:=	checker
 
 MANDATORY_SRCS	:=	$(filter-out main.c, $(SRCS))
 BONUS_DIR		:=	bonus
-BONUS_SRCS		:=	$(BONUS_DIR)/check_op_bonus.c \
+BONUS_SRCS		:=	$(BONUS_DIR)/checker_bonus.c \
 					$(BONUS_DIR)/ft_strncmp_bonus.c \
 					$(BONUS_DIR)/gnl_bonus.c \
 					$(BONUS_DIR)/gnl_check_bonus.c \

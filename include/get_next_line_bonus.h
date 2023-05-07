@@ -15,7 +15,7 @@
 typedef enum e_error	t_error;
 
 // gnl.c
-char	*get_next_line(int fd, t_error *error_code);
+char	*get_next_line(int fd, char **saved, t_error *error_code);
 
 // gnl_check.c
 bool	is_valid_args(const int fd, t_error *error_code);

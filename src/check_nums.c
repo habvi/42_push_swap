@@ -41,5 +41,3 @@ bool	has_valid_stack_nums(\
 		return (false);
 	return (true);
 }
-
-// has
