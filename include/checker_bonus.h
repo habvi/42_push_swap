@@ -14,6 +14,9 @@ typedef struct s_nums		t_nums;
 typedef enum e_error		t_error;
 typedef enum e_operation	t_operation;
 
+// args.c
+bool		is_valid_argv_bonus(t_nums *stack_a);
+
 // checker.c
 void		push_swap_checker(t_nums *stack_a, t_error *error_code);
 
