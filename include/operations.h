@@ -4,6 +4,17 @@
 # include <stdbool.h>
 
 # define TOTAL_OPERATIONS	11
+# define STR_SA				"sa"
+# define STR_SB				"sb"
+# define STR_SS				"ss"
+# define STR_PA				"pa"
+# define STR_PB				"pb"
+# define STR_RA				"ra"
+# define STR_RB				"rb"
+# define STR_RR				"rr"
+# define STR_RRA			"rra"
+# define STR_RRB			"rrb"
+# define STR_RRR			"rrr"
 
 typedef struct s_nums	t_nums;
 typedef struct s_data	t_data;

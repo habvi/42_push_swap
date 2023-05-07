@@ -7,10 +7,10 @@
 void	print_operations(t_nums *answer, t_error *error_code)
 {
 	t_deque				*node;
-	static const char	*op_strs[] = {NULL, "sa\n", "sb\n", "ss\n", \
-									"pa\n", "pb\n", \
-									"ra\n", "rb\n", "rr\n", \
-									"rra\n", "rrb\n", "rrr\n", NULL};
+	static const char	*op_strs[] = {NULL, STR_SA, STR_SB, STR_SS, \
+									STR_PA, STR_PB, \
+									STR_RA, STR_RB, STR_RR, \
+									STR_RRA, STR_RRB, STR_RRR, NULL};
 
 	if (*error_code)
 	{
@@ -23,7 +23,7 @@ void	print_operations(t_nums *answer, t_error *error_code)
 	while (node)
 	{
 		if (node->num != OP_NONE)
-			ft_dprintf(STDOUT_FILENO, "%s", op_strs[node->num]);
+			ft_dprintf(STDOUT_FILENO, "%s\n", op_strs[node->num]);
 		node = node->next;
 	}
 }

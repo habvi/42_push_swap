@@ -20,6 +20,7 @@ char	*get_next_line(int fd, char **saved, t_error *error_code);
 // gnl_check.c
 bool	is_valid_args(const int fd, t_error *error_code);
 bool	is_new_line(char *str);
+char	*erase_last_new_line(char *line);
 
 // gnl_utils.c
 char	*ft_strjoin(char const *s1, char const *s2, t_error *error_code);

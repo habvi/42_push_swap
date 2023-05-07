@@ -22,7 +22,7 @@ int			ft_strcmp(const char *s1, const char *s2);
 
 // operation.c
 t_operation	get_op_num(const char *op);
-bool		is_valid_op(const char *line, t_error *error_code);
+bool		is_valid_op(char *line, t_error *error_code);
 
 // put.c
 void		put_result(const char *result_message);

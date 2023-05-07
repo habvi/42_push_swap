@@ -1,4 +1,5 @@
 #include <limits.h>
+#include "libft.h"
 #include "get_next_line_bonus.h"
 #include "error.h"
 
@@ -24,4 +25,13 @@ bool	is_new_line(char *str)
 		str++;
 	}
 	return (false);
+}
+
+char	*erase_last_new_line(char *line)
+{
+	const size_t	len = ft_strlen(line);
+
+	if (line[len - 1] == '\n')
+		line[len - 1] = '\0';
+	return (line);
 }
