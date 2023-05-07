@@ -18,12 +18,15 @@ typedef enum e_type {
 	T_NUMS = 3
 }	t_type;
 
+// argc.c
+bool	is_valid_argc(int argc);
+
 // check_nums.c
 bool	is_stack_a_empty(size_t	size);
 bool	has_valid_stack_nums(\
 	t_nums *stack, int **array, t_deque *allocated_ptrs, t_error *error_code);
 
-// nums_new.c
+// nums.c
 t_nums	*nums_new(size_t init_size, t_error *error_code);
 t_nums	*init_nums(size_t init_size, t_error *error_code);
 

@@ -5,13 +5,6 @@
 #include "free.h"
 #include "push_swap.h"
 
-static bool	is_valid_argc(const int argc)
-{
-	if (argc <= 1)
-		return (false);
-	return (true);
-}
-
 int	main(int argc, char *argv[])
 {
 	t_nums	*stack_a;

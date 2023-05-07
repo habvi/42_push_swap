@@ -8,7 +8,8 @@ SRC_DIR	:=	src
 #--------------------------------------------
 # solve
 #--------------------------------------------
-SRCS			:=	check_nums.c \
+SRCS			:=	argc.c \
+					check_nums.c \
 					error.c \
 					free.c \
 					main.c \
