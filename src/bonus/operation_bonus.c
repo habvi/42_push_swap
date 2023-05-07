@@ -14,7 +14,7 @@ t_operation	get_op_num(const char *op)
 	i = 0;
 	while (ops[i])
 	{
-		if (ft_strncmp(op, ops[i], ft_strlen(op)) == SAME_STRING)
+		if (ft_strcmp(op, ops[i]) == SAME_STRING)
 			return (i + 1);
 		i++;
 	}

@@ -18,7 +18,7 @@ typedef enum e_operation	t_operation;
 void		push_swap_checker(t_nums *stack_a, t_error *error_code);
 
 // ft_strncmp.c
-int			ft_strncmp(const char *s1, const char *s2, size_t n);
+int			ft_strcmp(const char *s1, const char *s2);
 
 // operation.c
 t_operation	get_op_num(const char *op);
