@@ -19,6 +19,7 @@ typedef enum e_type {
 }	t_type;
 
 // check_nums.c
+bool	is_stack_a_empty(size_t	size);
 bool	has_valid_stack_nums(\
 	t_nums *stack, int **array, t_deque *allocated_ptrs, t_error *error_code);
 

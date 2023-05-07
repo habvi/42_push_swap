@@ -3,7 +3,7 @@
 #include "deque.h"
 #include "push_swap.h"
 
-static bool	is_stack_a_empty(size_t	size)
+bool	is_stack_a_empty(size_t	size)
 {
 	if (size)
 		return (false);
