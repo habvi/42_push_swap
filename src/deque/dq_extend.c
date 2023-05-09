@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "deque.h"
 
+// unlink the sentinel and add_back from the next node
 void	deque_extend(t_deque *deque, t_deque *new_deque)
 {
 	t_deque	*tail;
