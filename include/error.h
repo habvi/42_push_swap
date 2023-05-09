@@ -9,7 +9,6 @@ typedef enum e_error {
 	ERROR_MALLOC = 1,
 	ERROR_ARGS = 2,
 	ERROR_GNL = 3,
-	ERROR_RESULT = 4
 }	t_error;
 
 // error.c
