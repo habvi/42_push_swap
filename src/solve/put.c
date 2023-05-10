@@ -4,13 +4,36 @@
 #include "operations.h"
 #include "push_swap.h"
 
+static const char	*get_op_str(t_operation op_i)
+{
+	if (op_i == SA)
+		return (STR_SA);
+	if (op_i == SB)
+		return (STR_SB);
+	if (op_i == SS)
+		return (STR_SS);
+	if (op_i == PA)
+		return (STR_PA);
+	if (op_i == PB)
+		return (STR_PB);
+	if (op_i == RA)
+		return (STR_RA);
+	if (op_i == RB)
+		return (STR_RB);
+	if (op_i == RR)
+		return (STR_RR);
+	if (op_i == RRA)
+		return (STR_RRA);
+	if (op_i == RRB)
+		return (STR_RRB);
+	if (op_i == RRR)
+		return (STR_RRR);
+	return (NULL);
+}
+
 void	print_operations(t_nums *answer, t_error *error_code)
 {
-	t_deque				*node;
-	static const char	*op_strs[] = {NULL, STR_SA, STR_SB, STR_SS, \
-									STR_PA, STR_PB, \
-									STR_RA, STR_RB, STR_RR, \
-									STR_RRA, STR_RRB, STR_RRR, NULL};
+	t_deque	*node;
 
 	if (*error_code)
 	{
@@ -23,7 +46,7 @@ void	print_operations(t_nums *answer, t_error *error_code)
 	while (node)
 	{
 		if (node->num != OP_NONE)
-			ft_dprintf(STDOUT_FILENO, "%s\n", op_strs[node->num]);
+			ft_dprintf(STDOUT_FILENO, "%s\n", get_op_str(node->num));
 		node = node->next;
 	}
 }
