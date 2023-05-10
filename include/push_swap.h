@@ -36,6 +36,6 @@ t_nums	*parse_nums_from_argv(char *const *argv, t_error *error);
 // push_swap.c
 void	set_allocated_pointer(\
 		t_deque *allocated_ptrs, t_type type, void *ptr, t_error *error_code);
-void	*push_swap(t_nums *stack_a, t_error *error_code);
+void	push_swap(t_nums *stack_a, t_error *error_code);
 
 #endif

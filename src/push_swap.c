@@ -41,7 +41,7 @@ static t_data	init_data(\
 	return (data);
 }
 
-void	*push_swap(t_nums *stack_a, t_error *error_code)
+void	push_swap(t_nums *stack_a, t_error *error_code)
 {
 	int		*array;
 	t_deque	*allocated_ptrs;
@@ -50,16 +50,19 @@ void	*push_swap(t_nums *stack_a, t_error *error_code)
 
 	init_pointers(&array, &allocated_ptrs, error_code);
 	if (*error_code)
-		return (NULL);
+		return ;
 	// sep: allocate array
 	if (!has_valid_stack_nums(stack_a, &array, allocated_ptrs, error_code))
-		return (free_all_pointers(allocated_ptrs));
+	{
+		free_all_pointers(allocated_ptrs);
+		return ;
+	}
 	// in init_data?
 	init_stack_b(&stack_b, allocated_ptrs, error_code);
 	if (*error_code)
-		return (NULL);
+		return ;
 	data = init_data(stack_a, stack_b, array, allocated_ptrs);
 	solve(&data, error_code);
 	free_all_pointers(allocated_ptrs);
-	return (NULL);
+	return ;
 }
