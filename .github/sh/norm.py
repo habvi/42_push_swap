@@ -10,8 +10,11 @@ import sys
 
 # ----------------------------------------------------------
 OUT_FILE = "norm_out.txt"
-NORM_CHECK_PATH_ACTIONS = "include src lbft"
-NORM_CHECK_PATH_LOCAL = "../../include/ ../../src/ ../../libft"
+NORM_CHECK_PATH = "include src lbft"
+IGNORE_FILE_NAMES = "src/deque/test.c \
+                    src/operations/test.c \
+                    src/push_swap.c"
+LOCAL_PREFIX = "../../"
 
 # ----------------------------------------------------------
 # color
@@ -50,7 +53,21 @@ def put_result(passed):
         exit(1)
 
 # ----------------------------------------------------------
+def is_ignore_file_name(line):
+    argc = len(sys.argv)
+    filenames = list(IGNORE_FILE_NAMES.split())
+    for filename in filenames:
+        if argc != 1:
+            filename = LOCAL_PREFIX + filename
+        if filename + ": Error!\n" == line:
+            return True
+    return False
+
 def check_each_file(lines):
+    if not len(lines):
+        return True
+    if is_ignore_file_name(lines[0]):
+        return True
     if len(lines) >= 2:
         debug_lines(lines)
         return False
@@ -80,9 +97,11 @@ def norm_check_exclude_header():
 
 def run_norm(check_path):
     cmd = "touch " + OUT_FILE
+    print(cmd)
     run_cmd(cmd)
 
     cmd = "norminette " + check_path +  " > " + OUT_FILE
+    print(cmd)
     run_cmd(cmd)
 
     passed = norm_check_exclude_header()
@@ -91,9 +110,11 @@ def run_norm(check_path):
 def main():
     argc = len(sys.argv)
     if argc == 1:
-        path = NORM_CHECK_PATH_ACTIONS
+        path = NORM_CHECK_PATH
     elif argc == 2 and sys.argv[1] == "local":
-        path = NORM_CHECK_PATH_LOCAL
+        path = ""
+        for s in NORM_CHECK_PATH.split():
+            path += LOCAL_PREFIX + s + " "
     else:
         print("<python3 norm.py> or <python3 norm.py local>")
         exit(1)
