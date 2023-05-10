@@ -1,12 +1,30 @@
 # push_swap
 Sort integers using 2 stacks (a & b) in minimum operations with the least number of moves possible.
 
-[visualizer](https://github.com/o-reo/push_swap_visualizer)
+### [push swap visualizer](https://github.com/o-reo/push_swap_visualizer)  
+ Copyright (C) 2007 Free Software Foundation, Inc. / [LICENSE](https://github.com/o-reo/push_swap_visualizer/blob/master/LICENSE)
 ![](image/push_swap_100_20230507.gif)
 
 <br>
 
-Usage
+## Score
+### [push swap tester](https://github.com/nafuka11/push_swap_tester) 
+
+Copyright (c) 2021 nafuka11 / [LICENSE](https://github.com/nafuka11/push_swap_tester/blob/master/LICENSE)
+```shell
+$ python3 push_swap_tester.py -l 100 -c 500
+```
+![](image/push_swap_tester_100_20230502.png)
+
+```shell
+$ python3 push_swap_tester.py -l 500 -c 500
+```
+![](image/push_swap_tester_500_20230502.png)
+
+<br>
+
+---
+### Usage
 ```shell
 # push_swap
 $ make
@@ -19,7 +37,7 @@ $ ARG="2 -5 10 7"; ./push_swap $ARG | ./checker $ARG
 
 <br>
 
-operations  
+operations
 - sa : swap a
 - sb : swap b
 - ss : swap a & swap b
