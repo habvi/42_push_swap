@@ -1,9 +1,9 @@
 name: Norm
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "5-actions" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "5-actions" ]
 
   workflow_dispatch:
 
