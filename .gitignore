@@ -16,3 +16,4 @@ visualizer/
 !python/*.py
 !README.md
 !image/**
+!.github/**
