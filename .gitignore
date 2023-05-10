@@ -14,3 +14,5 @@ visualizer/
 # include
 !test.py
 !python/*.py
+!README.md
+!image/**
